@@ -8,7 +8,6 @@ import { CgArrowUpR } from "react-icons/cg";
 import { BsThreeDots, BsLayoutThreeColumns } from "react-icons/bs";
 import { RiArrowDownSLine, RiLayoutRowLine } from "react-icons/ri";
 import { useState } from "react";
-import ClickAwayListener from "@mui/material/ClickAwayListener";
 
 const Con = styled.div`
   width: 640px;
