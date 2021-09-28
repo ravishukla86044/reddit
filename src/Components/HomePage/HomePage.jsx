@@ -1,10 +1,11 @@
+import { Feed } from "./Feed/Feed";
 
 function HomePage() {
-    return (
-        <div>
-            
-        </div>
-    )
+  return (
+    <div>
+      <Feed />
+    </div>
+  );
 }
 
-export default HomePage
+export default HomePage;
