@@ -4,8 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 const Con = styled.div`
   position: relative;
   width: 640px;
-  min-height: 300px;
-
+  min-height: 100px;
   box-sizing: border-box;
   background-color: ${(props) => (props.isLight ? "#FFFFFF" : "#1A1A1B")};
   border-radius: 4px;
@@ -13,8 +12,7 @@ const Con = styled.div`
   display: flex;
   margin-bottom: 16px;
   padding: 8px;
-
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 `;
 
@@ -40,6 +38,10 @@ const Likes = styled.div`
 
 const Box = styled.div`
   padding-top: 8px;
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  padding-left: 40px;
   .upper {
     font-size: 12px;
     font-weight: 400;
@@ -49,6 +51,23 @@ const Box = styled.div`
     align-items: start;
     margin: 0 8px 8px;
     position: relative;
+  }
+  .profileImg {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+  .text {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1 1 auto;
+    overflow: hidden;
+  }
+  img {
+    width: 100%;
+    height: 100%;
   }
 `;
 
@@ -62,7 +81,19 @@ function FeedItem() {
         <ImArrowDown />
       </Likes>
       <Box>
-        <div className="upper"></div>
+        <div className="upper">
+          <div className="profileImg">
+            <img
+              src="https://styles.redditmedia.com/t5_3mnyi/styles/communityIcon_non5va69co441.png?width=256&s=b15586edb26a9302d97ed8656e4a2530d88d3db3"
+              alt=""
+            />
+          </div>
+          <div className="text">
+            <span>r/sdfsf</span>
+            <span>Posted by r/sdfsdf</span>
+            <span>8 hours ago</span>
+          </div>
+        </div>
       </Box>
     </Con>
   );
