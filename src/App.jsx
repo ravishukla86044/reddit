@@ -1,10 +1,27 @@
 import "./App.css";
 import HomePage from "./Components/HomePage/HomePage";
+import { Community } from "./Components/Community/Community";
+import { User } from "./Components/User/User";
+import { Switch, Route } from "react-router-dom";
+import { CommentsPage } from "./Components/Comments/CommentsPage";
 
 function App() {
   return (
     <div className="App">
-      <HomePage />
+      <Switch>
+        <Route exact path="/">
+          <HomePage />
+        </Route>
+        <Route exact path="/r/:community">
+          <Community />
+        </Route>
+        <Route exact path="/r/:community/comments/:id">
+          <CommentsPage />
+        </Route>
+        <Route path="/u/:user">
+          <User />
+        </Route>
+      </Switch>
     </div>
   );
 }
