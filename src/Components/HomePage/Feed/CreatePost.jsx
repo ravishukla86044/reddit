@@ -28,7 +28,7 @@ const Con = styled.div`
     opacity: 0.8;
   }
   & > svg:nth-child(n + 2):hover {
-    background: rgb(237, 237, 237);
+    background: ${(props) => (props.isLight ? "rgb(237, 237, 237)" : "rgba(215, 218, 220, 0.1)")};
   }
 
   & > svg:nth-child(1) {

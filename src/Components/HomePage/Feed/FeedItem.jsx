@@ -3,7 +3,7 @@ import { ImArrowUp, ImArrowDown, ImRedo } from "react-icons/im";
 import { HiOutlinePlus } from "react-icons/hi";
 import { FaRegCommentAlt } from "react-icons/fa";
 import { FiGift } from "react-icons/fi";
-import { BsBookmark, BsThreeDots } from "react-icons/bs";
+import { BsThreeDots } from "react-icons/bs";
 import { RiBookmarkLine } from "react-icons/ri";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -41,7 +41,7 @@ const Likes = styled.div`
     line-height: 16px;
     pointer-events: none;
     word-break: normal;
-    color: rgb(26, 26, 27);
+    color: ${(props) => (props.isLight ? " rgb(26, 26, 27)" : "#d7dadc")};
   }
   & > svg {
     line-height: 30px;
@@ -78,6 +78,7 @@ const Box = styled.div`
     height: 22px;
     border-radius: 50%;
     overflow: hidden;
+    margin-right: 5px;
   }
   .text {
     align-items: center;
@@ -87,7 +88,7 @@ const Box = styled.div`
     overflow: hidden;
     position: relative;
     span {
-      margin: 0px 5px;
+      margin-right: 5px;
       cursor: pointer;
     }
     span:hover {
@@ -97,7 +98,7 @@ const Box = styled.div`
       font-size: 12px;
       font-weight: 700;
       line-height: 16px;
-      color: #1c1c1c;
+      color: ${(props) => (props.isLight ? " #1c1c1c" : "#d7dadc")};
       display: inline;
       line-height: 20px;
 
@@ -111,9 +112,9 @@ const Box = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #0079d3;
-    color: #ffffff;
-    fill: #ffffff;
+    background: ${(props) => (props.isLight ? "#0079d3" : "#d7dadc")};
+    color: ${(props) => (props.isLight ? "#ffffff" : "#1a1a1b")};
+    fill: ${(props) => (props.isLight ? "#ffffff" : "#1a1a1b")};
 
     font-size: 14px;
     font-weight: 700;
@@ -141,7 +142,7 @@ const Box = styled.div`
     font-size: 18px;
     font-weight: 500;
     line-height: 22px;
-    color: #222222;
+    color: ${(props) => (props.isLight ? "#222222" : "#d7dadc")};
     text-align: left;
   }
   .postImage {
@@ -178,7 +179,7 @@ const Box = styled.div`
       word-break: normal;
     }
     .icon:hover {
-      background: rgb(237, 237, 237);
+      background: ${(props) => (props.isLight ? "rgb(237, 237, 237)" : "rgba(215, 218, 220, 0.1)")};
     }
     .icon > div:nth-child(1) {
       font-size: 23px;
@@ -195,33 +196,36 @@ const Box = styled.div`
   }
 `;
 
-function FeedItem() {
+function FeedItem({ community }) {
   const { isLight } = useSelector((state) => state.color);
   return (
     <Con isLight={isLight}>
-      <Likes>
+      <Likes isLight={isLight}>
         <ImArrowUp />
         <div>2</div>
         <ImArrowDown />
       </Likes>
-      <Box>
+      <Box isLight={isLight}>
         <div className="upper">
-          <div className="profileImg">
-            <img
-              src="https://styles.redditmedia.com/t5_3mnyi/styles/communityIcon_non5va69co441.png?width=256&s=b15586edb26a9302d97ed8656e4a2530d88d3db3"
-              alt=""
-            />
-          </div>
+          {!community && (
+            <div className="profileImg">
+              <img
+                src="https://styles.redditmedia.com/t5_3mnyi/styles/communityIcon_non5va69co441.png?width=256&s=b15586edb26a9302d97ed8656e4a2530d88d3db3"
+                alt=""
+              />
+            </div>
+          )}
           <div className="text">
-            <span>r/sdfsf</span>
-
+            <span>{!community && `r/sdfsf`}</span>
             <span>Posted by r/sdfsdf</span>
             <span>8 hours ago</span>
           </div>
-          <div className="join">
-            <HiOutlinePlus />
-            <span>Join</span>
-          </div>
+          {!community && (
+            <div className="join">
+              <HiOutlinePlus />
+              <span>Join</span>
+            </div>
+          )}
         </div>
         <div className="title">What sdfsdf dfsdfsf sdfsdf</div>
         <div className="postImage">
