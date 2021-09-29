@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-
 import { GoFileMedia } from "react-icons/go";
 import { HiLink } from "react-icons/hi";
 
@@ -63,24 +62,6 @@ const Con = styled.div`
     font-family: inherit;
   }
 `;
-const night = {
-  canvas: "#030303",
-  background: "#1A1A1B",
-  border: "#343536",
-  inputBackground: "#272729",
-  inputBorder: "#343536",
-  textColor: "#D7DADC",
-  iconColor: "#818384",
-};
-const light = {
-  canvas: "#DAE0E6",
-  background: "#FFFFFF",
-  border: "#ccc",
-  inputBackground: "#F6F7F8",
-  inputBorder: "#EDEFF1",
-  textColor: "#1c1c1c",
-  iconColor: "#878A8C",
-};
 
 function CreatePost() {
   const { isLight } = useSelector((state) => state.color);

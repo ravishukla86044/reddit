@@ -5,7 +5,7 @@ import { FaRegCommentAlt } from "react-icons/fa";
 import { FiGift } from "react-icons/fi";
 import { BsThreeDots } from "react-icons/bs";
 import { RiBookmarkLine } from "react-icons/ri";
-
+import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 const Con = styled.div`
   position: relative;
@@ -198,6 +198,13 @@ const Box = styled.div`
 
 function FeedItem({ community }) {
   const { isLight } = useSelector((state) => state.color);
+  const history = useHistory();
+  const handleRouteCommunity = () => {
+    history.push("/r/xyz");
+  };
+  const handleRouteUser = () => {
+    history.push("/u/xyz");
+  };
   return (
     <Con isLight={isLight}>
       <Likes isLight={isLight}>
@@ -216,8 +223,20 @@ function FeedItem({ community }) {
             </div>
           )}
           <div className="text">
-            <span>{!community && `r/sdfsf`}</span>
-            <span>Posted by r/sdfsdf</span>
+            <span
+              onClick={() => {
+                handleRouteCommunity();
+              }}
+            >
+              {!community && `r/sdfsf`}
+            </span>
+            <span
+              onClick={() => {
+                handleRouteUser();
+              }}
+            >
+              Posted by r/sdfsdf
+            </span>
             <span>8 hours ago</span>
           </div>
           {!community && (
