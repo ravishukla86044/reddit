@@ -1,9 +1,12 @@
 import { Feed } from "./Feed/Feed";
 import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
 
 function HomePage() {
+  const { isLight } = useSelector((state) => state.color);
+
   return (
-    <StyledDiv>
+    <StyledDiv isLight={isLight}>
       <div className="feedDiv">
         <Feed />
       </div>
@@ -17,7 +20,7 @@ function HomePage() {
 const StyledDiv = styled.div`
   width: 100%;
   box-sizing: border-box;
-  background: #dae0e6;
+  background: ${(props) => (props.isLight ? "#dae0e6" : "rgb(3,3,3)")};
   display: flex;
   align-items: flex-start;
   justify-content: center;

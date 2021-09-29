@@ -34,7 +34,7 @@ const Con = styled.div`
     border-radius: 50%;
     width: 38px;
     height: 38px;
-    background: #d7dfe2;
+    background: ${(props) => (props.isLight ? "#d7dfe2" : "rgb(129, 131, 132)")};
     fill: #fff;
     flex-basis: 38px;
     margin-right: 8px;

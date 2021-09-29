@@ -90,7 +90,7 @@ const Div = styled.div`
     padding-right: 24px;
   }
   .upperText > div:nth-child(1) {
-    color: ${(props) => (props.isLight ? "rgb(28, 28, 28)" : "#FFFFFF")};
+    color: ${(props) => (props.isLight ? "rgb(28, 28, 28)" : "#D7DADC")};
     flex: 1;
     font-size: 28px;
     font-weight: 700;
@@ -121,8 +121,8 @@ const Div = styled.div`
     min-width: 32px;
     padding: 4px 16px;
     border-radius: 20px;
-    background: ${(props) => (props.isLight ? "rgb(55, 60, 63)" : "#FFFFFF")};
-    color: ${(props) => (props.isLight ? "#FFFFFF" : "rgb(55, 60, 63)")};
+    background: ${(props) => (props.isLight ? "rgb(55, 60, 63)" : "#D7DADC")};
+    color: ${(props) => (props.isLight ? "#D7DADC" : "rgb(55, 60, 63)")};
     cursor: pointer;
   }
   .list > ul {

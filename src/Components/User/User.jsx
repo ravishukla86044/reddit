@@ -1,24 +1,30 @@
 import { CreatePost } from "../HomePage/Feed/CreatePost";
 import { Feed } from "../HomePage/Feed/Feed";
 import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import { UserHeader } from "./UserHeader";
 
 function User() {
+  const { isLight } = useSelector((state) => state.color);
   return (
-    <StyledDiv>
-      <div className="feedDiv">
-        <Feed />
-      </div>
-      <div>
-        <div className="fake"></div>
-      </div>
-    </StyledDiv>
+    <>
+      <UserHeader />
+      <StyledDiv isLight={isLight}>
+        <div className="feedDiv">
+          <Feed />
+        </div>
+        <div>
+          <div className="fake"></div>
+        </div>
+      </StyledDiv>
+    </>
   );
 }
 
 const StyledDiv = styled.div`
   width: 100%;
   box-sizing: border-box;
-  background: #dae0e6;
+  background: ${(props) => (props.isLight ? "#dae0e6" : "rgb(3,3,3)")};
   display: flex;
   align-items: flex-start;
   justify-content: center;

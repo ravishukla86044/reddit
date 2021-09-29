@@ -2,6 +2,7 @@ import { CreatePost } from "../HomePage/Feed/CreatePost";
 import { Feed } from "../HomePage/Feed/Feed";
 import styled from "styled-components";
 import { CommunityHeader } from "./CummunityHeader";
+import { useDispatch, useSelector } from "react-redux";
 
 const data = {
   communityBackground:
@@ -13,10 +14,11 @@ const data = {
 };
 
 function Community() {
+  const { isLight } = useSelector((state) => state.color);
   return (
     <>
       <CommunityHeader data={data} />
-      <StyledDiv>
+      <StyledDiv isLight={isLight}>
         <div className="feedDiv">
           <CreatePost />
           <Feed community={true} />
@@ -32,7 +34,7 @@ function Community() {
 const StyledDiv = styled.div`
   width: 100%;
   box-sizing: border-box;
-  background: #edeff1;
+  background: ${(props) => (props.isLight ? "#edeff1" : "rgb(3,3,3)")};
   display: flex;
   align-items: flex-start;
   justify-content: center;
