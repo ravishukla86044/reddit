@@ -8,6 +8,111 @@ import { RiBookmarkLine } from "react-icons/ri";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
+function FeedItem({ community, comments }) {
+  const { isLight } = useSelector((state) => state.color);
+  const history = useHistory();
+  const handleRouteCommunity = (e) => {
+    e.stopPropagation();
+    history.push("/r/xyz");
+  };
+  const handleRouteUser = (e) => {
+    e.stopPropagation();
+    history.push("/u/xyz");
+  };
+  const handleRouteComments = () => {
+    history.push("/r/xyz/comments/id");
+  };
+  return (
+    <Con isLight={isLight}>
+      <Likes isLight={isLight}>
+        <ImArrowUp />
+        <div>2</div>
+        <ImArrowDown />
+      </Likes>
+      <Box isLight={isLight}>
+        <div className="upper">
+          {!community && (
+            <div className="profileImg">
+              <img
+                src="https://styles.redditmedia.com/t5_3mnyi/styles/communityIcon_non5va69co441.png?width=256&s=b15586edb26a9302d97ed8656e4a2530d88d3db3"
+                alt=""
+              />
+            </div>
+          )}
+          <div className="text">
+            <span
+              onClick={(e) => {
+                handleRouteCommunity(e);
+              }}
+            >
+              {!community && `r/sdfsf`}
+            </span>
+            <span
+              onClick={(e) => {
+                handleRouteUser(e);
+              }}
+            >
+              Posted by r/sdfsdf
+            </span>
+            <span>8 hours ago</span>
+          </div>
+          {!community && !comments && (
+            <div className="join">
+              <HiOutlinePlus />
+              <span>Join</span>
+            </div>
+          )}
+        </div>
+        <div className="title">What sdfsdf dfsdfsf sdfsdf</div>
+        <div className="postImage">
+          <div>
+            <img
+              src="https://preview.redd.it/31ihgjkvv5q71.jpg?width=640&crop=smart&auto=webp&s=48f6206ff4d37e6b26758e415d70576eb11ac1af"
+              alt=""
+            />
+          </div>
+        </div>
+        <div className="comments">
+          <div
+            onClick={() => {
+              handleRouteComments();
+            }}
+            className="icon"
+          >
+            <div style={{ fontSize: "22px" }}>
+              <FaRegCommentAlt />
+            </div>
+            <div>10 Comments</div>
+          </div>
+          <div className="icon">
+            <div>
+              <FiGift />
+            </div>
+            <div>Awards</div>
+          </div>
+          <div className="icon">
+            <div>
+              <ImRedo />
+            </div>
+            <div>Share</div>
+          </div>
+          <div className="icon">
+            <div>
+              <RiBookmarkLine />
+            </div>
+            <div>Share</div>
+          </div>
+          <div className="icon">
+            <div>
+              <BsThreeDots />
+            </div>
+          </div>
+        </div>
+      </Box>
+    </Con>
+  );
+}
+
 const Con = styled.div`
   position: relative;
   cursor: pointer;
@@ -197,110 +302,4 @@ const Box = styled.div`
     }
   }
 `;
-
-function FeedItem({ community, comments }) {
-  const { isLight } = useSelector((state) => state.color);
-  const history = useHistory();
-  const handleRouteCommunity = (e) => {
-    e.stopPropagation();
-    history.push("/r/xyz");
-  };
-  const handleRouteUser = (e) => {
-    e.stopPropagation();
-    history.push("/u/xyz");
-  };
-  const handleRouteComments = () => {
-    history.push("/r/xyz/comments/id");
-  };
-  return (
-    <Con isLight={isLight}>
-      <Likes isLight={isLight}>
-        <ImArrowUp />
-        <div>2</div>
-        <ImArrowDown />
-      </Likes>
-      <Box isLight={isLight}>
-        <div className="upper">
-          {!community && (
-            <div className="profileImg">
-              <img
-                src="https://styles.redditmedia.com/t5_3mnyi/styles/communityIcon_non5va69co441.png?width=256&s=b15586edb26a9302d97ed8656e4a2530d88d3db3"
-                alt=""
-              />
-            </div>
-          )}
-          <div className="text">
-            <span
-              onClick={(e) => {
-                handleRouteCommunity(e);
-              }}
-            >
-              {!community && `r/sdfsf`}
-            </span>
-            <span
-              onClick={(e) => {
-                handleRouteUser(e);
-              }}
-            >
-              Posted by r/sdfsdf
-            </span>
-            <span>8 hours ago</span>
-          </div>
-          {!community && !comments && (
-            <div className="join">
-              <HiOutlinePlus />
-              <span>Join</span>
-            </div>
-          )}
-        </div>
-        <div className="title">What sdfsdf dfsdfsf sdfsdf</div>
-        <div className="postImage">
-          <div>
-            <img
-              src="https://preview.redd.it/31ihgjkvv5q71.jpg?width=640&crop=smart&auto=webp&s=48f6206ff4d37e6b26758e415d70576eb11ac1af"
-              alt=""
-            />
-          </div>
-        </div>
-        <div className="comments">
-          <div
-            onClick={() => {
-              handleRouteComments();
-            }}
-            className="icon"
-          >
-            <div style={{ fontSize: "22px" }}>
-              <FaRegCommentAlt />
-            </div>
-            <div>10 Comments</div>
-          </div>
-          <div className="icon">
-            <div>
-              <FiGift />
-            </div>
-            <div>Awards</div>
-          </div>
-          <div className="icon">
-            <div>
-              <ImRedo />
-            </div>
-            <div>Share</div>
-          </div>
-          <div className="icon">
-            <div>
-              <RiBookmarkLine />
-            </div>
-            <div>Share</div>
-          </div>
-          <div className="icon">
-            <div>
-              <BsThreeDots />
-            </div>
-          </div>
-        </div>
-      </Box>
-    </Con>
-  );
-}
-
 export { FeedItem };

@@ -7,6 +7,70 @@ import { FiGift } from "react-icons/fi";
 import { BsThreeDots } from "react-icons/bs";
 import { RiBookmarkLine } from "react-icons/ri";
 import { useHistory } from "react-router-dom";
+
+function CommentsItem({ data }) {
+  const { isLight } = useSelector((state) => state.color);
+  const history = useHistory();
+  const handleRouteUser = () => {
+    history.push("/u/xyz");
+  };
+  return (
+    <Com isLight={isLight}>
+      <div className="line"></div>
+      <div className="box">
+        <div className="upper">
+          <div className="profileImg">
+            <img src={data.profileImg} alt="" />
+          </div>
+          <div className="text">
+            <span
+              onClick={() => {
+                handleRouteUser();
+              }}
+            >
+              {" "}
+              {data.communityName}
+            </span>
+            <span></span>
+            <span>{data.time}</span>
+          </div>
+        </div>
+        <div className="title">{data.comment}</div>
+
+        <div className="comments">
+          <div className="icon">
+            <div className="likes">
+              <ImArrowUp />
+              <div>{data.votes}</div>
+              <ImArrowDown />
+            </div>
+          </div>
+          <div className="icon ">
+            <div style={{ fontSize: "22px" }}>
+              <FaRegCommentAlt />
+            </div>
+            <div>Reply</div>
+          </div>
+          <div className="icon ">
+            <div className="withoutIcon">Give Awards</div>
+          </div>
+          <div className="icon">
+            <div className="withoutIcon">Share</div>
+          </div>
+          <div className="icon">
+            <div className="withoutIcon">Share</div>
+          </div>
+          <div className="icon">
+            <div>
+              <BsThreeDots />
+            </div>
+          </div>
+        </div>
+      </div>
+    </Com>
+  );
+}
+
 const Com = styled.div`
   position: relative;
   width: 640px;
@@ -226,67 +290,4 @@ const Com = styled.div`
     top: 41px;
   }
 `;
-
-function CommentsItem({ data }) {
-  const { isLight } = useSelector((state) => state.color);
-  const history = useHistory();
-  const handleRouteUser = () => {
-    history.push("/u/xyz");
-  };
-  return (
-    <Com isLight={isLight}>
-      <div className="line"></div>
-      <div className="box">
-        <div className="upper">
-          <div className="profileImg">
-            <img src={data.profileImg} alt="" />
-          </div>
-          <div className="text">
-            <span
-              onClick={() => {
-                handleRouteUser();
-              }}
-            >
-              {" "}
-              {data.communityName}
-            </span>
-            <span></span>
-            <span>{data.time}</span>
-          </div>
-        </div>
-        <div className="title">{data.comment}</div>
-
-        <div className="comments">
-          <div className="icon">
-            <div className="likes">
-              <ImArrowUp />
-              <div>{data.votes}</div>
-              <ImArrowDown />
-            </div>
-          </div>
-          <div className="icon ">
-            <div style={{ fontSize: "22px" }}>
-              <FaRegCommentAlt />
-            </div>
-            <div>Reply</div>
-          </div>
-          <div className="icon ">
-            <div className="withoutIcon">Give Awards</div>
-          </div>
-          <div className="icon">
-            <div className="withoutIcon">Share</div>
-          </div>
-          <div className="icon">
-            <div className="withoutIcon">Share</div>
-          </div>
-          <div className="icon">
-            <div>
-              <BsThreeDots />
-            </div>
-          </div>
-        </div>
-      </div>
-    </Com>
-  );
-}
 export { CommentsItem };
