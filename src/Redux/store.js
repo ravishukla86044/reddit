@@ -1,18 +1,20 @@
-import { combineReducers, createStore,applyMiddleware,compose } from "redux";
-import {authReducer} from "./auth/reducer";
-import thunk from "redux-thunk";
+import { colorReducer } from "./color/reducer";
+import { authReducer } from "./auth/reducer";
+import { applyMiddleware, combineReducers, createStore, compose } from "redux";
 
-const rootReducer = combineReducers({
-    auth: authReducer,
+const rootreducer = combineReducers({
+  color: colorReducer,
+  auth: authReducer,
 });
-
-const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
-
-const enhancer = composeEnhancers(
-    applyMiddleware(thunk),
-);
+const customMiddleware = (store) => (next) => (action) => {
+  console.log();
+  return typeof action === "function" ? action(store.dispatch) : next(action);
+};
 
 export const store = createStore(
-    rootReducer,
-    enhancer
+  rootreducer,
+  compose(
+    applyMiddleware(customMiddleware),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  )
 );
