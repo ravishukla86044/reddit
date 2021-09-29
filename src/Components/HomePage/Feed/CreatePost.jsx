@@ -18,8 +18,8 @@ const Con = styled.div`
     display: inline-block;
     padding: 6px 8px;
     margin-left: 5px;
-    height: 25px;
-    width: 25px;
+    height: 36px;
+    width: 36px;
     font-size: 20px;
     line-height: 20px;
     fill: #818384;
