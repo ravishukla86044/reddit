@@ -1,13 +1,27 @@
 import "./App.css";
 import HomePage from "./Components/HomePage/HomePage";
-import Navbar from "./Components/HomePage/Navbar/Navbar";
-// import RegistrationModal from './Components/HomePage/Registration/RegistrationModal'
+import { Community } from "./Components/Community/Community";
+import { User } from "./Components/User/User";
+import { Switch, Route } from "react-router-dom";
+import { CommentsPage } from "./Components/Comments/CommentsPage";
+
 function App() {
   return (
-    <div className="App" style={{ background: "#dae0e6",}}>
-      <Navbar />
-      <HomePage />
-      {/* <RegistrationModal /> */}
+    <div className="App">
+      <Switch>
+        <Route exact path="/">
+          <HomePage />
+        </Route>
+        <Route exact path="/r/:community">
+          <Community />
+        </Route>
+        <Route exact path="/r/:community/comments/:id">
+          <CommentsPage />
+        </Route>
+        <Route path="/u/:user">
+          <User />
+        </Route>
+      </Switch>
     </div>
   );
 }

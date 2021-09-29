@@ -1,7 +1,7 @@
 import { NIGHT_MODE, LIGHT_MODE } from "./actionType";
 
 const initState = {
-  isLight: true,
+  isLight: false,
 };
 
 export const colorReducer = (state = initState, { type, payload }) => {

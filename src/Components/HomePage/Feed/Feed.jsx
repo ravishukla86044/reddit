@@ -1,8 +1,7 @@
 import { FeedItem } from "./FeedItem";
-import { CreatePost } from "./CreatePost";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { IoFlame, IoReorderTwo, IoReorderFourSharp } from "react-icons/io5";
+import { IoFlame, IoReorderFourSharp } from "react-icons/io5";
 import { AiOutlineStar } from "react-icons/ai";
 import { CgArrowUpR } from "react-icons/cg";
 import { BsThreeDots, BsLayoutThreeColumns } from "react-icons/bs";
@@ -57,7 +56,7 @@ const Con = styled.div`
       fill: #818384;
     }
     .icon:hover {
-      background: rgb(237, 237, 237);
+      background: ${(props) => (props.isLight ? "rgb(237, 237, 237)" : "rgba(215, 218, 220, 0.1)")};
     }
     .icon > div:nth-child(1) {
       font-size: 23px;
@@ -96,12 +95,13 @@ const Con = styled.div`
     position: absolute;
     top: 40px;
     right: -41px;
-    border: 1px solid #edeff1;
+    border: 1px solid ${(props) => (props.isLight ? "#edeff1" : "#343536")};
 
-    box-shadow: 0 2px 4px 0 rgba(28, 28, 28, 0.2);
-    color: #1c1c1c;
+    box-shadow: 0 2px 4px 0
+      ${(props) => (props.isLight ? "rgba(28, 28, 28, 0.2)" : "rgba(215,218,220,0.2)")};
+    color: ${(props) => (props.isLight ? " #1c1c1c" : "#d7dadc")};
     overflow: hidden;
-    background-color: #ffffff;
+    background-color: ${(props) => (props.isLight ? "#FFFFFF" : "#1A1A1B")};
     position: absolute;
     z-index: 10;
 
@@ -109,7 +109,7 @@ const Con = styled.div`
       display: flex;
       align-items: center;
       justify-content: flex-start !important;
-      border-bottom: 1px solid rgba(28, 28, 28, 0.2);
+      border-bottom: 1px solid ${(props) => (props.isLight ? "#edeff1" : "#343536")};
       border-radius: 0px !important;
       margin-bottom: 5px;
       padding: 15px 8px !important;
@@ -119,12 +119,12 @@ const Con = styled.div`
     }
 
     div:hover {
-      background: none !important;
+      background: none;
     }
   }
 `;
 
-function Feed() {
+function Feed({ community = false }) {
   const { isLight } = useSelector((state) => state.color);
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(1);
@@ -140,7 +140,6 @@ function Feed() {
   };
   return (
     <Con isLight={isLight}>
-      <CreatePost />
       <div className="menu">
         <div>Popular Post</div>
         <div className="menuItem">
@@ -225,7 +224,7 @@ function Feed() {
           </div>
         </div>
       </div>
-      <FeedItem />
+      <FeedItem community={community} />
     </Con>
   );
 }
