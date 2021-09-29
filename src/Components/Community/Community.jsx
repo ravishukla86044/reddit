@@ -1,24 +1,38 @@
 import { CreatePost } from "../HomePage/Feed/CreatePost";
 import { Feed } from "../HomePage/Feed/Feed";
 import styled from "styled-components";
+import { CommunityHeader } from "./CummunityHeader";
+
+const data = {
+  communityBackground:
+    "https://styles.redditmedia.com/t5_2uii8/styles/bannerBackgroundImage_v0a328mdtmk71.jpg?width=4000&format=pjpg&s=18a518f544beba0c58eb683bcbe90f0dcae79234",
+  communityProfile:
+    "https://a.thumbs.redditmedia.com/OT_3LiWYRmrHg-clwjXQN84qauGtBNRPJykzA2GA648.png",
+  communityName: "marvelstudios",
+  title: "Marvel Studios and the Marvel Cinematic Universe",
+};
+
 function Community() {
   return (
-    <StyledDiv>
-      <div className="feedDiv">
-        <CreatePost />
-        <Feed community={true} />
-      </div>
-      <div>
-        <div className="fake"></div>
-      </div>
-    </StyledDiv>
+    <>
+      <CommunityHeader data={data} />
+      <StyledDiv>
+        <div className="feedDiv">
+          <CreatePost />
+          <Feed community={true} />
+        </div>
+        <div>
+          <div className="fake"></div>
+        </div>
+      </StyledDiv>
+    </>
   );
 }
 
 const StyledDiv = styled.div`
   width: 100%;
   box-sizing: border-box;
-  background: #dae0e6;
+  background: #edeff1;
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -26,7 +40,7 @@ const StyledDiv = styled.div`
     margin-top: 30px;
   }
   & > div:nth-child(2) {
-    margin-top: 40px;
+    margin-top: 30px;
     margin-left: 30px;
   }
   .fake {
