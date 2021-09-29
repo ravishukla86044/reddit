@@ -1,4 +1,4 @@
-import { NIGHT_MODE, LIGHT_MODE } from "./actionType";
+import { LIGHT_MODE } from "./actionType";
 
 const initState = {
   isLight: true,
@@ -6,15 +6,10 @@ const initState = {
 
 export const colorReducer = (state = initState, { type, payload }) => {
   switch (type) {
-    case NIGHT_MODE:
-      return {
-        ...state,
-        isLight: false,
-      };
     case LIGHT_MODE:
       return {
         ...state,
-        isLight: true,
+        isLight: !state.isLight,
       };
 
     default:
