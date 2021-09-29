@@ -9,6 +9,7 @@ import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 const Con = styled.div`
   position: relative;
+  cursor: pointer;
   width: 640px;
   min-height: 100px;
   box-sizing: border-box;
@@ -196,14 +197,19 @@ const Box = styled.div`
   }
 `;
 
-function FeedItem({ community }) {
+function FeedItem({ community, comments }) {
   const { isLight } = useSelector((state) => state.color);
   const history = useHistory();
-  const handleRouteCommunity = () => {
+  const handleRouteCommunity = (e) => {
+    e.stopPropagation();
     history.push("/r/xyz");
   };
-  const handleRouteUser = () => {
+  const handleRouteUser = (e) => {
+    e.stopPropagation();
     history.push("/u/xyz");
+  };
+  const handleRouteComments = () => {
+    history.push("/r/xyz/comments/id");
   };
   return (
     <Con isLight={isLight}>
@@ -224,22 +230,22 @@ function FeedItem({ community }) {
           )}
           <div className="text">
             <span
-              onClick={() => {
-                handleRouteCommunity();
+              onClick={(e) => {
+                handleRouteCommunity(e);
               }}
             >
               {!community && `r/sdfsf`}
             </span>
             <span
-              onClick={() => {
-                handleRouteUser();
+              onClick={(e) => {
+                handleRouteUser(e);
               }}
             >
               Posted by r/sdfsdf
             </span>
             <span>8 hours ago</span>
           </div>
-          {!community && (
+          {!community && !comments && (
             <div className="join">
               <HiOutlinePlus />
               <span>Join</span>
@@ -256,7 +262,12 @@ function FeedItem({ community }) {
           </div>
         </div>
         <div className="comments">
-          <div className="icon">
+          <div
+            onClick={() => {
+              handleRouteComments();
+            }}
+            className="icon"
+          >
             <div style={{ fontSize: "22px" }}>
               <FaRegCommentAlt />
             </div>

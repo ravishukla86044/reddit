@@ -13,10 +13,10 @@ const Com = styled.div`
   min-height: 100px;
   box-sizing: border-box;
   background-color: ${(props) => (props.isLight ? "#FFFFFF" : "#1A1A1B")};
-  border-radius: 4px;
+  /* border-radius: 4px; */
   /* border: 1px solid ${(props) => (props.isLight ? "#ccc" : "#343536")}; */
   display: flex;
-  margin-bottom: 16px;
+  /* margin-bottom: 16px; */
   padding: 8px;
   align-items: flex-start;
   justify-content: center;
@@ -227,7 +227,7 @@ const Com = styled.div`
   }
 `;
 
-function CommentsItem() {
+function CommentsItem({ data }) {
   const { isLight } = useSelector((state) => state.color);
   const history = useHistory();
   const handleRouteUser = () => {
@@ -239,10 +239,7 @@ function CommentsItem() {
       <div className="box">
         <div className="upper">
           <div className="profileImg">
-            <img
-              src="https://styles.redditmedia.com/t5_3mnyi/styles/communityIcon_non5va69co441.png?width=256&s=b15586edb26a9302d97ed8656e4a2530d88d3db3"
-              alt=""
-            />
+            <img src={data.profileImg} alt="" />
           </div>
           <div className="text">
             <span
@@ -251,19 +248,19 @@ function CommentsItem() {
               }}
             >
               {" "}
-              sdfsdf
+              {data.communityName}
             </span>
             <span></span>
-            <span>8 hours ago</span>
+            <span>{data.time}</span>
           </div>
         </div>
-        <div className="title">What sdfsdf dfsdfsf sdfsdf</div>
+        <div className="title">{data.comment}</div>
 
         <div className="comments">
           <div className="icon">
             <div className="likes">
               <ImArrowUp />
-              <div>2</div>
+              <div>{data.votes}</div>
               <ImArrowDown />
             </div>
           </div>
