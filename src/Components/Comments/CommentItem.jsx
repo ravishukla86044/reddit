@@ -33,7 +33,7 @@ function CommentsItem({ data }) {
       <div className="box">
         <div className="upper">
           <div className="profileImg">
-            <img src={data.profileImg} alt="" />
+            <img src={data.userId.profile_url} alt="" />
           </div>
           <div className="text">
             <span
@@ -41,7 +41,7 @@ function CommentsItem({ data }) {
                 handleRouteUser();
               }}
             >
-              {data.communityName || "xyz"}
+              {data.userId.name}
             </span>
             <span></span>
             <span>

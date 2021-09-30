@@ -9,7 +9,6 @@ import { RiArrowDownSLine, RiLayoutRowLine } from "react-icons/ri";
 import { useState } from "react";
 
 function Feed({ community = false, data }) {
-  console.log(data);
   const { isLight } = useSelector((state) => state.color);
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(1);
@@ -110,7 +109,7 @@ function Feed({ community = false, data }) {
         </div>
       </div>
       {data.map((a) => (
-        <FeedItem community={community} type={value} data={a} />
+        <FeedItem community={community} type={value} data={a} key={a._id} />
       ))}
     </Con>
   );

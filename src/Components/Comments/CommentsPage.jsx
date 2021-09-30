@@ -10,33 +10,6 @@ import axios from "axios";
 import Spinner from "react-spinkit";
 import { useState, useEffect } from "react";
 
-const arr = [
-  {
-    time: "8 hours",
-    communityName: "sdfsf",
-    votes: 23,
-    comment: "sdfsdfsfsdfsffssfsf",
-    profileImg:
-      "https://styles.redditmedia.com/t5_3mnyi/styles/communityIcon_non5va69co441.png?width=256&s=b15586edb26a9302d97ed8656e4a2530d88d3db3",
-  },
-  {
-    time: "10 hours",
-    communityName: "lghkldg",
-    votes: 23,
-    comment: "ubmsb oijsdio ijsd sodjf",
-    profileImg:
-      "https://styles.redditmedia.com/t5_3mnyi/styles/communityIcon_non5va69co441.png?width=256&s=b15586edb26a9302d97ed8656e4a2530d88d3db3",
-  },
-  {
-    time: "15hours",
-    communityName: "kbian",
-    votes: 23,
-    comment: "hhhhhh hhhhhhhhhh hhhhhhhh",
-    profileImg:
-      "https://styles.redditmedia.com/t5_3mnyi/styles/communityIcon_non5va69co441.png?width=256&s=b15586edb26a9302d97ed8656e4a2530d88d3db3",
-  },
-];
-
 function CommentsPage() {
   const { isLight } = useSelector((state) => state.color);
   const [isLoading, setLoading] = useState(true);
@@ -92,7 +65,7 @@ function CommentsPage() {
         <div className="feedDiv">
           <FeedItem comments={true} data={commentPageData} />
           {comment.map((a) => (
-            <CommentsItem data={a} />
+            <CommentsItem data={a} key={a._id} />
           ))}
         </div>
         <div className="sideDiv">
