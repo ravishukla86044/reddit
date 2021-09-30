@@ -7,6 +7,7 @@ import { CommentsPage } from "./Components/Comments/CommentsPage";
 import Navbar from "./Components/HomePage/Navbar/Navbar";
 import RegistrationModal from "./Components/HomePage/Registration/RegistrationModal"
 
+
 function App() {
   const location = useLocation();
 

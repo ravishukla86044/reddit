@@ -1,11 +1,13 @@
 import { Feed } from "./Feed/Feed";
 import styled from "styled-components";
-import {useSelector } from "react-redux";
-
+import { useSelector } from "react-redux";
+import TrendingCards from "./Trending/TrendingCards";
 function HomePage() {
   const { isLight } = useSelector((state) => state.color);
 
   return (
+    <>
+    <TrendingCards />
     <StyledDiv isLight={isLight}>
       <div className="feedDiv">
         <Feed />
@@ -14,6 +16,7 @@ function HomePage() {
         <div className="fake"></div>
       </div>
     </StyledDiv>
+    </>
   );
 }
 
