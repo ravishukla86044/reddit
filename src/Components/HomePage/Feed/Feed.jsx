@@ -18,7 +18,7 @@ const Con = styled.div`
     font-size: 14px;
     font-weight: 500;
     line-height: 18px;
-    color: #1a1a1b;
+    color: ${(props) => (props.isLight ? " #1a1a1b;" : "#d7dadc")};
   }
 
   .menuItem {

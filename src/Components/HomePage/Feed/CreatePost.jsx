@@ -18,8 +18,8 @@ const Con = styled.div`
     display: inline-block;
     padding: 6px 8px;
     margin-left: 5px;
-    height: 25px;
-    width: 25px;
+    height: 36px;
+    width: 36px;
     font-size: 20px;
     line-height: 20px;
     fill: #818384;
@@ -34,7 +34,7 @@ const Con = styled.div`
     border-radius: 50%;
     width: 38px;
     height: 38px;
-    background: #d7dfe2;
+    background: ${(props) => (props.isLight ? "#d7dfe2" : "rgb(129, 131, 132)")};
     fill: #fff;
     flex-basis: 38px;
     margin-right: 8px;
