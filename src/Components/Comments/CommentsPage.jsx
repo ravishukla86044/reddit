@@ -5,39 +5,37 @@ import { useSelector } from "react-redux";
 import { ImArrowUp, ImArrowDown } from "react-icons/im";
 import { RiFileListLine } from "react-icons/ri";
 import { IoMdClose } from "react-icons/io";
-import { useHistory } from "react-router-dom";
-
-const arr = [
-  {
-    time: "8 hours",
-    communityName: "sdfsf",
-    votes: 23,
-    comment: "sdfsdfsfsdfsffssfsf",
-    profileImg:
-      "https://styles.redditmedia.com/t5_3mnyi/styles/communityIcon_non5va69co441.png?width=256&s=b15586edb26a9302d97ed8656e4a2530d88d3db3",
-  },
-  {
-    time: "10 hours",
-    communityName: "lghkldg",
-    votes: 23,
-    comment: "ubmsb oijsdio ijsd sodjf",
-    profileImg:
-      "https://styles.redditmedia.com/t5_3mnyi/styles/communityIcon_non5va69co441.png?width=256&s=b15586edb26a9302d97ed8656e4a2530d88d3db3",
-  },
-  {
-    time: "15hours",
-    communityName: "kbian",
-    votes: 23,
-    comment: "hhhhhh hhhhhhhhhh hhhhhhhh",
-    profileImg:
-      "https://styles.redditmedia.com/t5_3mnyi/styles/communityIcon_non5va69co441.png?width=256&s=b15586edb26a9302d97ed8656e4a2530d88d3db3",
-  },
-];
+import { useHistory, useParams } from "react-router-dom";
+import axios from "axios";
+import Spinner from "react-spinkit";
+import { useState, useEffect } from "react";
 
 function CommentsPage() {
   const { isLight } = useSelector((state) => state.color);
+  const [isLoading, setLoading] = useState(true);
   const history = useHistory();
-  return (
+  const { postId } = useParams();
+  const [commentPageData, setcommentPageData] = useState();
+  const [comment, setComment] = useState();
+
+  useEffect(() => {
+    getPost();
+  }, []);
+
+  // getting  post and comments from backend
+  async function getPost() {
+    let postData = await axios.get(`https://reddit-new.herokuapp.com/posts/${postId}`);
+    let comm = await axios.get(`https://reddit-new.herokuapp.com/comments/${postId}`);
+    setcommentPageData(postData.data.post);
+    setComment(comm.data.comment);
+    setLoading(false);
+  }
+
+  return isLoading ? (
+    <AppLoading>
+      <Spinner name="ball-spin-fade-loader" color="#0079D3" fadeIn="none" />
+    </AppLoading>
+  ) : (
     <StyledDiv isLight={isLight}>
       <div className="commentHeader">
         <div>
@@ -49,7 +47,7 @@ function CommentsPage() {
             </Likes>
             <div className="upperTitle">
               <RiFileListLine />
-              <div>thfdffdsdfdfd</div>
+              <div>{commentPageData.text}</div>
             </div>
           </div>
           <div
@@ -65,9 +63,9 @@ function CommentsPage() {
       </div>
       <div>
         <div className="feedDiv">
-          <FeedItem comments={true} />
-          {arr.map((a) => (
-            <CommentsItem data={a} />
+          <FeedItem comments={true} data={commentPageData} />
+          {comment.map((a) => (
+            <CommentsItem data={a} key={a._id} />
           ))}
         </div>
         <div className="sideDiv">
@@ -77,6 +75,16 @@ function CommentsPage() {
     </StyledDiv>
   );
 }
+
+const AppLoading = styled.div`
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 const StyledDiv = styled.div`
   width: 100%;

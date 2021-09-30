@@ -6,23 +6,54 @@ import { FiGift } from "react-icons/fi";
 import { BsThreeDots } from "react-icons/bs";
 import { RiBookmarkLine } from "react-icons/ri";
 import { CgImage } from "react-icons/cg";
-
+import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useState, useEffect } from "react";
 
-function FeedItem({ community, comments, type = 1 }) {
+function FeedItem({ community, comments, type = 1, data }) {
   const { isLight } = useSelector((state) => state.color);
+  const [comment, setComment] = useState(0);
   const history = useHistory();
+
+  // extractin time past
+  const currentDate = Date.now();
+  const postDate = new Date(data?.createdAt || 0);
+  let diff = Math.abs((currentDate - postDate) / (1000 * 60 * 60));
+  let days = null;
+  let hours = null;
+  let mins = null;
+  if (diff >= 24) {
+    days = Math.ceil(diff % 24); // will be in days
+  } else if (diff < 1) {
+    mins = Math.ceil(diff * 60); // will be in min
+  } else {
+    hours = Math.ceil(diff); // hours
+  }
+
+  ////////getting comments count
+  useEffect(() => {
+    getComments(data._id);
+  }, []);
+
+  async function getComments(postId) {
+    let commentsCount = await axios.get(`https://reddit-new.herokuapp.com/comments/${postId}`);
+
+    setComment(commentsCount.data);
+  }
+
   const handleRouteCommunity = (e) => {
     e.stopPropagation();
     history.push("/r/xyz");
   };
+
   const handleRouteUser = (e) => {
     e.stopPropagation();
     history.push("/user/xyz");
   };
-  const handleRouteComments = () => {
-    history.push("/r/xyz/comments/id");
+
+  const handleRouteComments = (id) => {
+    history.push(`/r/communityName/post/${data._id}`);
   };
   return type === 1 ? (
     <Con isLight={isLight}>
@@ -35,10 +66,7 @@ function FeedItem({ community, comments, type = 1 }) {
         <div className="upper">
           {!community && (
             <div className="profileImg">
-              <img
-                src="https://styles.redditmedia.com/t5_3mnyi/styles/communityIcon_non5va69co441.png?width=256&s=b15586edb26a9302d97ed8656e4a2530d88d3db3"
-                alt=""
-              />
+              <img src={data.userId.profile_url} alt="" />
             </div>
           )}
           <div className="text">
@@ -54,9 +82,12 @@ function FeedItem({ community, comments, type = 1 }) {
                 handleRouteUser(e);
               }}
             >
-              Posted by r/sdfsdf
+              Posted by u/{data.userId.name}
             </span>
-            <span>8 hours ago</span>
+            <span>
+              {days ? days : hours ? hours : mins}
+              {days ? "days" : hours ? "hours" : "mins"} ago
+            </span>
           </div>
           {!community && !comments && (
             <div className="join">
@@ -65,13 +96,10 @@ function FeedItem({ community, comments, type = 1 }) {
             </div>
           )}
         </div>
-        <div className="title">What sdfsdf dfsdfsf sdfsdf</div>
+        <div className="title">{data.text}</div>
         <div className="postImage">
           <div>
-            <img
-              src="https://preview.redd.it/31ihgjkvv5q71.jpg?width=640&crop=smart&auto=webp&s=48f6206ff4d37e6b26758e415d70576eb11ac1af"
-              alt=""
-            />
+            <img src={data.imageUrl} alt="" />
           </div>
         </div>
         <div className="comments">
@@ -84,7 +112,7 @@ function FeedItem({ community, comments, type = 1 }) {
             <div style={{ fontSize: "22px" }}>
               <FaRegCommentAlt />
             </div>
-            <div>10 Comments</div>
+            <div>{comment.count} Comments</div>
           </div>
           <div className="icon">
             <div>
@@ -122,13 +150,12 @@ function FeedItem({ community, comments, type = 1 }) {
       <div className="postImage">
         <div
           style={{
-            backgroundImage:
-              "url(https://preview.redd.it/31ihgjkvv5q71.jpg?width=640&crop=smart&auto=webp&s=48f6206ff4d37e6b26758e415d70576eb11ac1af)",
+            backgroundImage: `url(${data.imageUrl})`,
           }}
         ></div>
       </div>
       <div className="box">
-        <div className="title">What sdfsdf dfsdfsf</div>
+        <div className="title">{data.text}</div>
         <div className="upper">
           <div className="text">
             <span
@@ -143,9 +170,13 @@ function FeedItem({ community, comments, type = 1 }) {
                 handleRouteUser(e);
               }}
             >
-              Posted by r/sdfsdf
+              Posted by u/{data.userId.name}
             </span>
-            <span>8 hours ago</span>
+            <span>
+              {" "}
+              {days ? days : hours ? hours : mins}
+              {days ? "days" : hours ? "hours" : "mins"} ago
+            </span>
           </div>
           {!community && !comments && (
             <div className="join">
@@ -164,7 +195,7 @@ function FeedItem({ community, comments, type = 1 }) {
             <div>
               <FaRegCommentAlt />
             </div>
-            <div>10 Comments</div>
+            <div>{comment.count} Comments</div>
           </div>
           <div className="icon">
             <div>
@@ -205,7 +236,7 @@ function FeedItem({ community, comments, type = 1 }) {
         </div>
       </div>
       <div className="box">
-        <div className="title">What sdfsdf dfsdfsf</div>
+        <div className="title">{data.text}</div>
         <div className="upper">
           <div className="text">
             <span
@@ -220,9 +251,12 @@ function FeedItem({ community, comments, type = 1 }) {
                 handleRouteUser(e);
               }}
             >
-              Posted by r/sdfsdf
+              Posted by u/{data.userId.name}
             </span>
-            <span>8 hours ago</span>
+            <span>
+              {days ? days : hours ? hours : mins}
+              {days ? "days" : hours ? "hours" : "mins"} ago
+            </span>
           </div>
           {!community && !comments && (
             <div className="join">
@@ -241,7 +275,7 @@ function FeedItem({ community, comments, type = 1 }) {
           <div>
             <FaRegCommentAlt />
           </div>
-          <div>10</div>
+          <div>{comment.count}</div>
         </div>
         {/* <div className="icon">
             <div>
@@ -346,7 +380,7 @@ const Compact = styled.div`
     border-radius: 4px;
     padding-left: 10px;
     box-sizing: border-box;
-    max-width: 480px;
+    max-width: 420px;
     flex-grow: 1;
     .upper {
       font-size: 12px;

@@ -11,13 +11,29 @@ function CommentsItem({ data }) {
   const handleRouteUser = () => {
     history.push("/u/xyz");
   };
+
+  // extractin time past
+  const currentDate = Date.now();
+  const postDate = new Date(data?.createdAt);
+  let diff = Math.abs((currentDate - postDate) / (1000 * 60 * 60));
+  let days = null;
+  let hours = null;
+  let mins = null;
+  if (diff >= 24) {
+    days = Math.ceil(diff % 24); // will be in days
+  } else if (diff < 1) {
+    mins = Math.ceil(diff * 60); // will be in min
+  } else {
+    hours = Math.ceil(diff); // hours
+  }
+
   return (
     <Com isLight={isLight}>
       <div className="line"></div>
       <div className="box">
         <div className="upper">
           <div className="profileImg">
-            <img src={data.profileImg} alt="" />
+            <img src={data.userId.profile_url} alt="" />
           </div>
           <div className="text">
             <span
@@ -25,20 +41,22 @@ function CommentsItem({ data }) {
                 handleRouteUser();
               }}
             >
-              {" "}
-              {data.communityName}
+              {data.userId.name}
             </span>
             <span></span>
-            <span>{data.time}</span>
+            <span>
+              {days ? days : hours ? hours : mins}
+              {days ? "days" : hours ? "hours" : "mins"} ago
+            </span>
           </div>
         </div>
-        <div className="title">{data.comment}</div>
+        <div className="title">{data.text}</div>
 
         <div className="comments">
           <div className="icon">
             <div className="likes">
               <ImArrowUp />
-              <div>{data.votes}</div>
+              <div>{data.votes || 12}</div>
               <ImArrowDown />
             </div>
           </div>
