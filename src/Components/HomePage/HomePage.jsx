@@ -1,6 +1,6 @@
 import { Feed } from "./Feed/Feed";
 import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import TrendingCards from "./Trending/TrendingCards";
 function HomePage() {
   const { isLight } = useSelector((state) => state.color);
@@ -22,6 +22,7 @@ function HomePage() {
 
 const StyledDiv = styled.div`
   width: 100%;
+  min-height: 100vh;
   box-sizing: border-box;
   background: ${(props) => (props.isLight ? "#dae0e6" : "rgb(3,3,3)")};
   display: flex;

@@ -1,61 +1,72 @@
-import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS,REGISTER_REQUEST,REGISTER_SUCCESS,REGISTER_FAILURE } from "./actionTypes";
+import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, REGISTER_REQUEST, REGISTER_SUCCESS, REGISTER_FAILURE } from "./actionTypes";
+import { loadData, saveData } from "../../utils/localStorage"
 
-const initState ={
-    isLogin:false,
-    token:"",
-    isLoading:false,
-    isError:false
+const token = loadData("token");
+const user = loadData("user");
+
+const initState = {
+    isAuth: token ? true : false,
+    user: user || "",
+    token: token || "",
+    isLoading: false,
+    isError: false
 }
-export const authReducer = (state = initState,{type,payload})=>{
-    switch(type){
-        case LOGIN_REQUEST:{
-            return{
+export const authReducer = (state = initState, { type, payload }) => {
+    switch (type) {
+        case LOGIN_REQUEST: {
+            return {
                 ...state,
-                isLoading:true,
-                isError:false
+                isLoading: true,
+                isError: false
             }
         }
-        case LOGIN_SUCCESS:{
-            return{
+        case LOGIN_SUCCESS: {
+            saveData("token", payload.token);
+            saveData("user", payload.user);
+            return {
                 ...state,
-                isLogin:true,
-                token:payload,
-                isLoading:false,
-                isError:false
+                isAuth: true,
+                user: payload.user,
+                token: payload.token,
+                isLoading: false,
+                isError: false
             }
         }
-        case LOGIN_FAILURE:{
-            return{
+        case LOGIN_FAILURE: {
+            return {
                 ...state,
-                isLogin:false,
-                token:"",
-                isLoading:false,
-                isError:true
+                isAuth: false,
+                token: "",
+                isLoading: false,
+                isError: true
             }
         }
-        case REGISTER_REQUEST:{
-            return{
+        case REGISTER_REQUEST: {
+            return {
                 ...state,
-                isLoading:true,
-                isError:false
+                isLoading: true,
+                isError: false
             }
         }
-        case REGISTER_SUCCESS:{
-            return{
+        case REGISTER_SUCCESS: {
+            saveData("token", payload.token);
+            saveData("user", payload.user);
+            return {
                 ...state,
-                isREGISTER:true,
-                token:payload,
-                isLoading:false,
-                isError:false
+                isAuth: true,
+                user: payload.user,
+                token: payload.token,
+                isLoading: false,
+                isError: false
             }
         }
-        case REGISTER_FAILURE:{
-            return{
+        case REGISTER_FAILURE: {
+            return {
                 ...state,
-                isREGISTER:false,
-                token:"",
-                isLoading:false,
-                isError:true
+                isAuth: false,
+                token: "",
+                isLoading: false,
+                isError: true
             }
         }
         default:

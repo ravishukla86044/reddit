@@ -1,0 +1,21 @@
+.footerContainer {
+  width: 25vw;
+  background-color: rgb(255, 255, 255);
+  padding: 10px;
+  margin: 20px auto;
+  box-sizing: border-box;
+  font-family: Noto Sans, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  border-radius: 5px;
+  color: #838384;
+}
+.footerFlex {
+  display: flex;
+  justify-content: space-around;
+}
+.copyright {
+  width: 70%;
+  margin: auto;
+}

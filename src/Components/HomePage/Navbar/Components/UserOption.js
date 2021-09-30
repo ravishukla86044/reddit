@@ -5,7 +5,7 @@ import InputIcon from "@material-ui/icons/Input";
 import ToggleOnIcon from "@material-ui/icons/ToggleOnOutlined";
 import ToggleOffIcon from "@material-ui/icons/ToggleOffOutlined";
 import HelpIcon from "@material-ui/icons/HelpOutlineRounded";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { lightMode } from "../../../../Redux/color/action";
 
 const UserOption = () => {
