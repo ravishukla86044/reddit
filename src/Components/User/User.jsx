@@ -1,7 +1,6 @@
-import { CreatePost } from "../HomePage/Feed/CreatePost";
 import { Feed } from "../HomePage/Feed/Feed";
 import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { UserHeader } from "./UserHeader";
 
 function User() {

@@ -1,6 +1,6 @@
 import { FeedItem } from "./FeedItem";
 import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { IoFlame, IoReorderFourSharp } from "react-icons/io5";
 import { AiOutlineStar } from "react-icons/ai";
 import { CgArrowUpR } from "react-icons/cg";
