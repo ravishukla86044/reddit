@@ -8,6 +8,113 @@ import { BsThreeDots, BsLayoutThreeColumns } from "react-icons/bs";
 import { RiArrowDownSLine, RiLayoutRowLine } from "react-icons/ri";
 import { useState } from "react";
 
+function Feed({ community = false, data }) {
+  const { isLight } = useSelector((state) => state.color);
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(1);
+  const handleClick = (n = 1) => {
+    if (n === 1) setValue(1);
+    if (n === 2) setValue(2);
+    if (n === 3) setValue(3);
+    setOpen((pre) => !pre);
+  };
+  const handleClickAway = () => {
+    console.log("hh");
+    setOpen(false);
+  };
+  return (
+    <Con isLight={isLight}>
+      <div className="menu">
+        <div>Popular Post</div>
+        <div className="menuItem">
+          <div className="icon firstIcon">
+            <div>
+              <IoFlame />
+            </div>
+            <div>Hot</div>
+          </div>
+          <div className="icon">
+            <div>
+              <AiOutlineStar />
+            </div>
+            <div>New</div>
+          </div>
+          <div className="icon">
+            <div>
+              <CgArrowUpR />
+            </div>
+            <div>Top</div>
+          </div>
+          <div className="icon">
+            <div>
+              <BsThreeDots />
+            </div>
+          </div>
+          <div className="last" onClickAway={handleClickAway}>
+            <div className="icon" onClick={handleClick}>
+              <div>
+                {value === 1 ? (
+                  <RiLayoutRowLine />
+                ) : value === 2 ? (
+                  <BsLayoutThreeColumns className="rotate" />
+                ) : (
+                  <IoReorderFourSharp />
+                )}
+              </div>
+              <div>
+                <RiArrowDownSLine />
+              </div>
+            </div>
+            {open && (
+              <div className="hidden">
+                <div
+                  className="icon"
+                  onClick={() => {
+                    handleClick(1);
+                  }}
+                >
+                  <div className="iconDiv">
+                    <RiLayoutRowLine />
+                  </div>
+                  <div>Card</div>
+                </div>
+
+                <div
+                  className="icon"
+                  onClick={() => {
+                    handleClick(2);
+                  }}
+                >
+                  <div className="iconDiv">
+                    <BsLayoutThreeColumns className="rotate" />
+                  </div>
+                  <div>Classic</div>
+                </div>
+
+                <div
+                  className="icon"
+                  onClick={() => {
+                    handleClick(3);
+                  }}
+                  style={{ borderBottom: "none" }}
+                >
+                  <div className="iconDiv">
+                    <IoReorderFourSharp />
+                  </div>
+                  <div>Compact</div>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+      {data.map((a) => (
+        <FeedItem community={community} type={value} data={a} key={a._id} />
+      ))}
+    </Con>
+  );
+}
+
 const Con = styled.div`
   width: 640px;
   box-sizing: border-box;
@@ -51,6 +158,10 @@ const Con = styled.div`
       border-radius: 22px;
       cursor: pointer;
       margin-right: 5px;
+
+      .rotate {
+        transform: rotate(90deg);
+      }
     }
     .icon svg {
       fill: #818384;
@@ -123,110 +234,4 @@ const Con = styled.div`
     }
   }
 `;
-
-function Feed({ community = false }) {
-  const { isLight } = useSelector((state) => state.color);
-  const [open, setOpen] = useState(false);
-  const [value, setValue] = useState(1);
-  const handleClick = (n = 1) => {
-    if (n === 1) setValue(1);
-    if (n === 2) setValue(2);
-    if (n === 3) setValue(3);
-    setOpen((pre) => !pre);
-  };
-  const handleClickAway = () => {
-    console.log("hh");
-    setOpen(false);
-  };
-  return (
-    <Con isLight={isLight}>
-      <div className="menu">
-        <div>Popular Post</div>
-        <div className="menuItem">
-          <div className="icon firstIcon">
-            <div>
-              <IoFlame />
-            </div>
-            <div>Hot</div>
-          </div>
-          <div className="icon">
-            <div>
-              <AiOutlineStar />
-            </div>
-            <div>New</div>
-          </div>
-          <div className="icon">
-            <div>
-              <CgArrowUpR />
-            </div>
-            <div>Top</div>
-          </div>
-          <div className="icon">
-            <div>
-              <BsThreeDots />
-            </div>
-          </div>
-          <div className="last" onClickAway={handleClickAway}>
-            <div className="icon" onClick={handleClick}>
-              <div>
-                {value === 1 ? (
-                  <RiLayoutRowLine />
-                ) : value === 2 ? (
-                  <BsLayoutThreeColumns />
-                ) : (
-                  <IoReorderFourSharp />
-                )}
-              </div>
-              <div>
-                <RiArrowDownSLine />
-              </div>
-            </div>
-            {open && (
-              <div className="hidden">
-                <div
-                  className="icon"
-                  onClick={() => {
-                    handleClick(1);
-                  }}
-                >
-                  <div className="iconDiv">
-                    <RiLayoutRowLine />
-                  </div>
-                  <div>Card</div>
-                </div>
-
-                <div
-                  className="icon"
-                  onClick={() => {
-                    handleClick(2);
-                  }}
-                >
-                  <div className="iconDiv">
-                    <BsLayoutThreeColumns />
-                  </div>
-                  <div>Classic</div>
-                </div>
-
-                <div
-                  className="icon"
-                  onClick={() => {
-                    handleClick(3);
-                  }}
-                  style={{ borderBottom: "none" }}
-                >
-                  <div className="iconDiv">
-                    <IoReorderFourSharp />
-                  </div>
-                  <div>Compact</div>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-      <FeedItem community={community} />
-    </Con>
-  );
-}
-
 export { Feed };

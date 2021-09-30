@@ -118,6 +118,7 @@ const StyledUser = styled.div`
 `;
 const StyledModel = styled.div`
   position: absolute;
+  z-index: 2;
   right: 0;
   top: 45px;
   background: #fff;
