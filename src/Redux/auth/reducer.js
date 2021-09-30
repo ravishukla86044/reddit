@@ -1,8 +1,11 @@
 import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS,REGISTER_REQUEST,REGISTER_SUCCESS,REGISTER_FAILURE } from "./actionTypes";
+import {loadData, saveData} from "../../utils/localStorage"
+
+const token = loadData("token");
 
 const initState ={
     isAuth:false,
-    token:"",
+    token: token||"",
     isLoading:false,
     isError:false
 }
@@ -16,10 +19,11 @@ export const authReducer = (state = initState,{type,payload})=>{
             }
         }
         case LOGIN_SUCCESS:{
+            saveData("token", payload.token);
             return{
                 ...state,
                 isAuth:true,
-                token:payload,
+                token:payload.token,
                 isLoading:false,
                 isError:false
             }
@@ -40,11 +44,12 @@ export const authReducer = (state = initState,{type,payload})=>{
                 isError:false
             }
         }
-        case REGISTER_SUCCESS:{
+        case REGISTER_SUCCESS: {
+            saveData("token", payload.token);
             return{
                 ...state,
                 isAuth:true,
-                token:payload,
+                token:payload.token,
                 isLoading:false,
                 isError:false
             }
