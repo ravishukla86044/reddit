@@ -10,7 +10,6 @@ import { useSelector } from 'react-redux'
 
 const Login = () => {
     const isAuth = useSelector(state => state.auth.isAuth);
-    console.log('isAuth:', isAuth)
     return (
         <StyleLogin>
             {isAuth ? <>
