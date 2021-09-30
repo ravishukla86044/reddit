@@ -1,11 +1,8 @@
 import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
-import { ImArrowUp, ImArrowDown, ImRedo } from "react-icons/im";
-import { HiOutlinePlus } from "react-icons/hi";
+import { useSelector } from "react-redux";
+import { ImArrowUp, ImArrowDown } from "react-icons/im";
 import { FaRegCommentAlt } from "react-icons/fa";
-import { FiGift } from "react-icons/fi";
 import { BsThreeDots } from "react-icons/bs";
-import { RiBookmarkLine } from "react-icons/ri";
 import { useHistory } from "react-router-dom";
 const Com = styled.div`
   position: relative;
