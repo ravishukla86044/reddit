@@ -6,7 +6,7 @@ import { Switch, Route,useLocation } from "react-router-dom";
 import { CommentsPage } from "./Components/Comments/CommentsPage";
 import Navbar from "./Components/HomePage/Navbar/Navbar";
 import RegistrationModal from "./Components/HomePage/Registration/RegistrationModal"
-
+import CreatePostPage from "./Components/CreatePostPage/CreatePostPage";
 function App() {
   const location = useLocation();
 
@@ -29,6 +29,9 @@ function App() {
         </Route>
         <Route path="/u/:user">
           <User />
+        </Route>
+        <Route path="/create-post">
+          <CreatePostPage />
         </Route>
       </Switch>
     </div>

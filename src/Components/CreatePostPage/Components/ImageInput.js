@@ -1,14 +1,14 @@
-import React from 'react'
 import styled from 'styled-components'
 
-const ImageInput = () => {
+
+const ImageInput = ({handleFile,fileName}) => {
   return (
     <StyleImageInput>
-      <div>Drag and drop images or 
+      <div>{fileName}
 
       <div className="upload-btn-wrapper">
         <button className="btn">Upload</button>
-        <input type="file" name="myfile" />
+        <input onChange={handleFile} type="file" name="myfile" />
       </div>
 
       </div>

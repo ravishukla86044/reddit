@@ -9,11 +9,44 @@ import { BsLink45Deg } from 'react-icons/bs'
 import { MdKeyboardArrowDown } from 'react-icons/md'
 import { FaUserCircle } from 'react-icons/fa'
 import { FiSearch } from 'react-icons/fi'
+import axios from 'axios';
+import { loadData } from "../../../utils/localStorage";
 
 const CreatePost = () => {
   const [activeItem, setActiveItem] = useState('post')
   const [communityExtend, setCommunityExtend] = useState(false)
-  const [draft, setDraft] = useState(0)
+  const [draft, setDraft] = useState(0);
+  const [file, setFile] = useState("");
+  const [text,setText] = useState("");
+  const [fileName,setFileName] = useState("Drag and drop images or")
+  const [uploadedFile, setUploadedFile] = useState("");
+  const handleFile = (e) => {
+    setFile(e.target.files[0]);
+    console.log('e.target.files[0]:', e.target.files[0])
+    setFileName(e.target.files[0].name);
+  }
+  
+  const handleFileUplod = () => {
+    const { _id } = loadData("user");
+    const token = loadData("token");
+    const formData = new FormData();
+    formData.append('imageUrl', file);
+    formData.append('text', text);
+    formData.append('userId', _id);
+
+    axios.post("http://localhost:3001/posts", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        "Authorization": "Bearer " + token
+      }
+    })
+      .then((res) => {
+        setUploadedFile(res.data);
+        console.log(uploadedFile)
+      }).catch(err => {
+        console.log(err);
+      });
+  }
   return (
     <StyledCreatePost>
       <div className="create-post-head">
@@ -86,12 +119,12 @@ const CreatePost = () => {
           </span>
         </div>
 
-        <input className="title-input" type="text" placeholder="Title" />
+        <input onChange={(e)=>{setText(e.target.value)}} className="title-input" type="text" placeholder="Title" />
 
         {activeItem === 'post' ? (
           <PostInput />
         ) : activeItem === 'image' ? (
-          <ImageInput />
+          <ImageInput handleFile={handleFile} fileName={fileName} />
         ) : (
           activeItem === 'link' && <LinkInput />
         )}
@@ -99,7 +132,7 @@ const CreatePost = () => {
         <div className="post-btns">
           <div>
             <button onClick={()=> setDraft(1)} className="draft-btn">SAVE DRAFT</button>
-            <button className="post-btn">POST</button>
+            <button onClick={handleFileUplod} className="post-btn">POST</button>
           </div>
         </div>
 
