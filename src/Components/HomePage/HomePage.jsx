@@ -11,12 +11,13 @@ function HomePage() {
   const [data, setData] = useState();
 
   useEffect(() => {
-    getPost();
+    getAllPost();
   }, []);
 
   // getting all post from backend
-  async function getPost() {
+  async function getAllPost() {
     let postData = await axios.get("https://reddit-new.herokuapp.com/posts");
+
     setData(postData.data.posts);
     setLoading(false);
   }
