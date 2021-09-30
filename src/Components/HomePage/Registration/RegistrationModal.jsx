@@ -2,9 +2,13 @@ import React, { useState } from 'react';
 import styles from './RegistrationModal.module.css';
 import Login from './Login';
 import SignUp from './SignUp'
-
+import Spinner from "react-spinkit";
+import { useSelector } from 'react-redux';
+import styled from 'styled-components';
 const RegistrationModal = () => {
+    const { isLoading } = useSelector(state => state.auth);
 
+    console.log('loading:', isLoading)
     const [login, setLogin] = useState(true);
     const handleLogin = () => {
         setLogin(!login)
@@ -27,7 +31,7 @@ const RegistrationModal = () => {
                         </div>
                     </div>
                     <div className={styles.rightDown}>
-                        
+
                         {login ? (
                             <Login />
                         ) :
@@ -44,8 +48,27 @@ const RegistrationModal = () => {
                     </button>
                 </div>
             </div>
+            {isLoading ? <AppLoading>
+                    <Spinner
+                        name="ball-spin-fade-loader"
+                        color="#0079D3"
+                        fadeIn="none"
+                    />
+            </AppLoading> :
+                null
+            }
         </>
     )
 }
 
-export default RegistrationModal
+export default RegistrationModal;
+
+const AppLoading = styled.div`
+width: 100%;
+height: 100vh;
+position: absolute;
+top: 0;
+display: flex;
+justify-content: center;
+align-items: center;
+`;
