@@ -1,6 +1,6 @@
 import { Feed } from "./Feed/Feed";
 import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
+import {useSelector } from "react-redux";
 
 function HomePage() {
   const { isLight } = useSelector((state) => state.color);

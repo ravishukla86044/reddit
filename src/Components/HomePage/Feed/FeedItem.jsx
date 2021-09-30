@@ -6,7 +6,7 @@ import { FiGift } from "react-icons/fi";
 import { BsThreeDots } from "react-icons/bs";
 import { RiBookmarkLine } from "react-icons/ri";
 import { useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 const Con = styled.div`
   position: relative;

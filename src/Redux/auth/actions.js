@@ -1,4 +1,5 @@
 import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS,REGISTER_REQUEST,REGISTER_SUCCESS,REGISTER_FAILURE } from "./actionTypes"
+import axios from "axios"
 const loginRequest =()=>{
     return {
         type:LOGIN_REQUEST
@@ -20,7 +21,19 @@ const loginFailure =(payload)=>{
 }
 
 const loginUser=(payload)=>(dispatch)=>{
-
+    const requestAction = loginRequest();
+    dispatch(requestAction);
+    axios.post("http://localhost:3001/login", payload)
+        .then((res) => {
+            console.log('res:', res)
+            const successAction = loginSuccess(res.data);
+            dispatch(successAction);
+        })
+        .catch((err) => {
+            console.log('err:', err.response.data)
+            const failureAction = loginFailure(err);
+            dispatch(failureAction);
+        });
 }
 //---------------------------Register--------------------
 const registerRequest =()=>{
@@ -43,8 +56,18 @@ const registerFailure =(payload)=>{
     }
 }
 
- const registerUser=(payload)=>(dispatch)=>{
-
+const registerUser = (payload) => (dispatch) => {
+    const requestAction = registerRequest();
+    dispatch(requestAction);
+    axios.post("http://localhost:3001/register", payload)
+        .then((res) => {
+            const successAction = registerSuccess(res.data);
+            dispatch(successAction);
+        })
+        .catch((err) => {
+            const failureAction = registerFailure(err);
+            dispatch(failureAction);
+        });
 }
 
 export {loginRequest,loginSuccess,loginFailure,loginUser,registerRequest,registerSuccess,registerFailure, registerUser}

@@ -1,0 +1,44 @@
+.premiumBox {
+  width: 25vw;
+  margin: 20px auto;
+  padding: 10px;
+  background-color: white;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+.flexPremium {
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.icon {
+  width: 100%;
+}
+.premiumBox > div:first-child {
+  display: flex;
+}
+.premiumParaBox {
+  margin-left: 10px;
+}
+.premiumParaBox p {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  line-height: 12px;
+  margin-top: 2px;
+  margin-bottom: 4px;
+}
+.primaryOrangeButtonContainer {
+  width: 85%;
+  margin: 7px auto;
+}
+.primaryOrangeButton {
+  background-color: #ff5414;
+  color: #fff;
+  padding: 10px;
+  width: 100%;
+  border-radius: 20px;
+  border: none;
+  font-weight: 800;
+}
