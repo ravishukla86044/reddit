@@ -1,25 +1,31 @@
 import React from 'react'
 import styled from 'styled-components'
-import {FiMail} from 'react-icons/fi'
-import {VscDeviceCameraVideo} from 'react-icons/vsc'
-import {ImCoinDollar} from 'react-icons/im'
-import {CgArrowTopRightO} from 'react-icons/cg'
-import {AiOutlineMessage} from 'react-icons/ai'
-import {AiOutlinePlus} from 'react-icons/ai'
-import {IoIosTrendingUp} from 'react-icons/io'
+import { FiMail } from 'react-icons/fi'
+import { VscDeviceCameraVideo } from 'react-icons/vsc'
+import { ImCoinDollar } from 'react-icons/im'
+import { CgArrowTopRightO } from 'react-icons/cg'
+import { AiOutlineMessage } from 'react-icons/ai'
+import { AiOutlinePlus } from 'react-icons/ai'
+import { useSelector } from 'react-redux'
 
 const Login = () => {
+    const isAuth = useSelector(state => state.auth.isAuth);
+    console.log('isAuth:', isAuth)
     return (
         <StyleLogin>
-            {/* <button>Log In</button>
-            <button>Sign Up</button> */}
-            <CgArrowTopRightO/>
-            <VscDeviceCameraVideo/>
-            <AiOutlineMessage/>
-            <FiMail/>
-            <AiOutlinePlus/>
-            <span><ImCoinDollar/>Get Coins</span>
-            
+            {isAuth ? <>
+                <CgArrowTopRightO />
+                <VscDeviceCameraVideo />
+                <AiOutlineMessage />
+                <FiMail />
+                <AiOutlinePlus />
+                <span><ImCoinDollar />Get Coins</span>
+            </> : <>
+                <button>Log In</button>
+                <button>Sign Up</button>
+            </>
+            }
+
         </StyleLogin>
     )
 }
@@ -35,7 +41,7 @@ const StyleLogin = styled.div`
   &>button{
       height: 100%;
       font-weight: bold;
-      /* border: 1px solid #0079D3; */
+      border: 1px solid #0079D3;
       border-radius: 1rem;
       padding: 0 14%;
       background: #fff;

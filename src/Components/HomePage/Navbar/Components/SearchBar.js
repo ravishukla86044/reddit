@@ -14,7 +14,7 @@ const StyledSearch = styled.div`
 background: #F6F7F8;
 width: 51%;
 margin: auto 4%;
-height: 6vh;
+height: 35px;
 border-radius: .4rem;
 display: flex;
 padding: 0 .5rem;

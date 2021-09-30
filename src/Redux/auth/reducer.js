@@ -1,7 +1,7 @@
 import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS,REGISTER_REQUEST,REGISTER_SUCCESS,REGISTER_FAILURE } from "./actionTypes";
 
 const initState ={
-    isLogin:false,
+    isAuth:false,
     token:"",
     isLoading:false,
     isError:false
@@ -18,7 +18,7 @@ export const authReducer = (state = initState,{type,payload})=>{
         case LOGIN_SUCCESS:{
             return{
                 ...state,
-                isLogin:true,
+                isAuth:true,
                 token:payload,
                 isLoading:false,
                 isError:false
@@ -27,7 +27,7 @@ export const authReducer = (state = initState,{type,payload})=>{
         case LOGIN_FAILURE:{
             return{
                 ...state,
-                isLogin:false,
+                isAuth:false,
                 token:"",
                 isLoading:false,
                 isError:true
@@ -43,7 +43,7 @@ export const authReducer = (state = initState,{type,payload})=>{
         case REGISTER_SUCCESS:{
             return{
                 ...state,
-                isREGISTER:true,
+                isAuth:true,
                 token:payload,
                 isLoading:false,
                 isError:false
@@ -52,7 +52,7 @@ export const authReducer = (state = initState,{type,payload})=>{
         case REGISTER_FAILURE:{
             return{
                 ...state,
-                isREGISTER:false,
+                isAuth:false,
                 token:"",
                 isLoading:false,
                 isError:true
