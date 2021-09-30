@@ -7,9 +7,11 @@ import { CgArrowTopRightO } from 'react-icons/cg'
 import { AiOutlineMessage } from 'react-icons/ai'
 import { AiOutlinePlus } from 'react-icons/ai'
 import { useSelector } from 'react-redux'
+import { useHistory } from 'react-router'
 
 const Login = () => {
     const isAuth = useSelector(state => state.auth.isAuth);
+    const history = useHistory();
     return (
         <StyleLogin>
             {isAuth ? <>
@@ -20,8 +22,8 @@ const Login = () => {
                 <AiOutlinePlus />
                 <span><ImCoinDollar />Get Coins</span>
             </> : <>
-                <button>Log In</button>
-                <button>Sign Up</button>
+                <button onClick={()=>{history.push("/account")}}>Log In</button>
+                <button onClick={()=>{history.push("/account")}}>Sign Up</button>
             </>
             }
 
