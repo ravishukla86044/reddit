@@ -20,7 +20,7 @@ function CommentsItem({ data }) {
   let hours = null;
   let mins = null;
   if (diff >= 24) {
-    days = Math.ceil(diff % 24); // will be in days
+    days = Math.floor(diff / 24); // will be in days
   } else if (diff < 1) {
     mins = Math.ceil(diff * 60); // will be in min
   } else {
