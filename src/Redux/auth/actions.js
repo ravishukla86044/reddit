@@ -21,7 +21,19 @@ const loginFailure =(payload)=>{
 }
 
 const loginUser=(payload)=>(dispatch)=>{
-
+    const requestAction = loginRequest();
+    dispatch(requestAction);
+    axios.post("http://localhost:3001/login", payload)
+        .then((res) => {
+            console.log('res:', res)
+            const successAction = loginSuccess(res.data);
+            dispatch(successAction);
+        })
+        .catch((err) => {
+            console.log('err:', err.response.data)
+            const failureAction = loginFailure(err);
+            dispatch(failureAction);
+        });
 }
 //---------------------------Register--------------------
 const registerRequest =()=>{
@@ -49,12 +61,10 @@ const registerUser = (payload) => (dispatch) => {
     dispatch(requestAction);
     axios.post("http://localhost:3001/register", payload)
         .then((res) => {
-            console.log('res:', res)
-            const successAction = loginSuccess(res.data);
+            const successAction = registerSuccess(res.data);
             dispatch(successAction);
         })
         .catch((err) => {
-            console.log('err:', err.response.data)
             const failureAction = registerFailure(err);
             dispatch(failureAction);
         });

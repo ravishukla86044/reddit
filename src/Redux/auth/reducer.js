@@ -4,7 +4,7 @@ import {loadData, saveData} from "../../utils/localStorage"
 const token = loadData("token");
 
 const initState ={
-    isAuth:false,
+    isAuth:token?true:false,
     token: token||"",
     isLoading:false,
     isError:false
