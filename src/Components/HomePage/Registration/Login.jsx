@@ -34,7 +34,7 @@ const Login = () => {
           name="username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          
+          size = "small"
         />
        {loginText?<p style={{color:"red", fontSize:"small", marginTop:"-10px"}}>Username must be between 3 and 20 characters</p>:<></>}
            <TextField
@@ -43,7 +43,7 @@ const Login = () => {
           type="search"
           variant="filled"
           onClick={handleLoginText}
-          
+          size = "small"
         />
         </div>
     </Box>

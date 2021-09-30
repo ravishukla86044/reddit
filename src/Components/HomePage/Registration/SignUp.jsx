@@ -42,7 +42,7 @@ setLoginText(false);
           value={email}
           // onChange={(e) => setEmail(e.target.value)}
           onChange={handleEmail}
-          
+          size="small"
         />
           {loginText?<p style={{color:"red", fontSize:"small", marginTop:"-10px"}}>Please fix your email to continue.</p>:<></>}
         <TextField
@@ -50,14 +50,14 @@ setLoginText(false);
           label="CREATE A USERNAME"
           type="search"
           variant="filled"
-          
+          size="small"
         />
            <TextField
           id="filled-search"
           label="PASSWORD"
           type="search"
           variant="filled"
-          
+          size="small"
         />
         </div>
     </Box>

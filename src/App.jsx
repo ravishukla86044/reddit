@@ -4,13 +4,15 @@ import { Community } from "./Components/Community/Community";
 import { User } from "./Components/User/User";
 import { Switch, Route } from "react-router-dom";
 import { CommentsPage } from "./Components/Comments/CommentsPage";
+import RegistrationModal from "./Components/HomePage/Registration/RegistrationModal";
 
 function App() {
   return (
     <div className="App">
       <Switch>
         <Route exact path="/">
-          <HomePage />
+          {/* <HomePage /> */}
+          <RegistrationModal />
         </Route>
         <Route exact path="/r/:community">
           <Community />
