@@ -80,6 +80,7 @@ function CommentsPage() {
 
 const StyledDiv = styled.div`
   width: 100%;
+  min-height: 100vh;
   box-sizing: border-box;
   background: rgb(46, 47, 48);
   display: flex;

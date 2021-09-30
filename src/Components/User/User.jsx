@@ -28,6 +28,7 @@ function User() {
 
 const StyledDiv = styled.div`
   width: 100%;
+  min-height: 100vh;
   box-sizing: border-box;
   background: ${(props) => (props.isLight ? "#dae0e6" : "rgb(3,3,3)")};
   display: flex;
