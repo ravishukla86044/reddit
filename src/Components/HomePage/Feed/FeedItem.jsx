@@ -10,17 +10,35 @@ import { CgImage } from "react-icons/cg";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-function FeedItem({ community, comments, type = 1 }) {
+function FeedItem({ community, comments, type = 1, data }) {
   const { isLight } = useSelector((state) => state.color);
+
+  const currentDate = Date.now();
+  const postDate = new Date(data.createdAt);
+  let diff = Math.abs((currentDate - postDate) / (1000 * 60 * 60));
+  let days = null;
+  let hours = null;
+  let mins = null;
+  if (diff >= 24) {
+    days = Math.ceil(diff % 24); // will be in days
+  } else if (diff < 1) {
+    mins = Math.ceil(diff * 60); // will be in min
+  } else {
+    hours = Math.ceil(diff); // hours
+  }
+  console.log(days, hours, mins);
   const history = useHistory();
+
   const handleRouteCommunity = (e) => {
     e.stopPropagation();
     history.push("/r/xyz");
   };
+
   const handleRouteUser = (e) => {
     e.stopPropagation();
     history.push("/user/xyz");
   };
+
   const handleRouteComments = () => {
     history.push("/r/xyz/comments/id");
   };
@@ -35,10 +53,7 @@ function FeedItem({ community, comments, type = 1 }) {
         <div className="upper">
           {!community && (
             <div className="profileImg">
-              <img
-                src="https://styles.redditmedia.com/t5_3mnyi/styles/communityIcon_non5va69co441.png?width=256&s=b15586edb26a9302d97ed8656e4a2530d88d3db3"
-                alt=""
-              />
+              <img src={data.userId.profile_url} alt="" />
             </div>
           )}
           <div className="text">
@@ -56,7 +71,10 @@ function FeedItem({ community, comments, type = 1 }) {
             >
               Posted by r/sdfsdf
             </span>
-            <span>8 hours ago</span>
+            <span>
+              {days ? days : hours ? hours : mins}
+              {days ? "days" : hours ? "hours" : "mins"} ago
+            </span>
           </div>
           {!community && !comments && (
             <div className="join">
@@ -65,7 +83,7 @@ function FeedItem({ community, comments, type = 1 }) {
             </div>
           )}
         </div>
-        <div className="title">What sdfsdf dfsdfsf sdfsdf</div>
+        <div className="title">{data.text}</div>
         <div className="postImage">
           <div>
             <img
