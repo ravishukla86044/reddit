@@ -21,13 +21,13 @@ function App() {
         <Route exact path="/">
           <HomePage />
         </Route>
-        <Route exact path="/r/:community">
+        <Route exact path="/r/:communityId">
           <Community />
         </Route>
-        <Route exact path="/r/:community/comments/:id">
+        <Route exact path="/r/:community/comments/:commentId">
           <CommentsPage />
         </Route>
-        <Route path="/u/:user">
+        <Route path="/user/:userId">
           <User />
         </Route>
       </Switch>
