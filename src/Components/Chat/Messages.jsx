@@ -19,7 +19,7 @@ const Div = styled.div`
   & > div {
     padding: 5px;
     border-radius: 4px;
-    background: #cfcccc;
+    background: ${(props) => (props.currentUser ? "#cfcccc" : "#5094f9;")};
   }
 `;
 

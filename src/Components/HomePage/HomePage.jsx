@@ -6,7 +6,6 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Spinner from "react-spinkit";
 import { Sidebar } from "../Sidebar/Sidebar";
-import { Chat } from "../Chat/Chat";
 
 function HomePage() {
   const { isLight } = useSelector((state) => state.color);
@@ -31,7 +30,6 @@ function HomePage() {
     </AppLoading>
   ) : (
     <>
-      <Chat />
       <TrendingCards />
       <StyledDiv isLight={isLight}>
         <div className="feedDiv">

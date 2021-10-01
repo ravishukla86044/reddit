@@ -15,7 +15,7 @@ import { Messages } from "./Messages";
 
 import TextField from "@mui/material/TextField";
 
-function Chat() {
+function Chat({ setChat }) {
   const { isLight } = useSelector((state) => state.color);
   const { user } = useSelector((state) => state.auth);
   const scrollRef = useRef();
@@ -26,6 +26,7 @@ function Chat() {
   const [currentChat, setCurrentChat] = useState(null);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
+  const [currentFriend, setFriend] = useState("");
 
   useEffect(() => {
     getConversation();
@@ -82,6 +83,11 @@ function Chat() {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  async function getUser(data) {
+    const friendsId = data.members.find((a) => a !== user._id);
+    const res = await axios.get(`http://localhost:3001/users/${friendsId}`);
+    setFriend(res.data.user);
+  }
   return (
     <ChatDiv isLight={isLight}>
       <div className="rootDiv">
@@ -99,6 +105,7 @@ function Chat() {
               <div
                 onClick={() => {
                   setCurrentChat(a);
+                  getUser(a);
                 }}
               >
                 <AllChatMember data={a} currentUser={user} />
@@ -108,7 +115,7 @@ function Chat() {
         </div>
         <div className="rightPart">
           <div className="rightHeader">
-            <div className="name">Name</div>
+            <div className="name">{currentFriend?.name || "Name"}</div>
             <div className="optionIcons">
               <div>
                 <IoSettingsOutline />
@@ -119,7 +126,7 @@ function Chat() {
               <div>
                 <BsChevronDown />
               </div>
-              <div>
+              <div onClick={() => setChat((pre) => !pre)}>
                 <VscChromeClose />
               </div>
             </div>
