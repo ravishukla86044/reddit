@@ -4,13 +4,16 @@ import PostAbout from './Components/PostAbout'
 import styled from 'styled-components'
 
 const CreatePostPage = () => {
-    return (
+    return (<>
         <StyledPage>
             <CreatePost />
             <PostAbout />
         </StyledPage>
+    </>
     )
 }
+export default CreatePostPage
+
 const StyledPage = styled.div`
   width: 100%;
   min-height: 100vh;
@@ -28,5 +31,3 @@ const StyledPage = styled.div`
       width: 315px;
   }
 `
-
-export default CreatePostPage

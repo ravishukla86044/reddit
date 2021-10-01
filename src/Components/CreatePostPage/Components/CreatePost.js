@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import PostInput from './PostInput'
 import ImageInput from './ImageInput'
@@ -11,30 +11,49 @@ import { FaUserCircle } from 'react-icons/fa'
 import { FiSearch } from 'react-icons/fi'
 import axios from 'axios';
 import { loadData } from "../../../utils/localStorage";
+import { useHistory } from 'react-router'
+import Spinner from "react-spinkit";
+import { useSelector } from 'react-redux'
+import Avatar from '@material-ui/core/Avatar';
 
 const CreatePost = () => {
+  const history = useHistory();
   const [activeItem, setActiveItem] = useState('post')
   const [communityExtend, setCommunityExtend] = useState(false)
   const [draft, setDraft] = useState(0);
   const [file, setFile] = useState("");
-  const [text,setText] = useState("");
-  const [fileName,setFileName] = useState("Drag and drop images or")
+  const [text, setText] = useState("");
+  const [fileName, setFileName] = useState("Drag and drop images or")
   const [uploadedFile, setUploadedFile] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [communities, setCommunities] = useState([]);
+  const [inputText, setInputText] = useState("");
+  const [communityId, setCommunityId] = useState(" ");
+
+  const user = useSelector(state => state.auth.user);
+
   const handleFile = (e) => {
     setFile(e.target.files[0]);
-    console.log('e.target.files[0]:', e.target.files[0])
+    // console.log('file:', e.target.files[0])
     setFileName(e.target.files[0].name);
   }
-  
+
+  const communityHandler=(id,name)=>{
+    setInputText(name);
+    setCommunityId(id);
+  }
+
   const handleFileUplod = () => {
+    setIsLoading(true);
     const { _id } = loadData("user");
     const token = loadData("token");
     const formData = new FormData();
     formData.append('imageUrl', file);
     formData.append('text', text);
     formData.append('userId', _id);
+    formData.append("communityId",communityId)
 
-    axios.post("http://localhost:3001/posts", formData, {
+    axios.post("https://reddit-new.herokuapp.com/posts", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
         "Authorization": "Bearer " + token
@@ -43,10 +62,20 @@ const CreatePost = () => {
       .then((res) => {
         setUploadedFile(res.data);
         console.log(uploadedFile)
+        setIsLoading(false);
+        history.push("/");
       }).catch(err => {
-        console.log(err);
+        console.log(err.response);
       });
   }
+
+  useEffect(() => {
+    axios.get("https://reddit-new.herokuapp.com/community")
+      .then((res) => {
+        setCommunities(res.data.communities);
+      })
+  }, [])
+
   return (
     <StyledCreatePost>
       <div className="create-post-head">
@@ -61,31 +90,23 @@ const CreatePost = () => {
         className="community-bar"
       >
         <FiSearch />
-        <input type="text" placeholder="Choose a Community " />
+        <input type="text" onChange={(e)=>setInputText(e.target.value)} value={inputText} placeholder="Choose a Community " />
         <MdKeyboardArrowDown />
         {communityExtend && (
           <div className="coummnity-dropdown">
-            <p>your profile</p>
-            <div>
-              
-              <FaUserCircle />
-              profile 1
+            <p>Your profile</p>
+            <div  onClick={() => {setInputText(user.name)}}>
+              <HeaderAvatar src={user.profile_url} alt={user.name} />
+              {user.name}
             </div>
-            <div>
-              
-              <FaUserCircle />
-              profile 2
-            </div>
-            <div>
-              
-              <FaUserCircle />
-              profile 3
-            </div>
-            <div>
-              
-              <FaUserCircle />
-              profile 4
-            </div>
+            <p>Your Communities</p>
+            {communities.map((item) => {
+              return <div key={item._id} onClick={() => {communityHandler(item._id,item.name)}}>
+                <FaUserCircle />
+                {item.name}
+              </div>
+            })}
+
           </div>
         )}
       </div>
@@ -97,7 +118,7 @@ const CreatePost = () => {
             onClick={() => setActiveItem('post')}
             className={activeItem === 'post' ? 'active-item' : ''}
           >
-            
+
             <GoNote />
             Post
           </span>
@@ -105,7 +126,7 @@ const CreatePost = () => {
             onClick={() => setActiveItem('image')}
             className={activeItem === 'image' ? 'active-item' : ''}
           >
-            
+
             <BsImage /> Image & Video
           </span>
           <span
@@ -113,13 +134,13 @@ const CreatePost = () => {
             onClick={() => setActiveItem('link')}
             className={activeItem === 'link' ? 'active-item' : ''}
           >
-            
+
             <BsLink45Deg />
             Link
           </span>
         </div>
 
-        <input onChange={(e)=>{setText(e.target.value)}} className="title-input" type="text" placeholder="Title" />
+        <input onChange={(e) => { setText(e.target.value) }} className="title-input" type="text" placeholder="Title" />
 
         {activeItem === 'post' ? (
           <PostInput />
@@ -131,7 +152,7 @@ const CreatePost = () => {
 
         <div className="post-btns">
           <div>
-            <button onClick={()=> setDraft(1)} className="draft-btn">SAVE DRAFT</button>
+            <button onClick={() => setDraft(1)} className="draft-btn">SAVE DRAFT</button>
             <button onClick={handleFileUplod} className="post-btn">POST</button>
           </div>
         </div>
@@ -141,9 +162,20 @@ const CreatePost = () => {
           Send me post reply notification
         </div>
       </div>
+      {isLoading ? <AppLoading>
+        <Spinner
+          name="ball-spin-fade-loader"
+          color="#0079D3"
+          fadeIn="none"
+        />
+      </AppLoading> :
+        null
+      }
     </StyledCreatePost>
   )
 }
+export default CreatePost
+
 const StyledCreatePost = styled.div`
   width: 100%;
   min-height: 500px;
@@ -194,7 +226,7 @@ const StyledCreatePost = styled.div`
         color: #ccc;
       }
       & > div {
-        padding: 0.4rem;
+        padding: 0.4rem 0;
         display: flex;
         align-items: center;
         color: #333;
@@ -328,4 +360,20 @@ const StyledCreatePost = styled.div`
   }
 `
 
-export default CreatePost
+const AppLoading = styled.div`
+width: 100vh;
+height: 100vh;
+position: absolute;
+top: 140px;
+left: 140px;
+display: flex;
+justify-content: center;
+align-items: center;
+`;
+
+const HeaderAvatar = styled(Avatar)`
+cursor: pointer;
+margin-right: 8px;
+:hover{
+    opacity:0.8;
+}`;

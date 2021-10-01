@@ -4,7 +4,6 @@ import SearchBar from './Components/SearchBar'
 import Login from './Components/Login'
 import UserOption from './Components/UserOption'
 import styled from 'styled-components'
-
 const Navbar = () => {
 
     return (

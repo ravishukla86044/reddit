@@ -20,7 +20,7 @@ function CommentsPage() {
 
   useEffect(() => {
     getPost();
-  }, []);
+  });
 
   // getting  post and comments from backend
   async function getPost() {

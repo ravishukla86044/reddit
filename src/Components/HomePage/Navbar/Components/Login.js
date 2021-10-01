@@ -19,7 +19,7 @@ const Login = () => {
                 <VscDeviceCameraVideo />
                 <AiOutlineMessage />
                 <FiMail />
-                <AiOutlinePlus />
+                <AiOutlinePlus onClick={()=>{history.push("/create-post")}} />
                 <span><ImCoinDollar />Get Coins</span>
             </> : <>
                 <button onClick={()=>{history.push("/account")}}>Log In</button>
@@ -56,6 +56,7 @@ const StyleLogin = styled.div`
   &> svg{
       font-size: 140%;
       color: #1A1A1B;
+      cursor: pointer;
   }
   &>span{
       display: flex;
@@ -71,6 +72,4 @@ const StyleLogin = styled.div`
   }
   
 `
-
-
 export default Login
