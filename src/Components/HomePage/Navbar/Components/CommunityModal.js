@@ -29,7 +29,24 @@ const CommunityModal = ({ setModalDisplay, modalDisplay }) => {
         setCharLenght(e.target.value.length)
     }
   }
-
+  const createCommunityHandler = () => {
+    const payload = {
+      name: nameInput,
+      userId:user._id
+    }
+    axios.post("https://reddit-new.herokuapp.com/community", payload, {
+      headers: {
+        "Authorization": "Bearer " + token
+      }
+    })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err.response);
+      })
+    console.log(nameInput,user._id)
+  }
 
   // styles
   const styleSpan = {
