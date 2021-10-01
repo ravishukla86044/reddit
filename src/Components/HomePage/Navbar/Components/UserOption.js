@@ -7,24 +7,21 @@ import ToggleOffIcon from "@material-ui/icons/ToggleOffOutlined";
 import HelpIcon from "@material-ui/icons/HelpOutlineRounded";
 import { useDispatch } from "react-redux";
 import { lightMode } from "../../../../Redux/color/action";
-import Modal from '@material-ui/core/Modal';
-import CreateCommunityModal from "./CreateCommunityModal";
+
+import CommunityModal from "./CommunityModal";
 const UserOption = () => {
   // States
   const [userClicked, setUserClicked] = useState(false);
-  const [open, setOpen] = useState(false);
+  const [modalDisplay, setModalDisplay] = useState(false);
   const [nightMode, setNightMode] = useState(false);
 
   //theme
   const dispatch = useDispatch();
   //   Handlers
   const handleOpen = () => {
-    setOpen(true);
+    setModalDisplay(true);
   };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
   const userClickHandler = () => {
     setUserClicked(!userClicked);
   };
@@ -105,11 +102,7 @@ const UserOption = () => {
           </li>
         </StyledModel>
       )}
-      <Modal open={open} onClose={handleClose}
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description">
-        <CreateCommunityModal handleClose={handleClose} />
-      </Modal>
+      <CommunityModal modalDisplay={modalDisplay} setModalDisplay={setModalDisplay }/>
     </StyledUser>
   );
 };
