@@ -4,25 +4,42 @@ import styled from "styled-components";
 import { CommunityHeader } from "./CummunityHeader";
 import { useSelector } from "react-redux";
 import { CommunitySidebar } from "../CommunitySidebar/CommunitySidebar";
-
-const data = {
-  communityBackground:
-    "https://styles.redditmedia.com/t5_2uii8/styles/bannerBackgroundImage_v0a328mdtmk71.jpg?width=4000&format=pjpg&s=18a518f544beba0c58eb683bcbe90f0dcae79234",
-  communityProfile:
-    "https://a.thumbs.redditmedia.com/OT_3LiWYRmrHg-clwjXQN84qauGtBNRPJykzA2GA648.png",
-  communityName: "marvelstudios",
-  title: "Marvel Studios and the Marvel Cinematic Universe",
-};
+import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import Spinner from "react-spinkit";
 
 function Community() {
   const { isLight } = useSelector((state) => state.color);
-  return (
+  const { communityId } = useParams();
+  const [isLoading, setLoading] = useState(true);
+  const [data, setData] = useState();
+
+  useEffect(() => {
+    getAllPost();
+  }, []);
+
+  // getting all post from backend
+  async function getAllPost() {
+    let postData = await axios.get(
+      `https://reddit-new.herokuapp.com/posts/community/${communityId}`
+    );
+    setData(postData.data.post);
+    //console.log(postData.data.post, "thd");
+    setLoading(false);
+  }
+
+  return isLoading ? (
+    <AppLoading>
+      <Spinner name="ball-spin-fade-loader" color="#0079D3" fadeIn="none" />
+    </AppLoading>
+  ) : (
     <>
       <CommunityHeader data={data} />
       <StyledDiv isLight={isLight}>
         <div className="feedDiv">
           <CreatePost />
-          <Feed community={true} />
+          <Feed community={true} data={data} />
         </div>
         <div>
           <div className="fake">
@@ -33,6 +50,16 @@ function Community() {
     </>
   );
 }
+
+const AppLoading = styled.div`
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 const StyledDiv = styled.div`
   width: 100%;

@@ -69,6 +69,7 @@ function Chat() {
 }
 
 const ChatDiv = styled.div`
+  display: none;
   bottom: 10px;
   right: 30px;
   border-radius: 1em 1em 0 0;
