@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { GoFileMedia } from "react-icons/go";
 import { HiLink } from "react-icons/hi";
 
