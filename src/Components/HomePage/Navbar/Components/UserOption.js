@@ -5,7 +5,7 @@ import InputIcon from "@material-ui/icons/Input";
 import ToggleOnIcon from "@material-ui/icons/ToggleOnOutlined";
 import ToggleOffIcon from "@material-ui/icons/ToggleOffOutlined";
 import HelpIcon from "@material-ui/icons/HelpOutlineRounded";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { lightMode } from "../../../../Redux/color/action";
 
 const UserOption = () => {
@@ -118,6 +118,7 @@ const StyledUser = styled.div`
 `;
 const StyledModel = styled.div`
   position: absolute;
+  z-index: 2;
   right: 0;
   top: 45px;
   background: #fff;

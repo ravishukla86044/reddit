@@ -2,7 +2,7 @@ import { CreatePost } from "../HomePage/Feed/CreatePost";
 import { Feed } from "../HomePage/Feed/Feed";
 import styled from "styled-components";
 import { CommunityHeader } from "./CummunityHeader";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 const data = {
   communityBackground:
@@ -33,6 +33,7 @@ function Community() {
 
 const StyledDiv = styled.div`
   width: 100%;
+  min-height: 100vh;
   box-sizing: border-box;
   background: ${(props) => (props.isLight ? "#edeff1" : "rgb(3,3,3)")};
   display: flex;
