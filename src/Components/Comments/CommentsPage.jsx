@@ -100,12 +100,14 @@ const StyledDiv = styled.div`
   }
   & > div:nth-child(2) {
     max-width: 1068px;
+    height: max-content;
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
     background-color: ${(props) => (props.isLight ? "#DAE0E6" : "#030303")};
     box-sizing: border-box;
     padding: 0px 60px;
+    padding-bottom: 20px;
   }
   .feedDiv {
     margin-top: 30px;
