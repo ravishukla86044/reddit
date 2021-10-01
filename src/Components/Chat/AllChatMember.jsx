@@ -11,19 +11,23 @@ function AllChatMember({ data, currentUser }) {
   }, []);
 
   async function getUser(friendsId) {
-    const res = await axios.get(`https://reddit-new.herokuapp.com/users/${friendsId}`);
-    setUser(res.data);
+    const res = await axios.get(`http://localhost:3001/users/${friendsId}`);
+    setUser(res.data.user);
   }
 
   return (
     <User>
-      <div></div>
-      <div></div>
+      <div>
+        <img src={user?.profile_url} alt="" />
+      </div>
+      <div>{user?.name}</div>
     </User>
   );
 }
 
 const User = styled.div`
+  cursor: pointer;
+  padding: 5px;
   width: 100%;
   height: 30px;
   display: flex;
@@ -34,9 +38,16 @@ const User = styled.div`
     margin: 5px;
   }
   & > div:nth-child(1) {
+    width: 22px;
+    height: 22px;
     border-radius: 50%;
-    width: 30px;
-    height: 30px;
+    overflow: hidden;
+    margin-right: 5px;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
   }
 `;
 export { AllChatMember };

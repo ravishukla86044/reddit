@@ -8,32 +8,42 @@ import { VscChromeClose } from "react-icons/vsc";
 import { AiOutlineCamera, AiOutlineGif, AiOutlineCaretRight } from "react-icons/ai";
 import { GrEmoji } from "react-icons/gr";
 import io from "socket.io-client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { AllChatMember } from "./AllChatMember";
 import { Messages } from "./Messages";
 
+import TextField from "@mui/material/TextField";
+
 function Chat() {
   const { isLight } = useSelector((state) => state.color);
   const { user } = useSelector((state) => state.auth);
-  console.log(user);
+  const scrollRef = useRef();
+  //console.log(user);
 
   // getting all conversation of a user
   const [chatroom, setChatroom] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
   const [messages, setMessages] = useState([]);
+  const [newMessage, setNewMessage] = useState("");
 
   useEffect(() => {
     getConversation();
   }, []);
 
   async function getConversation() {
-    let res = await axios.get(`https://reddit-new.herokuapp.com/chatroom/${user._id}`);
-    setChatroom(res.data);
+    let res = await axios.get(`http://localhost:3001/chatroom/${user._id}`);
+    setChatroom(res.data.chatroom);
+    console.log(res, "chatroom");
   }
   async function getMsg() {
-    const res = await axios.get(`https://reddit-new.herokuapp.com/msg/${currentChat?._id}`);
-    setMessages(res);
+    try {
+      const res = await axios.get(`http://localhost:3001/msg/${currentChat._id}`);
+      setMessages(res.data.allMsg);
+      console.log(res, "msg");
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   useEffect(() => {
@@ -47,6 +57,28 @@ function Chat() {
   // socket.on("output", (data) => {
   //   console.log(data, "output");
   // });
+  const handleSendMessage = async () => {
+    if (newMessage === "") {
+      return;
+    }
+    const payload = {
+      senderId: user._id,
+      text: newMessage,
+      chatRoomId: currentChat._id,
+    };
+
+    try {
+      const res = await axios.post(`http://localhost:3001/msg`, payload);
+      setMessages([...messages, res.data]);
+      setNewMessage("");
+    } catch (e) {
+      console.log({ error: e });
+    }
+  };
+
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
   return (
     <ChatDiv isLight={isLight}>
@@ -94,7 +126,12 @@ function Chat() {
             {!currentChat ? (
               <div className="nochat">Select a user to start a chat</div>
             ) : (
-              messages.map((m) => <Messages data={m} currentUser={m.senderId === user._id} />)
+              messages ||
+              [].map((m) => (
+                <div ref={scrollRef}>
+                  <Messages data={m} currentUser={m.senderId === user._id} />
+                </div>
+              ))
             )}
           </div>
           <div className="input lastIcons">
@@ -103,7 +140,17 @@ function Chat() {
                 <AiOutlineCamera />
               </div>
             </div>
-            <div className="inputField"></div>
+            <div className="inputField">
+              <TextField
+                id="outlined-basic"
+                label="Message"
+                variant="outlined"
+                value={newMessage}
+                onChange={(e) => {
+                  setNewMessage(e.target.value);
+                }}
+              />
+            </div>
             <div className="optionIcons">
               <div>
                 <AiOutlineGif />
@@ -111,7 +158,7 @@ function Chat() {
               <div>
                 <GrEmoji />
               </div>
-              <div style={{ marginLeft: "20px" }}>
+              <div onClick={handleSendMessage} style={{ marginLeft: "20px" }}>
                 <AiOutlineCaretRight />
               </div>
             </div>
@@ -123,7 +170,7 @@ function Chat() {
 }
 
 const ChatDiv = styled.div`
-  display: none;
+  /* display: none; */
   bottom: 10px;
   right: 30px;
   border-radius: 1em 1em 0 0;

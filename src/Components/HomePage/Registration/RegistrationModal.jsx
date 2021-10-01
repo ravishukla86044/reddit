@@ -16,7 +16,7 @@ const RegistrationModal = () => {
     setLogin(!login);
     // console.log(login);
   };
-  if (user) {
+  if (user._id) {
     return <Redirect to="/" />;
   }
   return (
