@@ -23,7 +23,7 @@ const loginFailure =(payload)=>{
 const loginUser=(payload)=>(dispatch)=>{
     const requestAction = loginRequest();
     dispatch(requestAction);
-    axios.post("http://localhost:3001/login", payload)
+    axios.post("https://reddit-new.herokuapp.com/login", payload)
         .then((res) => {
             console.log('res:', res)
             const successAction = loginSuccess(res.data);
@@ -59,7 +59,7 @@ const registerFailure =(payload)=>{
 const registerUser = (payload) => (dispatch) => {
     const requestAction = registerRequest();
     dispatch(requestAction);
-    axios.post("http://localhost:3001/register", payload)
+    axios.post("https://reddit-new.herokuapp.com/register", payload)
         .then((res) => {
             const successAction = registerSuccess(res.data);
             dispatch(successAction);
