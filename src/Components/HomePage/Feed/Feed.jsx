@@ -7,7 +7,7 @@ import { CgArrowUpR } from "react-icons/cg";
 import { BsThreeDots, BsLayoutThreeColumns } from "react-icons/bs";
 import { RiArrowDownSLine, RiLayoutRowLine } from "react-icons/ri";
 import { useState } from "react";
-
+import { CreatePost } from "./CreatePost";
 function Feed({ community = false, data }) {
   const { isLight } = useSelector((state) => state.color);
   const [open, setOpen] = useState(false);
@@ -28,6 +28,7 @@ function Feed({ community = false, data }) {
   return (
     <Con isLight={isLight}>
       <div className="menu">
+        <CreatePost />
         <div>Popular Post</div>
         <div className="menuItem">
           <div className="icon firstIcon">
@@ -141,6 +142,7 @@ const Con = styled.div`
     align-items: center;
     justify-content: flex-start;
     margin-bottom: 16px;
+    margin-top: 8px;
     padding: 10px 12px;
 
     .firstIcon {
