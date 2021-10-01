@@ -39,8 +39,8 @@ function Chat() {
   async function getMsg() {
     try {
       const res = await axios.get(`http://localhost:3001/msg/${currentChat._id}`);
-      setMessages(res.data.allMsg);
       console.log(res, "msg");
+      setMessages(res.data.allMsg);
     } catch (e) {
       console.log(e);
     }
@@ -69,7 +69,9 @@ function Chat() {
 
     try {
       const res = await axios.post(`http://localhost:3001/msg`, payload);
-      setMessages([...messages, res.data]);
+      console.log(res.data.msg);
+      setMessages([...messages, res.data.msg]);
+
       setNewMessage("");
     } catch (e) {
       console.log({ error: e });
@@ -126,8 +128,7 @@ function Chat() {
             {!currentChat ? (
               <div className="nochat">Select a user to start a chat</div>
             ) : (
-              messages ||
-              [].map((m) => (
+              messages.map((m) => (
                 <div ref={scrollRef}>
                   <Messages data={m} currentUser={m.senderId === user._id} />
                 </div>
@@ -293,6 +294,15 @@ const ChatDiv = styled.div`
     }
     .inputField {
       flex-grow: 1;
+      margin-left: 15px;
+      margin-bottom: -10px;
+
+      .MuiOutlinedInput-root > input {
+        padding: 5px 10px;
+      }
+      label {
+        top: -9px;
+      }
     }
     .input {
       width: 100%;
@@ -309,6 +319,8 @@ const ChatDiv = styled.div`
     .chatFeed {
       margin-bottom: 20px;
       flex-grow: 1;
+      display: flex;
+      flex-direction: column;
     }
   }
 `;
