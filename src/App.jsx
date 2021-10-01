@@ -6,12 +6,13 @@ import { Switch, Route } from "react-router-dom";
 import { CommentsPage } from "./Components/Comments/CommentsPage";
 import Navbar from "./Components/HomePage/Navbar/Navbar";
 /* import { CommunitySidebar } from "./Components/CommunitySidebar/CommunitySidebar";
-
-import { ProfileSidebar } from "./Components/ProfileSidebar/ProfileSidebar"; */
+ */
+import { ProfileSidebar } from "./Components/ProfileSidebar/ProfileSidebar";
 function App() {
   return (
     <div className="App">
-      <Navbar />
+      <ProfileSidebar />
+      {/* <Navbar />
       <Switch>
         <Route exact path="/">
           <HomePage />
@@ -25,7 +26,7 @@ function App() {
         <Route path="/u/:user">
           <User />
         </Route>
-      </Switch>{" "}
+      </Switch>{" "} */}
     </div>
   );
 }
