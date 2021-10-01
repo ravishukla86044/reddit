@@ -1,15 +1,19 @@
 import "./App.css";
-import HomePage from "./Components/HomePage/HomePage";
+/* import HomePage from "./Components/HomePage/HomePage";
 import { Community } from "./Components/Community/Community";
 import { User } from "./Components/User/User";
 import { Switch, Route } from "react-router-dom";
 import { CommentsPage } from "./Components/Comments/CommentsPage";
-import Navbar from "./Components/HomePage/Navbar/Navbar";
-
+import Navbar from "./Components/HomePage/Navbar/Navbar"; 
+import { CommunitySidebar } from "./Components/CommunitySidebar/CommunitySidebar";
+*/
+import { ProfileSidebar } from "./Components/ProfileSidebar/ProfileSidebar";
 function App() {
   return (
     <div className="App">
-      <Navbar />
+      <ProfileSidebar />
+      {/*<CommunitySidebar />
+       <Navbar />
       <Switch>
         <Route exact path="/">
           <HomePage />
@@ -23,7 +27,7 @@ function App() {
         <Route path="/u/:user">
           <User />
         </Route>
-      </Switch>
+      </Switch> */}
     </div>
   );
 }

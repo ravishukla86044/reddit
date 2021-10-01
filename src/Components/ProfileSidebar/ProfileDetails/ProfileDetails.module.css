@@ -1,0 +1,128 @@
+.ProfileDetailsContainer {
+  background-color: #fff;
+  width: 25vw;
+  margin: 20px auto;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+.profileName {
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+}
+.avatarButtonContainer {
+  width: 90%;
+  margin: auto;
+  position: relative;
+  top: -65px;
+}
+.createAvatarButton {
+  background: linear-gradient(90deg, #ec0623, #ff8717);
+  color: #fff;
+  padding: 10px;
+  width: 100%;
+  border-radius: 20px;
+  border: none;
+  margin-bottom: 10px;
+  font-weight: 800;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+.profilelink {
+  font-size: 13px;
+  color: gray;
+  text-align: center;
+}
+.blueBackGround {
+  height: 100px;
+  background-color: #0079d3;
+}
+.avtarContainer {
+  width: 100%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  top: -80px;
+}
+.avtarContainer > img {
+  width: 120px;
+}
+.buttonContainer {
+  width: 100%;
+  padding: 0 20px;
+  text-align: center;
+}
+.description {
+  position: relative;
+  top: -50px;
+}
+.rating {
+  border: none;
+  color: gray;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.primaryButton {
+  background-color: #0079d3;
+  color: #fff;
+  padding: 10px;
+  width: 100%;
+  border-radius: 20px;
+  border: none;
+  margin-bottom: 10px;
+  font-weight: 800;
+}
+.moreOptionContainer {
+  width: 95%;
+  position: relative;
+  top: -40px;
+  padding: 10px;
+  text-align: right;
+}
+.moreOptionBox {
+  padding: 10px;
+  position: relative;
+  top: -30px;
+}
+.moreOption {
+  border: none;
+  color: #0079d3;
+  font-size: 15px;
+  font-weight: 600;
+  background: transparent;
+}
+
+.padding10 {
+  padding: 10px;
+}
+.boldHeading {
+  font-size: 14px;
+  font-weight: 600;
+}
+.subHeading {
+  font-size: 12px;
+  color: gray;
+}
+.countDown {
+  display: flex;
+  width: 80%;
+  align-items: center;
+  justify-content: space-between;
+}
+.award {
+  display: grid;
+  padding: 0 10px;
+  grid-template-columns: auto auto auto;
+  align-items: center;
+  grid-gap: 5px;
+  margin-bottom: 15px;
+}
+.lineheight {
+  line-height: 13px;
+}
