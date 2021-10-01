@@ -7,13 +7,15 @@ import ToggleOffIcon from "@material-ui/icons/ToggleOffOutlined";
 import HelpIcon from "@material-ui/icons/HelpOutlineRounded";
 import { useDispatch } from "react-redux";
 import { lightMode } from "../../../../Redux/color/action";
-
+import { Avatar } from "@material-ui/core";
+import { useSelector } from "react-redux";
 import CommunityModal from "./CommunityModal";
 const UserOption = () => {
   // States
   const [userClicked, setUserClicked] = useState(false);
   const [modalDisplay, setModalDisplay] = useState(false);
   const [nightMode, setNightMode] = useState(false);
+  const user = useSelector(state => state.auth.user);
 
   //theme
   const dispatch = useDispatch();
@@ -36,19 +38,7 @@ const UserOption = () => {
 
   return (
     <StyledUser onClick={userClickHandler}>
-      <svg
-        data-icon="user"
-        role="img"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 448 512"
-        className="svg-inline--fa fa-user fa-w-14 fa-7x"
-      >
-        <path
-          fill="currentColor"
-          d="M313.6 288c-28.7 0-42.5 16-89.6 16-47.1 0-60.8-16-89.6-16C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4zM416 464c0 8.8-7.2 16-16 16H48c-8.8 0-16-7.2-16-16v-41.6C32 365.9 77.9 320 134.4 320c19.6 0 39.1 16 89.6 16 50.4 0 70-16 89.6-16 56.5 0 102.4 45.9 102.4 102.4V464zM224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm0-224c52.9 0 96 43.1 96 96s-43.1 96-96 96-96-43.1-96-96 43.1-96 96-96z"
-          className=""
-        ></path>
-      </svg>
+      <img src={user.profile_url } alt="user" />
       <svg
         data-icon="chevron-down"
         role="img"
@@ -99,11 +89,15 @@ const UserOption = () => {
   );
 };
 const StyledUser = styled.div`
-  width: 5%;
+  width: 7%;
   height: 90%;
   margin: auto 1%;
   /* border: solid #333; */
   cursor: pointer;
+  &>img{
+    width:40%;
+    border-radius: 5px;
+  }
   & > svg {
     padding: 12%;
     /* border: solid; */
