@@ -34,7 +34,7 @@ const CreatePost = () => {
     formData.append('text', text);
     formData.append('userId', _id);
 
-    axios.post("http://localhost:3001/posts", formData, {
+    axios.post("https://reddit-new.herokuapp.com/posts", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
         "Authorization": "Bearer " + token
