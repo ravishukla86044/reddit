@@ -1,38 +1,41 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import {FaLock} from 'react-icons/fa'
-import {FaUser} from 'react-icons/fa'
-import {HiEye} from 'react-icons/hi'
+import { FaLock } from 'react-icons/fa'
+import { FaUser } from 'react-icons/fa'
+import { HiEye } from 'react-icons/hi'
 import { useSelector } from 'react-redux'
 import axios from "axios";
+import Spinner from "react-spinkit";
 const CommunityModal = ({ setModalDisplay, modalDisplay }) => {
-  
-  const {user,token} = useSelector(state => state.auth);
-  
+
+  const { user, token } = useSelector(state => state.auth);
+
   const [nameInput, setNameInput] = useState('')
   const [charLenght, setCharLenght] = useState(0)
+  const [isLoading, setIsLoading] = useState(false);
 
   // handler
   const modalDisableHandler = (e) => {
     if (e.target.id === 'communityModal') {
       setModalDisplay(false)
-      
+
     }
   }
 
   const onChangeNameHandler = (e) => {
     setNameInput(e.target.value)
 
-    if(e.target.value.length >= 21){
-        setCharLenght(21)
-    }else{
-        setCharLenght(e.target.value.length)
+    if (e.target.value.length >= 21) {
+      setCharLenght(21)
+    } else {
+      setCharLenght(e.target.value.length)
     }
   }
   const createCommunityHandler = () => {
+    setIsLoading(true);
     const payload = {
       name: nameInput,
-      userId:user._id
+      userId: user._id
     }
     axios.post("https://reddit-new.herokuapp.com/community", payload, {
       headers: {
@@ -41,11 +44,12 @@ const CommunityModal = ({ setModalDisplay, modalDisplay }) => {
     })
       .then((res) => {
         console.log(res.data);
+        setIsLoading(false);
       })
       .catch((err) => {
         console.log(err.response);
       })
-    console.log(nameInput,user._id)
+    console.log(nameInput, user._id)
   }
 
   // styles
@@ -62,7 +66,7 @@ const CommunityModal = ({ setModalDisplay, modalDisplay }) => {
   }
 
   modalDisplay ? document.body.style.overflow = "hidden" : document.body.style.overflow = "auto";
-  
+
   return (
     <StyledModal
       id="communityModal"
@@ -87,8 +91,8 @@ const CommunityModal = ({ setModalDisplay, modalDisplay }) => {
           </div>
           <p>{21 - charLenght} character remaining</p>
           {
-           !nameInput &&
-          <p>A community name is required</p>
+            !nameInput &&
+            <p>A community name is required</p>
           }
         </StyleNameInput>
 
@@ -96,11 +100,11 @@ const CommunityModal = ({ setModalDisplay, modalDisplay }) => {
 
           <h3>Community type</h3>
           <div>
-          <input type="radio" value="Male" name="gender" /> <FaUser/> Public <span style={styleSpanfont}>Anyone can view, post, and comment to this community</span>
-          <br />
-          <input type="radio" value="Female" name="gender"/> <HiEye/> Restricted <span style={styleSpanfont}>Anyone can view this community, but only approved users can post</span>
-          <br />
-          <input type="radio" value="Other" name="gender" /> <FaLock/> Private <span style={styleSpanfont}>Only approved users can view and submit to this community</span>
+            <input type="radio" value="Male" name="gender" /> <FaUser /> Public <span style={styleSpanfont}>Anyone can view, post, and comment to this community</span>
+            <br />
+            <input type="radio" value="Female" name="gender" /> <HiEye /> Restricted <span style={styleSpanfont}>Anyone can view this community, but only approved users can post</span>
+            <br />
+            <input type="radio" value="Other" name="gender" /> <FaLock /> Private <span style={styleSpanfont}>Only approved users can view and submit to this community</span>
           </div>
 
         </StyleCommunityType>
@@ -121,9 +125,20 @@ const CommunityModal = ({ setModalDisplay, modalDisplay }) => {
           </div>
         </div>
       </StyledModalContent>
+      {isLoading ? <AppLoading>
+        <Spinner
+          name="ball-spin-fade-loader"
+          color="#0079D3"
+          fadeIn="none"
+        />
+      </AppLoading> :
+        null
+      }
     </StyledModal>
   )
 }
+export default CommunityModal
+
 const StyledModal = styled.div`
   position: absolute;
   top: 0;
@@ -264,9 +279,15 @@ overflow: hidden;
   }
 }
 }
-
- 
-
 `
+const AppLoading = styled.div`
+width: 100vw;
+height: 100vh;
+position: absolute;
+top: 0px;
+left: 0px;
+display: flex;
+justify-content: center;
+align-items: center;
+`;
 
-export default CommunityModal

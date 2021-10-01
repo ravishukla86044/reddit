@@ -18,10 +18,13 @@ function Feed({ community = false, data }) {
     if (n === 3) setValue(3);
     setOpen((pre) => !pre);
   };
-  const handleClickAway = () => {
-    console.log("hh");
-    setOpen(false);
-  };
+
+  // const handleClickAway = () => {
+  //   console.log("hh");
+  //   setOpen(false);
+  // };
+  
+
   return (
     <Con isLight={isLight}>
       <div className="menu">
@@ -50,7 +53,7 @@ function Feed({ community = false, data }) {
               <BsThreeDots />
             </div>
           </div>
-          <div className="last" onClickAway={handleClickAway}>
+          <div className="last" >
             <div className="icon" onClick={handleClick}>
               <div>
                 {value === 1 ? (

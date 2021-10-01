@@ -25,7 +25,7 @@ const CreatePost = () => {
   const [text, setText] = useState("");
   const [fileName, setFileName] = useState("Drag and drop images or")
   const [uploadedFile, setUploadedFile] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [communities, setCommunities] = useState([]);
   const [inputText, setInputText] = useState("");
 
@@ -58,7 +58,7 @@ const CreatePost = () => {
         setIsLoading(false);
         history.push("/");
       }).catch(err => {
-        console.log(err);
+        console.log(err.response);
       });
   }
 
