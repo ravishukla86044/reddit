@@ -5,16 +5,20 @@ import SignUp from "./SignUp";
 import Spinner from "react-spinkit";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
+import { Redirect } from "react-router-dom";
 
 const RegistrationModal = () => {
   const { isLoading } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.auth);
   console.log("loading:", isLoading);
   const [login, setLogin] = useState(true);
   const handleLogin = () => {
     setLogin(!login);
     // console.log(login);
   };
-
+  if (user) {
+    return <Redirect to="/" />;
+  }
   return (
     <>
       <div className={styles.mainModal}>

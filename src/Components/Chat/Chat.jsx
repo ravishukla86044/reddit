@@ -7,9 +7,47 @@ import { BsChevronDown } from "react-icons/bs";
 import { VscChromeClose } from "react-icons/vsc";
 import { AiOutlineCamera, AiOutlineGif, AiOutlineCaretRight } from "react-icons/ai";
 import { GrEmoji } from "react-icons/gr";
+import io from "socket.io-client";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { AllChatMember } from "./AllChatMember";
+import { Messages } from "./Messages";
 
 function Chat() {
   const { isLight } = useSelector((state) => state.color);
+  const { user } = useSelector((state) => state.auth);
+  console.log(user);
+
+  // getting all conversation of a user
+  const [chatroom, setChatroom] = useState([]);
+  const [currentChat, setCurrentChat] = useState(null);
+  const [messages, setMessages] = useState([]);
+
+  useEffect(() => {
+    getConversation();
+  }, []);
+
+  async function getConversation() {
+    let res = await axios.get(`https://reddit-new.herokuapp.com/chatroom/${user._id}`);
+    setChatroom(res.data);
+  }
+  async function getMsg() {
+    const res = await axios.get(`https://reddit-new.herokuapp.com/msg/${currentChat?._id}`);
+    setMessages(res);
+  }
+
+  useEffect(() => {
+    getMsg();
+  }, [currentChat]);
+
+  // const socket = io("http://localhost:3001");
+  // socket.on("message", (data) => {
+  //   console.log(data, "mssg");
+  // });
+  // socket.on("output", (data) => {
+  //   console.log(data, "output");
+  // });
+
   return (
     <ChatDiv isLight={isLight}>
       <div className="rootDiv">
@@ -22,7 +60,17 @@ function Chat() {
               </div>
             </div>
           </div>
-          <div></div>
+          <div>
+            {chatroom.map((a) => (
+              <div
+                onClick={() => {
+                  setCurrentChat(a);
+                }}
+              >
+                <AllChatMember data={a} currentUser={user} />
+              </div>
+            ))}
+          </div>
         </div>
         <div className="rightPart">
           <div className="rightHeader">
@@ -42,7 +90,13 @@ function Chat() {
               </div>
             </div>
           </div>
-          <div className="chatFeed"></div>
+          <div className="chatFeed">
+            {!currentChat ? (
+              <div className="nochat">Select a user to start a chat</div>
+            ) : (
+              messages.map((m) => <Messages data={m} currentUser={m.senderId === user._id} />)
+            )}
+          </div>
           <div className="input lastIcons">
             <div className="optionIcons">
               <div>
