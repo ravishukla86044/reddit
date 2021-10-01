@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import PostInput from './PostInput'
 import ImageInput from './ImageInput'
@@ -13,6 +13,8 @@ import axios from 'axios';
 import { loadData } from "../../../utils/localStorage";
 import { useHistory } from 'react-router'
 import Spinner from "react-spinkit";
+import { useSelector } from 'react-redux'
+import Avatar from '@material-ui/core/Avatar';
 
 const CreatePost = () => {
   const history = useHistory();
@@ -24,6 +26,10 @@ const CreatePost = () => {
   const [fileName, setFileName] = useState("Drag and drop images or")
   const [uploadedFile, setUploadedFile] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [communities, setCommunities] = useState([]);
+  const [inputText, setInputText] = useState("");
+
+  const user = useSelector(state => state.auth.user);
 
   const handleFile = (e) => {
     setFile(e.target.files[0]);
@@ -55,6 +61,14 @@ const CreatePost = () => {
         console.log(err);
       });
   }
+
+  useEffect(() => {
+    axios.get("https://reddit-new.herokuapp.com/community")
+      .then((res) => {
+        setCommunities(res.data.communities);
+      })
+  }, [communities])
+
   return (
     <StyledCreatePost>
       <div className="create-post-head">
@@ -69,31 +83,23 @@ const CreatePost = () => {
         className="community-bar"
       >
         <FiSearch />
-        <input type="text" placeholder="Choose a Community " />
+        <input type="text" onChange={(e)=>setInputText(e.target.value)} value={inputText} placeholder="Choose a Community " />
         <MdKeyboardArrowDown />
         {communityExtend && (
           <div className="coummnity-dropdown">
-            <p>your profile</p>
-            <div>
-
-              <FaUserCircle />
-              profile 1
+            <p>Your profile</p>
+            <div  onClick={() => {setInputText(user.name)}}>
+              <HeaderAvatar src={user.profile_url} alt={user.name} />
+              {user.name}
             </div>
-            <div>
+            <p>Your Communities</p>
+            {communities.map((item) => {
+              return <div key={item._id} onClick={() => {setInputText(item.name)}}>
+                <FaUserCircle />
+                {item.name}
+              </div>
+            })}
 
-              <FaUserCircle />
-              profile 2
-            </div>
-            <div>
-
-              <FaUserCircle />
-              profile 3
-            </div>
-            <div>
-
-              <FaUserCircle />
-              profile 4
-            </div>
           </div>
         )}
       </div>
@@ -213,7 +219,7 @@ const StyledCreatePost = styled.div`
         color: #ccc;
       }
       & > div {
-        padding: 0.4rem;
+        padding: 0.4rem 0;
         display: flex;
         align-items: center;
         color: #333;
@@ -357,3 +363,10 @@ display: flex;
 justify-content: center;
 align-items: center;
 `;
+
+const HeaderAvatar = styled(Avatar)`
+cursor: pointer;
+margin-right: 8px;
+:hover{
+    opacity:0.8;
+}`;

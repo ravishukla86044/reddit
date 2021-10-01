@@ -69,7 +69,7 @@ function CreatePost() {
   return (
     <Con isLight={isLight}>
       <svg
-        class="_3utuhrSAkEkzgaswqglvpN _1cvAFWcyUe8hsdIpCmJP0W "
+        className="_3utuhrSAkEkzgaswqglvpN _1cvAFWcyUe8hsdIpCmJP0W "
         viewBox="0 0 320 320"
         xmlns="http://www.w3.org/2000/svg"
       >
