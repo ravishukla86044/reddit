@@ -5,6 +5,7 @@ import TrendingCards from "./Trending/TrendingCards";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Spinner from "react-spinkit";
+import { Sidebar } from "../Sidebar/Sidebar";
 
 function HomePage() {
   const { isLight } = useSelector((state) => state.color);
@@ -35,7 +36,9 @@ function HomePage() {
           <Feed data={data} />
         </div>
         <div>
-          <div className="fake"></div>
+          <div className="fake">
+            <Sidebar />
+          </div>
         </div>
       </StyledDiv>
     </>
@@ -71,6 +74,7 @@ const StyledDiv = styled.div`
     width: 300px;
     height: 200px;
     border: 1px solid black;
+    box-sizing: border-box;
   }
 `;
 
