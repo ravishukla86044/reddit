@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { UserHeader } from "./UserHeader";
 import { useState } from "react";
+import { ProfileSidebar } from "../ProfileSidebar/ProfileSidebar";
 
 function User() {
   const { isLight } = useSelector((state) => state.color);
@@ -18,7 +19,9 @@ function User() {
           <Feed />
         </div>
         <div>
-          <div className="fake"></div>
+          <div className="fake">
+            <ProfileSidebar />
+          </div>
         </div>
       </StyledDiv>
     </>

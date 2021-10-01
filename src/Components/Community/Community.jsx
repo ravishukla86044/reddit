@@ -3,6 +3,7 @@ import { Feed } from "../HomePage/Feed/Feed";
 import styled from "styled-components";
 import { CommunityHeader } from "./CummunityHeader";
 import { useSelector } from "react-redux";
+import { CommunitySidebar } from "../CommunitySidebar/CommunitySidebar";
 
 const data = {
   communityBackground:
@@ -24,7 +25,9 @@ function Community() {
           <Feed community={true} />
         </div>
         <div>
-          <div className="fake"></div>
+          <div className="fake">
+            <CommunitySidebar />
+          </div>
         </div>
       </StyledDiv>
     </>
