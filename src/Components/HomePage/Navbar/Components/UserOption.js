@@ -66,38 +66,30 @@ const UserOption = () => {
         <StyledModel onClick={bubbleHandler}>
           <p>VIEW OPTIONS</p>
           <li onClick={nightModeHandler}>
-            {" "}
             <Moon /> Night Mode {nightMode ? <ToggleOffIcon /> : <ToggleOnIcon />}
           </li>
           <p>MORE STUFF</p>
           <li>
-            {" "}
             <HelpIcon /> Coin
           </li>
           <li>
-            {" "}
             <HelpIcon /> Premium
           </li>
           <li onClick={handleOpen}>
-            {" "}
             <HelpIcon /> Create Community
           </li>
           <li>
-            {" "}
             <HelpIcon /> Powerups
           </li>
           <li>
-            {" "}
             <HelpIcon /> Talks
           </li>
           <li>
-            {" "}
             <HelpIcon />
             Help Center
           </li>
-          <div classNameName="line"></div>
+          <div className="line"></div>
           <li>
-            {" "}
             <InputIcon /> Log In/ Sign Up
           </li>
         </StyledModel>

@@ -6,8 +6,10 @@ import { HiEye } from 'react-icons/hi'
 import { useSelector } from 'react-redux'
 import axios from "axios";
 import Spinner from "react-spinkit";
+import { useHistory } from 'react-router'
 const CommunityModal = ({ setModalDisplay, modalDisplay }) => {
 
+  const history = useHistory();
   const { user, token } = useSelector(state => state.auth);
 
   const [nameInput, setNameInput] = useState('')
@@ -45,6 +47,7 @@ const CommunityModal = ({ setModalDisplay, modalDisplay }) => {
       .then((res) => {
         console.log(res.data);
         setIsLoading(false);
+        history.push(`r/${res.data.community._id}`);
       })
       .catch((err) => {
         console.log(err.response);
