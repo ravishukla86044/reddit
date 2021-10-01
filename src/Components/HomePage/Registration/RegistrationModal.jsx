@@ -8,7 +8,7 @@ import styled from 'styled-components';
 const RegistrationModal = () => {
     const { isLoading } = useSelector(state => state.auth);
 
-    console.log('loading:', isLoading)
+    // console.log('loading:', isLoading)
     const [login, setLogin] = useState(true);
     const handleLogin = () => {
         setLogin(!login)

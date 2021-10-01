@@ -11,22 +11,28 @@ import { FaUserCircle } from 'react-icons/fa'
 import { FiSearch } from 'react-icons/fi'
 import axios from 'axios';
 import { loadData } from "../../../utils/localStorage";
+import { useHistory } from 'react-router'
+import Spinner from "react-spinkit";
 
 const CreatePost = () => {
+  const history = useHistory();
   const [activeItem, setActiveItem] = useState('post')
   const [communityExtend, setCommunityExtend] = useState(false)
   const [draft, setDraft] = useState(0);
   const [file, setFile] = useState("");
-  const [text,setText] = useState("");
-  const [fileName,setFileName] = useState("Drag and drop images or")
+  const [text, setText] = useState("");
+  const [fileName, setFileName] = useState("Drag and drop images or")
   const [uploadedFile, setUploadedFile] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleFile = (e) => {
     setFile(e.target.files[0]);
-    console.log('e.target.files[0]:', e.target.files[0])
+    // console.log('file:', e.target.files[0])
     setFileName(e.target.files[0].name);
   }
-  
+
   const handleFileUplod = () => {
+    setIsLoading(true);
     const { _id } = loadData("user");
     const token = loadData("token");
     const formData = new FormData();
@@ -43,6 +49,8 @@ const CreatePost = () => {
       .then((res) => {
         setUploadedFile(res.data);
         console.log(uploadedFile)
+        setIsLoading(false);
+        history.push("/");
       }).catch(err => {
         console.log(err);
       });
@@ -67,22 +75,22 @@ const CreatePost = () => {
           <div className="coummnity-dropdown">
             <p>your profile</p>
             <div>
-              
+
               <FaUserCircle />
               profile 1
             </div>
             <div>
-              
+
               <FaUserCircle />
               profile 2
             </div>
             <div>
-              
+
               <FaUserCircle />
               profile 3
             </div>
             <div>
-              
+
               <FaUserCircle />
               profile 4
             </div>
@@ -97,7 +105,7 @@ const CreatePost = () => {
             onClick={() => setActiveItem('post')}
             className={activeItem === 'post' ? 'active-item' : ''}
           >
-            
+
             <GoNote />
             Post
           </span>
@@ -105,7 +113,7 @@ const CreatePost = () => {
             onClick={() => setActiveItem('image')}
             className={activeItem === 'image' ? 'active-item' : ''}
           >
-            
+
             <BsImage /> Image & Video
           </span>
           <span
@@ -113,13 +121,13 @@ const CreatePost = () => {
             onClick={() => setActiveItem('link')}
             className={activeItem === 'link' ? 'active-item' : ''}
           >
-            
+
             <BsLink45Deg />
             Link
           </span>
         </div>
 
-        <input onChange={(e)=>{setText(e.target.value)}} className="title-input" type="text" placeholder="Title" />
+        <input onChange={(e) => { setText(e.target.value) }} className="title-input" type="text" placeholder="Title" />
 
         {activeItem === 'post' ? (
           <PostInput />
@@ -131,7 +139,7 @@ const CreatePost = () => {
 
         <div className="post-btns">
           <div>
-            <button onClick={()=> setDraft(1)} className="draft-btn">SAVE DRAFT</button>
+            <button onClick={() => setDraft(1)} className="draft-btn">SAVE DRAFT</button>
             <button onClick={handleFileUplod} className="post-btn">POST</button>
           </div>
         </div>
@@ -141,9 +149,20 @@ const CreatePost = () => {
           Send me post reply notification
         </div>
       </div>
+      {isLoading ? <AppLoading>
+        <Spinner
+          name="ball-spin-fade-loader"
+          color="#0079D3"
+          fadeIn="none"
+        />
+      </AppLoading> :
+        null
+      }
     </StyledCreatePost>
   )
 }
+export default CreatePost
+
 const StyledCreatePost = styled.div`
   width: 100%;
   min-height: 500px;
@@ -328,4 +347,13 @@ const StyledCreatePost = styled.div`
   }
 `
 
-export default CreatePost
+const AppLoading = styled.div`
+width: 100vh;
+height: 100vh;
+position: absolute;
+top: 140px;
+left: 140px;
+display: flex;
+justify-content: center;
+align-items: center;
+`;
