@@ -25,9 +25,10 @@ const CreatePost = () => {
   const [text, setText] = useState("");
   const [fileName, setFileName] = useState("Drag and drop images or")
   const [uploadedFile, setUploadedFile] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [communities, setCommunities] = useState([]);
   const [inputText, setInputText] = useState("");
+  const [communityId, setCommunityId] = useState(" ");
 
   const user = useSelector(state => state.auth.user);
 
@@ -35,6 +36,11 @@ const CreatePost = () => {
     setFile(e.target.files[0]);
     // console.log('file:', e.target.files[0])
     setFileName(e.target.files[0].name);
+  }
+
+  const communityHandler=(id,name)=>{
+    setInputText(name);
+    setCommunityId(id);
   }
 
   const handleFileUplod = () => {
@@ -45,6 +51,7 @@ const CreatePost = () => {
     formData.append('imageUrl', file);
     formData.append('text', text);
     formData.append('userId', _id);
+    formData.append("communityId",communityId)
 
     axios.post("https://reddit-new.herokuapp.com/posts", formData, {
       headers: {
@@ -67,7 +74,7 @@ const CreatePost = () => {
       .then((res) => {
         setCommunities(res.data.communities);
       })
-  }, [communities])
+  }, [])
 
   return (
     <StyledCreatePost>
@@ -94,7 +101,7 @@ const CreatePost = () => {
             </div>
             <p>Your Communities</p>
             {communities.map((item) => {
-              return <div key={item._id} onClick={() => {setInputText(item.name)}}>
+              return <div key={item._id} onClick={() => {communityHandler(item._id,item.name)}}>
                 <FaUserCircle />
                 {item.name}
               </div>
