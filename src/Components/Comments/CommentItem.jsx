@@ -4,13 +4,24 @@ import { ImArrowUp, ImArrowDown } from "react-icons/im";
 import { FaRegCommentAlt } from "react-icons/fa";
 import { BsThreeDots } from "react-icons/bs";
 import { useHistory } from "react-router-dom";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 function CommentsItem({ data }) {
   const { isLight } = useSelector((state) => state.color);
+  const { user } = useSelector((state) => state.auth);
   const history = useHistory();
+  const [vote, setVote] = useState(0);
+  const [isVoted, setIsVoted] = useState(0);
+
+  console.log("comment", data);
   const handleRouteUser = () => {
-    history.push("/u/xyz");
+    history.push(`/user/${data.userId._id}`);
   };
+
+  useEffect(() => {
+    updateVote();
+  }, []);
 
   // extractin time past
   const currentDate = Date.now();
@@ -27,8 +38,81 @@ function CommentsItem({ data }) {
     hours = Math.ceil(diff); // hours
   }
 
+  function updateVote() {
+    voteCount(data._id);
+    if (user._id) {
+      voteStatus(data._id, user?._id);
+    }
+  }
+
+  //  gettiing vote count
+  async function voteCount(postId) {
+    let count = await axios.get(`https://reddit-new.herokuapp.com/votes/count/${postId}`);
+    setVote(count.data.count);
+    //console.log("count.data", count.data.count);
+  }
+
+  // getting vote status
+  async function voteStatus(postId, userId) {
+    let count = await axios.get(`https://reddit-new.herokuapp.com/votes/check/${postId}/${userId}`);
+    setIsVoted(count.data.vote[0]?.value);
+  }
+
+  async function voteUp(postId, userId) {
+    console.log(1, "up");
+    if (isVoted === 1) {
+      voteRemove(postId, userId);
+      return;
+    }
+    try {
+      let body = {
+        userId: userId,
+        parentId: postId,
+      };
+      let up = await axios.post(`https://reddit-new.herokuapp.com/votes/up`, body);
+      updateVote();
+      setIsVoted(1);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async function voteDown(postId, userId) {
+    if (isVoted === -1) {
+      voteRemove(postId, userId);
+      return;
+    }
+    try {
+      let body = {
+        userId: userId,
+        parentId: postId,
+      };
+      let down = await axios.post(`https://reddit-new.herokuapp.com/votes/down`, body);
+      updateVote();
+      setIsVoted(down);
+      console.log("down", down.data);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async function voteRemove(postId, userId) {
+    try {
+      let body = {
+        userId: userId,
+        parentId: postId,
+      };
+      let remove = await axios.post(`https://reddit-new.herokuapp.com/votes/remove`, body);
+      updateVote();
+      setIsVoted(0);
+      console.log("remove", remove.data);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   return (
-    <Com isLight={isLight}>
+    <Com isLight={isLight} isVoted={isVoted}>
       <div className="line"></div>
       <div className="box">
         <div className="upper">
@@ -55,9 +139,25 @@ function CommentsItem({ data }) {
         <div className="comments">
           <div className="icon">
             <div className="likes">
-              <ImArrowUp />
-              <div>{data.votes || 12}</div>
-              <ImArrowDown />
+              <ImArrowUp
+                onClick={() => {
+                  if (!user._id) {
+                    alert("Please login first");
+                    return;
+                  }
+                  voteUp(data._id, user?._id);
+                }}
+              />
+              <div>{vote || 0}</div>
+              <ImArrowDown
+                onClick={() => {
+                  if (!user._id) {
+                    alert("Please login first");
+                    return;
+                  }
+                  voteDown(data._id, user?._id);
+                }}
+              />
             </div>
           </div>
           <div className="icon ">
@@ -281,19 +381,23 @@ const Com = styled.div`
     }
     & > svg {
       line-height: 30px;
-      fill: #818384;
+
       cursor: pointer;
       opacity: 0.8;
       height: 30px;
       width: 26px;
       font-size: 25px;
     }
+    & > svg:nth-child(1) {
+      fill: ${(props) => (props.isVoted === 1 ? "#0d5fcb" : "#818384")};
+    }
+    & > svg:nth-child(3) {
+      fill: ${(props) => (props.isVoted === -1 ? "rgb(201 13 13)" : "#818384")};
+      margin-top: 2px !important;
+    }
     & > svg:hover {
       background: rgb(237, 237, 237);
       fill: #4b5864;
-    }
-    & > svg:nth-child(3) {
-      margin-top: 2px !important;
     }
   }
   .line {
