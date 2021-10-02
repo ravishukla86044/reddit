@@ -1,6 +1,8 @@
 import { IoIosArrowUp } from "react-icons/io";
 import style from "./TopCommunity.module.css";
+import { useSelector } from "react-redux";
 export const TopCommunity = () => {
+  const { isLight } = useSelector((state) => state.color);
   const community = [
     {
       img: "https://styles.redditmedia.com/t5_2qixk/styles/communityIcon_7un6h01l6j871.png",
@@ -24,14 +26,22 @@ export const TopCommunity = () => {
     },
   ];
   return (
-    <div className={style.TopComunityContainer}>
+    <div
+      className={style.backgroundWhite}
+      style={
+        isLight ? { backgroundColor: "#fff" } : { backgroundColor: "#1a1a1b" }
+      }
+    >
       <div className={style.TopComunityHeading}>
         <h4>Top Aww Communities</h4>
       </div>
       {community.map((ele, index) => (
         <div key={index} className={style.community}>
-          <a href="/">
-            <div className={style.communityDetails}>
+          <span>
+            <div
+              className={style.communityDetails}
+              style={isLight ? { color: "#1c1c1c" } : { color: "#c8cbcd" }}
+            >
               <span className={style.indexing}>{index + 1}</span>
               <IoIosArrowUp style={{ color: "#46D160" }} />
               <div>
@@ -40,17 +50,26 @@ export const TopCommunity = () => {
 
               <span>r/{ele.name}</span>
             </div>
-          </a>
+          </span>
         </div>
       ))}
       <div className={style.primaryButtonContainer}>
         <button className={style.primaryButton}>View All</button>
       </div>
       <div className={style.tags}>
-        <button>Top</button>
-        <button>Near You</button>
-        <button>News</button>
-        <button>Sports</button>
+        <span style={isLight ? { color: "#0079d3" } : { color: "#c8cbcd" }}>
+          Top
+        </span>
+        <span style={isLight ? { color: "#0079d3" } : { color: "#c8cbcd" }}>
+          Near You
+        </span>
+
+        <span style={isLight ? { color: "#0079d3" } : { color: "#c8cbcd" }}>
+          News
+        </span>
+        <span style={isLight ? { color: "#0079d3" } : { color: "#c8cbcd" }}>
+          Sports
+        </span>
       </div>
     </div>
   );

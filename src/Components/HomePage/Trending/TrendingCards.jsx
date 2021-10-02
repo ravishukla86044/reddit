@@ -2,7 +2,7 @@ import React from 'react'
 import TrendingData from './TrendingData';
 import styles from './TrendingCards.module.css';
 import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 
 const StyledDiv = styled.div`

@@ -1,8 +1,8 @@
 .TopComunityContainer {
-  width: 25vw;
+  width: 22vw;
   /* padding: 10px; */
   background-color: #fff;
-  margin: 20px auto;
+  margin: 0px auto 20px;
   box-sizing: border-box;
   padding-bottom: 20px;
   border-radius: 5px;
@@ -23,7 +23,7 @@
   color: #fff;
 }
 .community {
-  border-bottom: 0.001rem solid gray;
+  border-bottom: 1px solid rgb(200, 203, 205, 0.5);
   padding: 10px 30px;
 }
 .community a {
@@ -32,8 +32,9 @@
 .communityDetails {
   display: flex;
   align-items: center;
-  color: #000;
+  font-size: 14px;
   font-weight: 500;
+  line-height: 18px;
 }
 .communityDetails > span:first-child {
   margin-right: 10px;
@@ -69,11 +70,16 @@
   margin: auto;
   display: flex;
   justify-content: space-around;
+  padding-bottom: 20px;
 }
-.tags button {
+.tags span {
   border: none;
   color: #0079d3;
   background: transparent;
   border-radius: 7px;
   font-weight: 600;
+  font-size: 0.8rem;
+}
+.backgroundWhite {
+  background-color: #fff;
 }
