@@ -59,6 +59,7 @@ function Chat({ setChat }) {
 
   useEffect(() => {
     getConversation();
+    getAllUser();
   }, []);
 
   async function getConversation() {
@@ -119,14 +120,56 @@ function Chat({ setChat }) {
     const res = await axios.get(`http://localhost:3001/users/${friendsId}`);
     setFriend(res.data.user);
   }
+
+  async function getAllUser() {
+    let data = await axios.get("https://reddit-new.herokuapp.com/users");
+    setAllUser(data.data.users);
+  }
+
+  const [allUser, setAllUser] = useState();
+  const [userSearch, setUserSearch] = useState("");
+  const [selectedUser, setSelectedUser] = useState([]);
+
+  const handleSearchUser = (e) => {
+    setUserSearch(e.target.value);
+    let newallUser = allUser.filter((a) => a.name.includes(userSearch));
+    setSelectedUser(newallUser);
+  };
+
+  const handelAddchatroom = () => {};
+
   return (
     <ChatDiv isLight={isLight}>
       <div className="rootDiv">
         <div className="leftPart">
           <div className="leftHeader">
-            <div>Chat</div>
             <div>
-              <div className="join">
+              <input
+                type="text"
+                placeholder="Search users"
+                value={userSearch}
+                onChange={handleSearchUser}
+              />
+              {selectedUser.length > 0 && (
+                <div className="hidden">
+                  {selectedUser.map((a) => {
+                    return (
+                      <div
+                        onClick={() => {
+                          setUserSearch(a.name);
+                          setSelectedUser([]);
+                        }}
+                        className="hiddenUser"
+                      >
+                        {a.name}
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+            <div>
+              <div onClick={handelAddchatroom} className="join">
                 <HiOutlinePlus />
               </div>
             </div>
@@ -258,13 +301,31 @@ const ChatDiv = styled.div`
       font-size: 18px;
       font-weight: 500;
       line-height: 22px;
+      position: relative;
+    }
+    .leftHeader input {
+      outline: none;
+      border: none;
     }
     .leftHeader > div:nth-child(2) {
       display: flex;
       flex: 1;
       justify-content: flex-end;
     }
-
+    .leftHeader .hidden {
+      position: absolute;
+      top: 26px;
+      border: 1px solid red;
+      padding: 5px;
+      font-size: 14px;
+      font-weight: 400;
+      z-index: 70;
+    }
+    .hiddenUser {
+      border-bottom: 1px solid #e7dbdb;
+      margin: 5px 0px;
+      cursor: pointer;
+    }
     .join {
       display: flex;
       align-items: center;
