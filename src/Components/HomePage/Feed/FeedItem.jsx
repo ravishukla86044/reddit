@@ -121,9 +121,9 @@ function FeedItem({ community = false, comments, type = 1, data }) {
 
   const handleRouteCommunity = (e) => {
     e.stopPropagation();
-    history.push(`/r/${data.communityId}`);
+    history.push(`/r/${data.communityId._id}`);
   };
-
+  console.log("data", data);
   const handleRouteUser = (e) => {
     e.stopPropagation();
     history.push(`/user/${data.userId._id}`);
