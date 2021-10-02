@@ -1,13 +1,34 @@
 import { IoFlowerSharp } from "react-icons/io5";
 import style from "./ProfileDetails.module.css";
 import { BsCardText } from "react-icons/bs";
-import { GiFlowerPot } from "react-icons/gi";
-import { MdNavigateNext } from "react-icons/md";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { loadData } from "../../../utils/localStorage";
+import axios from 'axios';
+
 export const ProfileDetails = () => {
   const { isLight } = useSelector((state) => state.color);
   const [showMoreOption, setShowMoreOption] = useState(true);
+
+
+  const handleFileUplod = (e) => {
+    const { _id } = loadData("user");
+    const token = loadData("token");
+    const formData = new FormData();
+    formData.append('profile_url', e.target.files[0]);
+
+    axios.patch(`https://reddit-new.herokuapp.com/users/${_id}`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        "Authorization": "Bearer " + token
+      }
+    }).then((res) => {
+      console.log(res.data);
+    }).catch ((err) => {
+      console.log("err.response", err.response);
+    })
+  }
+
   return (
     <div
       className={style.ProfileDetailsContainer}
@@ -26,7 +47,7 @@ export const ProfileDetails = () => {
       <div className={style.createButtonContainer}>
         <div className={style.createAvatarButton}>
           <span>Update profile picture</span>
-        <input  type="file" name="myfile" />
+        <input onChange={handleFileUplod} type="file" name="myfile" />
         </div>
       </div>
       <div className={style.description}>
