@@ -29,21 +29,35 @@ font-weight: 600;
 text-align: center;
 }
 .createButtonContainer{
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
   width: 100%;
   padding: 0 20px;
   text-align: center;
-  margin-top: 40px;
+  overflow: hidden;
 }
 .createAvatarButton {
   color: #fff;
+  position: relative;
   padding: 10px;
   width: 100%;
   border-radius: 20px;
-  border: none;
+  overflow: hidden;
   margin: auto;
   font-size: 14px;
   font-weight: 700;
+  cursor: pointer;
   background: linear-gradient(90deg, #ec0623, #ff8717);
+}
+.createAvatarButton input[type=file] {
+  font-size: 30px;
+  position: absolute;
+  left: -60px;
+  top: 0;
+  cursor: pointer;
+  transform: rotate(180deg);
+  opacity: 0;
 }
 
 .buttonContainer {

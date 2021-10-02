@@ -24,9 +24,10 @@ export const ProfileDetails = () => {
         </div>
       </div>
       <div className={style.createButtonContainer}>
-        <button className={style.createAvatarButton}>
+        <div className={style.createAvatarButton}>
           <span>Update profile picture</span>
-        </button>
+        <input  type="file" name="myfile" />
+        </div>
       </div>
       <div className={style.description}>
         <div className={`${style.padding10} ${style.countDown}`}>
