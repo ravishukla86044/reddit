@@ -1,19 +1,24 @@
+import { Avatar } from '@material-ui/core'
 import styled from 'styled-components'
 
 
-const ImageInput = ({handleFile,fileName}) => {
+const ImageInput = ({ handleFile, fileName, image }) => {
   return (
     <StyleImageInput>
-      <div>{fileName}
-
-      <div className="upload-btn-wrapper">
-        <button className="btn">Upload</button>
-        <input onChange={handleFile} type="file" name="myfile" />
+      <div>
+        {image ?
+        <img src={image} />
+        :<Avatar/>
+      }
+      </div>
+      <div>Drag and drop images or
+        <div className="upload-btn-wrapper">
+          <button className="btn">Upload</button>
+          <input onChange={handleFile} type="file" name="myfile" />
+        </div>
       </div>
 
-      </div>
 
-     
     </StyleImageInput>
   )
 }
@@ -30,7 +35,27 @@ const StyleImageInput = styled.div`
   margin-top: 0.5rem;
   color: #0079d3;
   font-size: 110%;
-  & > div {
+  &>div:nth-child(1){
+    width: 150px;
+    height: 180px;
+    display: flex;
+    justify-content: center;
+    border: solid #ccc;
+    border-radius: 8px;
+    &>div{
+      margin-top: 20px;
+      width: 100px;
+      height: 100px;
+    }
+  }
+  &>div>img{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 6px;
+    object-fit: cover;
+  }
+  & > div:nth-child(2) {
     width: fit-content;
     display: flex;
     justify-content: center;
@@ -67,5 +92,4 @@ const StyleImageInput = styled.div`
   opacity: 0;
 }
 `
-
 export default ImageInput

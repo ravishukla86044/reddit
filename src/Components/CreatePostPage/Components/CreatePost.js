@@ -23,7 +23,6 @@ const CreatePost = () => {
   const [draft, setDraft] = useState(0);
   const [file, setFile] = useState("");
   const [text, setText] = useState("");
-  const [fileName, setFileName] = useState("Drag and drop images or")
   const [uploadedFile, setUploadedFile] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [communities, setCommunities] = useState([]);
@@ -31,14 +30,21 @@ const CreatePost = () => {
   const [communityId, setCommunityId] = useState(" ");
 
   const user = useSelector(state => state.auth.user);
+  const [image, setImage] = useState("");
 
   const handleFile = (e) => {
     setFile(e.target.files[0]);
-    // console.log('file:', e.target.files[0])
-    setFileName(e.target.files[0].name);
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (reader.readyState == 2) {
+        setImage(reader.result);
+      }
+    }
+    reader.readAsDataURL(e.target.files[0]);
   }
 
-  const communityHandler=(id,name)=>{
+  const communityHandler = (id, name) => {
     setInputText(name);
     setCommunityId(id);
   }
@@ -51,7 +57,7 @@ const CreatePost = () => {
     formData.append('imageUrl', file);
     formData.append('text', text);
     formData.append('userId', _id);
-    formData.append("communityId",communityId)
+    formData.append("communityId", communityId)
 
     axios.post("https://reddit-new.herokuapp.com/posts", formData, {
       headers: {
@@ -74,6 +80,9 @@ const CreatePost = () => {
       .then((res) => {
         setCommunities(res.data.communities);
       })
+      .catch((err) => {
+        console.log(err);
+      })
   }, [])
 
   return (
@@ -90,18 +99,18 @@ const CreatePost = () => {
         className="community-bar"
       >
         <FiSearch />
-        <input type="text" onChange={(e)=>setInputText(e.target.value)} value={inputText} placeholder="Choose a Community " />
+        <input type="text" onChange={(e) => setInputText(e.target.value)} value={inputText} placeholder="Choose a Community " />
         <MdKeyboardArrowDown />
         {communityExtend && (
           <div className="coummnity-dropdown">
             <p>Your profile</p>
-            <div  onClick={() => {setInputText(user.name)}}>
+            <div onClick={() => { setInputText(user.name) }}>
               <HeaderAvatar src={user.profile_url} alt={user.name} />
               {user.name}
             </div>
             <p>Your Communities</p>
             {communities.map((item) => {
-              return <div key={item._id} onClick={() => {communityHandler(item._id,item.name)}}>
+              return <div key={item._id} onClick={() => { communityHandler(item._id, item.name) }}>
                 <FaUserCircle />
                 {item.name}
               </div>
@@ -141,11 +150,10 @@ const CreatePost = () => {
         </div>
 
         <input onChange={(e) => { setText(e.target.value) }} className="title-input" type="text" placeholder="Title" />
-
         {activeItem === 'post' ? (
           <PostInput />
         ) : activeItem === 'image' ? (
-          <ImageInput handleFile={handleFile} fileName={fileName} />
+          <ImageInput handleFile={handleFile} image={image} />
         ) : (
           activeItem === 'link' && <LinkInput />
         )}
