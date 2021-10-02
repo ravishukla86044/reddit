@@ -11,10 +11,14 @@ import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 
-function FeedItem({ community, comments, type = 1, data }) {
+function FeedItem({ community = false, comments, type = 1, data }) {
   const { isLight } = useSelector((state) => state.color);
+  const { user } = useSelector((state) => state.auth);
   const [comment, setComment] = useState(0);
+  const [vote, setVote] = useState(0);
+  const [isVoted, setIsVoted] = useState(0);
   const history = useHistory();
+
   //console.log(data);
   // extractin time past
   const currentDate = Date.now();
@@ -31,15 +35,88 @@ function FeedItem({ community, comments, type = 1, data }) {
     hours = Math.ceil(diff); // hours
   }
 
-  ////////getting comments count
   useEffect(() => {
     getComments(data._id);
+    updateVote();
   }, []);
 
+  function updateVote() {
+    voteCount(data._id);
+    if (user._id) {
+      voteStatus(data._id, user?._id);
+    }
+  }
+
+  ////////getting comments count
   async function getComments(postId) {
     let commentsCount = await axios.get(`https://reddit-new.herokuapp.com/comments/${postId}`);
-
     setComment(commentsCount.data);
+  }
+
+  //  gettiing vote count
+  async function voteCount(postId) {
+    let count = await axios.get(`https://reddit-new.herokuapp.com/votes/count/${postId}`);
+    setVote(count.data.count);
+    //console.log("count.data", count.data.count);
+  }
+
+  // getting vote status
+  async function voteStatus(postId, userId) {
+    let count = await axios.get(`https://reddit-new.herokuapp.com/votes/check/${postId}/${userId}`);
+    setIsVoted(count.data.vote[0]?.value);
+  }
+
+  async function voteUp(postId, userId) {
+    console.log(1, "up");
+    if (isVoted === 1) {
+      voteRemove(postId, userId);
+      return;
+    }
+    try {
+      let body = {
+        userId: userId,
+        parentId: postId,
+      };
+      let up = await axios.post(`https://reddit-new.herokuapp.com/votes/up`, body);
+      updateVote();
+      setIsVoted(1);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async function voteDown(postId, userId) {
+    if (isVoted === -1) {
+      voteRemove(postId, userId);
+      return;
+    }
+    try {
+      let body = {
+        userId: userId,
+        parentId: postId,
+      };
+      let down = await axios.post(`https://reddit-new.herokuapp.com/votes/down`, body);
+      updateVote();
+      setIsVoted(down);
+      console.log("down", down.data);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async function voteRemove(postId, userId) {
+    try {
+      let body = {
+        userId: userId,
+        parentId: postId,
+      };
+      let remove = await axios.post(`https://reddit-new.herokuapp.com/votes/remove`, body);
+      updateVote();
+      setIsVoted(0);
+      console.log("remove", remove.data);
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   const handleRouteCommunity = (e) => {
@@ -55,12 +132,29 @@ function FeedItem({ community, comments, type = 1, data }) {
   const handleRouteComments = (id) => {
     history.push(`/r/communityName/post/${data._id}`);
   };
+
   return type === 1 ? (
     <Con isLight={isLight}>
-      <Likes isLight={isLight}>
-        <ImArrowUp />
-        <div>2</div>
-        <ImArrowDown />
+      <Likes isLight={isLight} isVoted={isVoted}>
+        <ImArrowUp
+          onClick={() => {
+            if (!user._id) {
+              alert("Please login first");
+              return;
+            }
+            voteUp(data._id, user?._id);
+          }}
+        />
+        <div>{vote || 0}</div>
+        <ImArrowDown
+          onClick={() => {
+            if (!user._id) {
+              alert("Please login first");
+              return;
+            }
+            voteDown(data._id, user?._id);
+          }}
+        />
       </Likes>
       <Box isLight={isLight}>
         <div className="upper">
@@ -75,7 +169,7 @@ function FeedItem({ community, comments, type = 1, data }) {
                 handleRouteCommunity(e);
               }}
             >
-              {!community && data.communityId && `r/sdfsf`}
+              {!community && data.communityId && `r/${data.communityId.name}`}
             </span>
             <span
               onClick={(e) => {
@@ -141,11 +235,27 @@ function FeedItem({ community, comments, type = 1, data }) {
       </Box>
     </Con>
   ) : type === 2 ? (
-    <Classic isLight={isLight}>
+    <Classic isLight={isLight} isVoted={isVoted}>
       <div className="likes">
-        <ImArrowUp />
-        <div>2</div>
-        <ImArrowDown />
+        <ImArrowUp
+          onClick={() => {
+            if (!user._id) {
+              alert("Please login first");
+              return;
+            }
+            voteUp(data._id, user?._id);
+          }}
+        />
+        <div>{vote || 0}</div>
+        <ImArrowDown
+          onClick={() => {
+            if (!user._id) {
+              alert("Please login first");
+              return;
+            }
+            voteDown(data._id, user?._id);
+          }}
+        />
       </div>
       <div className="postImage">
         <div
@@ -224,11 +334,27 @@ function FeedItem({ community, comments, type = 1, data }) {
       </div>
     </Classic>
   ) : (
-    <Compact isLight={isLight}>
+    <Compact isLight={isLight} isVoted={isVoted}>
       <div className="likes">
-        <ImArrowUp />
-        <div>2</div>
-        <ImArrowDown />
+        <ImArrowUp
+          onClick={() => {
+            if (!user._id) {
+              alert("Please login first");
+              return;
+            }
+            voteUp(data._id, user?._id);
+          }}
+        />
+        <div>{vote || 0}</div>
+        <ImArrowDown
+          onClick={() => {
+            if (!user._id) {
+              alert("Please login first");
+              return;
+            }
+            voteDown(data._id, user?._id);
+          }}
+        />
       </div>
       <div className="postImage">
         <div>
@@ -277,24 +403,7 @@ function FeedItem({ community, comments, type = 1, data }) {
           </div>
           <div>{comment.count}</div>
         </div>
-        {/* <div className="icon">
-            <div>
-              <FiGift />
-            </div>
-            <div>Awards</div>
-          </div>
-          <div className="icon">
-            <div>
-              <ImRedo />
-            </div>
-            <div>Share</div>
-          </div>
-          <div className="icon">
-            <div>
-              <RiBookmarkLine />
-            </div>
-            <div>Share</div>
-          </div> */}
+
         <div className="icon">
           <div>
             <BsThreeDots />
@@ -343,13 +452,16 @@ const Compact = styled.div`
     }
     & > svg {
       line-height: 30px;
-      fill: #818384;
       cursor: pointer;
       opacity: 0.8;
       height: 45px;
       width: 26px;
     }
+    & > svg:nth-child(1) {
+      fill: ${(props) => (props.isVoted === 1 ? "#0d5fcb" : "#818384")};
+    }
     & > svg:nth-child(3) {
+      fill: ${(props) => (props.isVoted === -1 ? "rgb(201 13 13)" : "#818384")};
       margin-top: 2px;
     }
     & > svg:hover {
@@ -554,6 +666,13 @@ const Classic = styled.div`
       height: 30px;
       width: 26px;
     }
+    & > svg:nth-child(1) {
+      fill: ${(props) => (props.isVoted === 1 ? "#0d5fcb" : "#818384")};
+    }
+    & > svg:nth-child(3) {
+      fill: ${(props) => (props.isVoted === -1 ? "rgb(201 13 13)" : "#818384")};
+      margin-top: 2px;
+    }
     & > svg:hover {
       background: rgb(237, 237, 237);
       fill: #4b5864;
@@ -755,6 +874,13 @@ const Likes = styled.div`
     opacity: 0.8;
     height: 30px;
     width: 26px;
+  }
+  & > svg:nth-child(1) {
+    fill: ${(props) => (props.isVoted === 1 ? "#0d5fcb" : "#818384")};
+  }
+  & > svg:nth-child(3) {
+    fill: ${(props) => (props.isVoted === -1 ? "rgb(201 13 13)" : "#818384")};
+    margin-top: 2px;
   }
   & > svg:hover {
     background: rgb(237, 237, 237);
