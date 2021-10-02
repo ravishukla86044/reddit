@@ -16,6 +16,7 @@ function HomePage() {
     getAllPost();
   }, []);
 
+  console.log(data);
   // getting all post from backend
   async function getAllPost() {
     let postData = await axios.get("https://reddit-new.herokuapp.com/posts");
