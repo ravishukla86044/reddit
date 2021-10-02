@@ -7,14 +7,19 @@ import { loadData } from "../../../utils/localStorage";
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { updateProfile } from "../../../Redux/auth/actions";
+import styled from 'styled-components'
+import Spinner from "react-spinkit";
 
 export const ProfileDetails = () => {
   const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false);
   const { isLight } = useSelector((state) => state.color);
   const [showMoreOption, setShowMoreOption] = useState(true);
+  const user = useSelector(state => state.auth.user);
 
 
   const handleFileUplod = (e) => {
+    setIsLoading(true);
     const { _id } = loadData("user");
     const token = loadData("token");
     const formData = new FormData();
@@ -28,8 +33,9 @@ export const ProfileDetails = () => {
     }).then((res) => {
       const successAction = updateProfile(res.data.user);
       dispatch(successAction);
-      console.log(res.data);
-    }).catch ((err) => {
+      setIsLoading(false);
+    }).catch((err) => {
+      setIsLoading(false);
       console.log("err.response", err.response);
     })
   }
@@ -45,14 +51,23 @@ export const ProfileDetails = () => {
     >
       <div className={style.blueBackGround}>
         <div>
-          <img src="https://res.cloudinary.com/dwulcntnx/image/upload/v1633062061/a7dqizsyb37mpavxedai.jpg" alt="" />
+          <img src={user.profile_url} alt="" />
           <p>Username</p>
         </div>
+        {isLoading ? <AppLoading>
+          <Spinner
+            name="line-spin-fade-loader"
+            color="#F22C20"
+            fadeIn="none"
+          />
+        </AppLoading> :
+          null
+        }
       </div>
       <div className={style.createButtonContainer}>
         <div className={style.createAvatarButton}>
           <span>Update profile picture</span>
-        <input onChange={handleFileUplod} type="file" name="myfile" />
+          <input onChange={handleFileUplod} type="file" name="myfile" />
         </div>
       </div>
       <div className={style.description}>
@@ -102,3 +117,10 @@ export const ProfileDetails = () => {
     </div>
   );
 };
+
+const AppLoading = styled.div`
+width: 100%;
+height: 100%;
+margin-top: 40px;
+margin-left: 40px;
+`;
