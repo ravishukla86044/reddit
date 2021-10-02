@@ -11,7 +11,7 @@ import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 
-function FeedItem({ community, comments, type = 1, data }) {
+function FeedItem({ community = false, comments, type = 1, data }) {
   const { isLight } = useSelector((state) => state.color);
   const { user } = useSelector((state) => state.auth);
   const [comment, setComment] = useState(0);
@@ -19,6 +19,7 @@ function FeedItem({ community, comments, type = 1, data }) {
   const [isVoted, setIsVoted] = useState(0);
   const history = useHistory();
 
+  //console.log(data);
   // extractin time past
   const currentDate = Date.now();
   const postDate = new Date(data?.createdAt || 0);
@@ -168,7 +169,7 @@ function FeedItem({ community, comments, type = 1, data }) {
                 handleRouteCommunity(e);
               }}
             >
-              {!community && data.communityId && `r/sdfsf`}
+              {!community && data.communityId && `r/${data.communityId.name}`}
             </span>
             <span
               onClick={(e) => {
