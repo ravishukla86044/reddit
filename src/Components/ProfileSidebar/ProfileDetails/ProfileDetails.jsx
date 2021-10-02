@@ -5,8 +5,11 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { loadData } from "../../../utils/localStorage";
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { updateProfile } from "../../../Redux/auth/actions";
 
 export const ProfileDetails = () => {
+  const dispatch = useDispatch();
   const { isLight } = useSelector((state) => state.color);
   const [showMoreOption, setShowMoreOption] = useState(true);
 
@@ -23,6 +26,8 @@ export const ProfileDetails = () => {
         "Authorization": "Bearer " + token
       }
     }).then((res) => {
+      const successAction = updateProfile(res.data.user);
+      dispatch(successAction);
       console.log(res.data);
     }).catch ((err) => {
       console.log("err.response", err.response);
