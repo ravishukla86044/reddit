@@ -1,5 +1,12 @@
-import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS,REGISTER_REQUEST,REGISTER_SUCCESS,REGISTER_FAILURE } from "./actionTypes"
+import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS,REGISTER_REQUEST,REGISTER_SUCCESS,REGISTER_FAILURE, UPDATE_PROFILE } from "./actionTypes"
 import axios from "axios"
+
+const updateProfile = (payload) => {
+    return {
+        type: UPDATE_PROFILE,
+        payload
+    }
+}
 const loginRequest =()=>{
     return {
         type:LOGIN_REQUEST
@@ -70,4 +77,4 @@ const registerUser = (payload) => (dispatch) => {
         });
 }
 
-export {loginRequest,loginSuccess,loginFailure,loginUser,registerRequest,registerSuccess,registerFailure, registerUser}
+export {loginRequest,loginSuccess,loginFailure,loginUser,registerRequest,registerSuccess,registerFailure, registerUser,updateProfile}
