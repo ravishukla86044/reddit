@@ -129,6 +129,7 @@ function Chat({ setChat }) {
   const [allUser, setAllUser] = useState();
   const [userSearch, setUserSearch] = useState("");
   const [selectedUser, setSelectedUser] = useState([]);
+  const friendIdRef = useRef();
 
   const handleSearchUser = (e) => {
     setUserSearch(e.target.value);
@@ -136,7 +137,29 @@ function Chat({ setChat }) {
     setSelectedUser(newallUser);
   };
 
-  const handelAddchatroom = () => {};
+  const handelAddchatroom = async () => {
+    console.log(chatroom);
+    for (var i = 0; i < chatroom.length; i++) {
+      let mem = chatroom[i].members;
+      if (mem.includes(user._id) && mem.includes(friendIdRef.current)) {
+        alert("Friend alreday in the list");
+        return;
+      }
+    }
+    if (!friendIdRef.current) {
+      alert("Please add a friend");
+      return;
+    }
+    let body = {
+      members: [user._id, friendIdRef.current],
+    };
+    try {
+      let data = await axios.post("https://reddit-new.herokuapp.com/chatroom", body);
+      console.log(data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <ChatDiv isLight={isLight}>
@@ -150,7 +173,7 @@ function Chat({ setChat }) {
                 value={userSearch}
                 onChange={handleSearchUser}
               />
-              {selectedUser.length > 0 && (
+              {selectedUser.length > 0 && userSearch !== "" && (
                 <div className="hidden">
                   {selectedUser.map((a) => {
                     return (
@@ -158,6 +181,7 @@ function Chat({ setChat }) {
                         onClick={() => {
                           setUserSearch(a.name);
                           setSelectedUser([]);
+                          friendIdRef.current = a._id;
                         }}
                         className="hiddenUser"
                       >
@@ -315,11 +339,13 @@ const ChatDiv = styled.div`
     .leftHeader .hidden {
       position: absolute;
       top: 26px;
-      border: 1px solid red;
+      border: 1px solid black;
+      border-radius: 4px;
       padding: 5px;
       font-size: 14px;
       font-weight: 400;
       z-index: 70;
+      background: #ffffff;
     }
     .hiddenUser {
       border-bottom: 1px solid #e7dbdb;
