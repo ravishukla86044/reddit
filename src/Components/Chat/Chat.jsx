@@ -7,7 +7,7 @@ import { BsChevronDown } from "react-icons/bs";
 import { VscChromeClose } from "react-icons/vsc";
 import { AiOutlineCamera, AiOutlineGif, AiOutlineCaretRight } from "react-icons/ai";
 import { GrEmoji } from "react-icons/gr";
-import io from "socket.io-client";
+import { io } from "socket.io-client";
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { AllChatMember } from "./AllChatMember";
@@ -27,6 +27,34 @@ function Chat({ setChat }) {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const [currentFriend, setFriend] = useState("");
+  const [arrivedM, setArrivedM] = useState();
+  const socket = useRef();
+
+  useEffect(() => {
+    socket.current = io("http://localhost:3001");
+    socket.current.on("welcome", (data) => {
+      console.log(data);
+    });
+    socket.current.emit("addedUser", user._id);
+
+    socket.current.on("getMessage", (data) => {
+      setArrivedM({
+        senderId: data.senderId,
+        text: data.text,
+        createdAt: Date.now(),
+      });
+    });
+
+    socket.current.on("getUsers", (users) => {
+      console.log(users);
+    });
+  }, [user]);
+
+  useEffect(() => {
+    arrivedM &&
+      currentChat?.members.includes(arrivedM.senderId) &&
+      setMessages((pre) => [...pre, arrivedM]);
+  }, [arrivedM]);
 
   useEffect(() => {
     getConversation();
@@ -51,13 +79,6 @@ function Chat({ setChat }) {
     getMsg();
   }, [currentChat]);
 
-  // const socket = io("http://localhost:3001");
-  // socket.on("message", (data) => {
-  //   console.log(data, "mssg");
-  // });
-  // socket.on("output", (data) => {
-  //   console.log(data, "output");
-  // });
   const handleSendMessage = async () => {
     if (newMessage === "") {
       return;
@@ -67,6 +88,14 @@ function Chat({ setChat }) {
       text: newMessage,
       chatRoomId: currentChat._id,
     };
+
+    const receiverId = currentChat.members.find((mem) => mem._id !== user._id);
+    console.log("receiverId", receiverId);
+    socket.current.emit("sendMessage", {
+      senderId: user._id,
+      receiverId,
+      text: newMessage,
+    });
 
     try {
       const res = await axios.post(`http://localhost:3001/msg`, payload);
