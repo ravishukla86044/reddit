@@ -46,7 +46,7 @@ function Chat({ setChat }) {
     });
 
     socket.current.on("getUsers", (users) => {
-      console.log(users);
+      //console.log(users);
     });
   }, [user]);
 
@@ -54,6 +54,7 @@ function Chat({ setChat }) {
     arrivedM &&
       currentChat?.members.includes(arrivedM.senderId) &&
       setMessages((pre) => [...pre, arrivedM]);
+    console.log(currentChat, "currChat");
   }, [arrivedM]);
 
   useEffect(() => {
@@ -63,7 +64,7 @@ function Chat({ setChat }) {
   async function getConversation() {
     let res = await axios.get(`http://localhost:3001/chatroom/${user._id}`);
     setChatroom(res.data.chatroom);
-    console.log(res, "chatroom");
+    //console.log(res.data.chatroom, "chatroom");
   }
   async function getMsg() {
     try {
@@ -95,6 +96,7 @@ function Chat({ setChat }) {
       senderId: user._id,
       receiverId,
       text: newMessage,
+      currentChatroomId: currentChat._id,
     });
 
     try {
@@ -224,6 +226,7 @@ const ChatDiv = styled.div`
     height: 420px;
     background-color: ${(props) => (props.isLight ? "#FFFFFF" : "#1A1A1B")};
     display: flex;
+    box-sizing: border-box;
   }
 
   .leftPart {
@@ -290,6 +293,7 @@ const ChatDiv = styled.div`
     position: relative;
     display: flex;
     flex-direction: column;
+    box-sizing: border-box;
 
     .rightHeader {
       padding: 0 1em;
@@ -357,6 +361,8 @@ const ChatDiv = styled.div`
       flex-grow: 1;
       display: flex;
       flex-direction: column;
+      box-sizing: border-box;
+      overflow: scroll;
     }
   }
 `;

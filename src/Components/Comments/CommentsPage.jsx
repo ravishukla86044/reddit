@@ -13,25 +13,99 @@ import CommentBox from "./CommentBox";
 
 function CommentsPage() {
   const { isLight } = useSelector((state) => state.color);
+  const { user } = useSelector((state) => state.auth);
   const [isLoading, setLoading] = useState(true);
   const history = useHistory();
   const { postId } = useParams();
-  const [commentPageData, setcommentPageData] = useState();
+  const [data, setData] = useState();
   const [comment, setComment] = useState();
+  const [vote, setVote] = useState(0);
+  const [isVoted, setIsVoted] = useState(0);
 
   useEffect(() => {
     getPost();
-  });
+  }, []);
+
+  console.log(data);
+
+  function updateVote() {
+    voteCount(data._id);
+    if (user._id) {
+      voteStatus(data._id, user?._id);
+    }
+  }
+
+  //  gettiing vote count
+  async function voteCount(postId) {
+    let count = await axios.get(`https://reddit-new.herokuapp.com/votes/count/${postId}`);
+    setVote(count.data.count);
+    //console.log("count.data", count.data.count);
+  }
+
+  // getting vote status
+  async function voteStatus(postId, userId) {
+    let count = await axios.get(`https://reddit-new.herokuapp.com/votes/check/${postId}/${userId}`);
+    setIsVoted(count.data.vote[0]?.value);
+  }
+
+  async function voteUp(postId, userId) {
+    console.log(1, "up");
+    if (isVoted === 1) {
+      voteRemove(postId, userId);
+      return;
+    }
+    try {
+      let body = {
+        userId: userId,
+        parentId: postId,
+      };
+      let up = await axios.post(`https://reddit-new.herokuapp.com/votes/up`, body);
+      updateVote();
+      setIsVoted(1);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async function voteDown(postId, userId) {
+    if (isVoted === -1) {
+      voteRemove(postId, userId);
+      return;
+    }
+    try {
+      let body = {
+        userId: userId,
+        parentId: postId,
+      };
+      let down = await axios.post(`https://reddit-new.herokuapp.com/votes/down`, body);
+      updateVote();
+      setIsVoted(down);
+      console.log("down", down.data);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async function voteRemove(postId, userId) {
+    try {
+      let body = {
+        userId: userId,
+        parentId: postId,
+      };
+      let remove = await axios.post(`https://reddit-new.herokuapp.com/votes/remove`, body);
+      updateVote();
+      setIsVoted(0);
+      console.log("remove", remove.data);
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
   // getting  post and comments from backend
   async function getPost() {
-    let postData = await axios.get(
-      `https://reddit-new.herokuapp.com/posts/${postId}`
-    );
-    let comm = await axios.get(
-      `https://reddit-new.herokuapp.com/comments/${postId}`
-    );
-    setcommentPageData(postData.data.post);
+    let postData = await axios.get(`https://reddit-new.herokuapp.com/posts/${postId}`);
+    let comm = await axios.get(`https://reddit-new.herokuapp.com/comments/${postId}`);
+    setData(postData.data.post);
     setComment(comm.data.comment);
     setLoading(false);
   }
@@ -45,14 +119,30 @@ function CommentsPage() {
       <div className="commentHeader">
         <div>
           <div className="likeDiv">
-            <Likes isLight={isLight}>
-              <ImArrowUp />
-              <div>2</div>
-              <ImArrowDown />
+            <Likes isLight={isLight} isVoted={isVoted}>
+              <ImArrowUp
+                onClick={() => {
+                  if (!user._id) {
+                    alert("Please login first");
+                    return;
+                  }
+                  voteUp(data._id, user?._id);
+                }}
+              />
+              <div>{vote || 0}</div>
+              <ImArrowDown
+                onClick={() => {
+                  if (!user._id) {
+                    alert("Please login first");
+                    return;
+                  }
+                  voteDown(data._id, user?._id);
+                }}
+              />
             </Likes>
             <div className="upperTitle">
               <RiFileListLine />
-              <div>{commentPageData.text}</div>
+              <div>{data.text}</div>
             </div>
           </div>
           <div
@@ -68,7 +158,7 @@ function CommentsPage() {
       </div>
       <div>
         <div className="feedDiv">
-          <FeedItem comments={true} data={commentPageData} />
+          <FeedItem comments={true} data={data} />
           {comment.map((a) => (
             <CommentsItem data={a} key={a._id} />
           ))}
@@ -218,14 +308,17 @@ const Likes = styled.div`
   }
   & > svg {
     line-height: 30px;
-    fill: #818384;
     cursor: pointer;
     opacity: 0.8;
     height: 30px;
     width: 20px;
   }
+  & > svg:nth-child(1) {
+    fill: ${(props) => (props.isVoted === 1 ? "#0d5fcb" : "#818384")};
+  }
   & > svg:nth-child(3) {
-    margin-top: 3px;
+    fill: ${(props) => (props.isVoted === -1 ? "rgb(201 13 13)" : "#818384")};
+    margin-top: 2px;
   }
   & > svg:hover {
     background: rgb(237, 237, 237);
