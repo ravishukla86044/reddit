@@ -1,14 +1,23 @@
 import { useState } from "react";
 import style from "./RecentPost.module.css";
+import { useSelector } from "react-redux";
 
 export const RecentPost = () => {
+  const { isLight } = useSelector((state) => state.color);
   const handleClearContainer = () => {
     setDisplayRecentPostContainer(false);
   };
   const [displayRecentPostContainer, setDisplayRecentPostContainer] =
     useState(true);
   return displayRecentPostContainer ? (
-    <div className={style.RecentPostContainer}>
+    <div
+      className={style.RecentPostContainer}
+      style={
+        isLight
+          ? { backgroundColor: "#fff", color: "#1a1a1b" }
+          : { backgroundColor: "#1a1a1b", color: "#c8cbcd" }
+      }
+    >
       <div>
         <p className={`${style.textAlignLeft} ${style.recentpostHeading}`}>
           RECENT POSTS

@@ -24,8 +24,12 @@ function CommentsPage() {
 
   // getting  post and comments from backend
   async function getPost() {
-    let postData = await axios.get(`https://reddit-new.herokuapp.com/posts/${postId}`);
-    let comm = await axios.get(`https://reddit-new.herokuapp.com/comments/${postId}`);
+    let postData = await axios.get(
+      `https://reddit-new.herokuapp.com/posts/${postId}`
+    );
+    let comm = await axios.get(
+      `https://reddit-new.herokuapp.com/comments/${postId}`
+    );
     setcommentPageData(postData.data.post);
     setComment(comm.data.comment);
     setLoading(false);

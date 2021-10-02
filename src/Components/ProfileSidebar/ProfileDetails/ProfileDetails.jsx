@@ -4,10 +4,19 @@ import { BsCardText } from "react-icons/bs";
 import { GiFlowerPot } from "react-icons/gi";
 import { MdNavigateNext } from "react-icons/md";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 export const ProfileDetails = () => {
+  const { isLight } = useSelector((state) => state.color);
   const [showMoreOption, setShowMoreOption] = useState(true);
   return (
-    <div className={style.ProfileDetailsContainer}>
+    <div
+      className={style.ProfileDetailsContainer}
+      style={
+        isLight
+          ? { backgroundColor: "#fff", color: "#1a1a1b" }
+          : { backgroundColor: "#1a1a1b", color: "#c8cbcd" }
+      }
+    >
       <div className={style.blueBackGround}></div>
       <div className={style.avtarContainer}>
         <img
@@ -51,7 +60,10 @@ export const ProfileDetails = () => {
         <div className={style.award}>
           <GiFlowerPot style={{ color: "gray" }} />
           <button className={style.rating}>+29</button>
-          <span className={`${style.subHeading} ${style.lineheight}`}>
+          <span
+            className={`${style.subHeading} ${style.lineheight}`}
+            style={isLight ? { color: "#1a1a1b" } : { color: "#c8cbcd" }}
+          >
             Received the Helpful Award and more in the past 30 days
           </span>
         </div>
