@@ -1,0 +1,60 @@
+.cmnt_outer_box{
+    margin: 24px 40px 24px 48px;
+    position: relative;
+}
+.cmnt_userName{
+    margin-bottom: 4px;
+}
+.cmnt_userName > span {
+    font-family: Noto Sans,Arial,sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 18px;
+    color: #D7DADC;
+    margin-right: 4px;
+}
+textarea{
+    /* left: 33px; */
+    position: relative;
+    background: #343536;
+    cursor: text;
+    border: 1px solid #D7DADC;
+    border-radius: 4px;
+    color: #D7DADC;
+    user-select: text;
+    min-height: 122px;
+    outline: none;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    box-sizing: border-box;
+    padding: 15px;
+}
+.cmnt_tools{
+    justify-content: space-between;
+    background-color: #272729;
+    flex-direction: row-reverse;
+    opacity: 1;
+    position: sticky;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    border-radius: 0 0 4px 4px;
+    bottom: 0;
+}
+.cmnt_tools_1{
+    max-width: 525px;
+    align-items: center;
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+.cmnt_tools_1_1{
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    margin-left: 4px;
+    position: relative;
+    display: flex;
+    color: #D7DADC;
+}

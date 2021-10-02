@@ -7,6 +7,7 @@ import { CommentsPage } from "./Components/Comments/CommentsPage";
 import Navbar from "./Components/HomePage/Navbar/Navbar";
 import RegistrationModal from "./Components/HomePage/Registration/RegistrationModal"
 import CreatePostPage from "./Components/CreatePostPage/CreatePostPage";
+import CommentBox from "./Components/Comments/CommentBox";
 function App() {
   const location = useLocation();
 
@@ -18,7 +19,8 @@ function App() {
           <RegistrationModal />
         </Route>
         <Route exact path="/">
-          <HomePage />
+        <CommentBox />
+          {/* <HomePage /> */}
         </Route>
         <Route exact path="/r/:communityId">
           <Community />
