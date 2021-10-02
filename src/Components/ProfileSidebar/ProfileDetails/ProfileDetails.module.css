@@ -17,9 +17,12 @@
   position: absolute;
   top: 30px;
   left: 10px;
+  height: 100px;
 }
 .blueBackGround>div>img{
   width: 90px;
+  height: 100px;
+  object-fit: cover;
   border-radius: 8px;
   border: solid 4px white;
 }

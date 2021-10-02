@@ -70,6 +70,7 @@ export const authReducer = (state = initState, { type, payload }) => {
             }
         }
         case UPDATE_PROFILE: {
+            saveData("user", payload);
             return {
                 ...state,
                 user:payload
