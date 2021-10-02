@@ -7,13 +7,12 @@ import { CommentsPage } from "./Components/Comments/CommentsPage";
 import Navbar from "./Components/HomePage/Navbar/Navbar";
 import RegistrationModal from "./Components/HomePage/Registration/RegistrationModal";
 import CreatePostPage from "./Components/CreatePostPage/CreatePostPage";
-import { ProfileSidebar } from "./Components/ProfileSidebar/ProfileSidebar";
+
 function App() {
   const location = useLocation();
 
   return (
     <div className="App">
-      <ProfileSidebar />
       {location.pathname === "/account" ? null : <Navbar />}
       <Switch>
         <Route path="/account">

@@ -1,9 +1,9 @@
 .createpostContainer {
   background-color: "#fff";
-  width: 25vw;
+  width: 22vw;
   /* padding: 10px; */
   margin: 20px auto;
-  background-color: #fff;
+
   box-sizing: border-box;
   border-radius: 5px;
 }

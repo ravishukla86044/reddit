@@ -1,11 +1,20 @@
 import style from "./CreatePost.module.css";
+import { useSelector } from "react-redux";
 
 export const CreatePost = () => {
+  const { isLight } = useSelector((state) => state.color);
   return (
     <>
       <div className={style.createpostContainer}>
         <div className={style.imageContainer}>
-          <div className={style.createPostBgWhite}>
+          <div
+            className={style.createPostBgWhite}
+            style={
+              isLight
+                ? { backgroundColor: "#fff", color: "#1a1a1b" }
+                : { backgroundColor: "#1a1a1b", color: "#c8cbcd" }
+            }
+          >
             <div className={style.createPostImageLeftAlign}>
               <img
                 className={style.movingImageTop}

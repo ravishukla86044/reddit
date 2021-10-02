@@ -1,9 +1,25 @@
 import { BsCardText } from "react-icons/bs";
 import style from "./AboutCommunity.module.css";
+import { useSelector } from "react-redux";
 export const AboutCommunity = () => {
+  const { isLight } = useSelector((state) => state.color);
   return (
-    <div className={style.aboutCommunityContainer}>
-      <div className={style.blueBackGround}>
+    <div
+      className={style.aboutCommunityContainer}
+      style={
+        isLight
+          ? { backgroundColor: "#fff", color: "#1a1a1b" }
+          : { backgroundColor: "#1a1a1b", color: "#c8cbcd" }
+      }
+    >
+      <div
+        className={style.blueBackGround}
+        style={
+          isLight
+            ? { color: "#fff" }
+            : { backgroundColor: "#1a1a1b", color: "#c8cbcd" }
+        }
+      >
         <span>About Community</span>
       </div>
       <div className={`${style.padding10}`}>

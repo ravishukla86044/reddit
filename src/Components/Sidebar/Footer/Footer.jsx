@@ -1,7 +1,17 @@
 import style from "./Footer.module.css";
+import { useSelector } from "react-redux";
+
 export const Footer = () => {
+  const { isLight } = useSelector((state) => state.color);
   return (
-    <div className={style.footerContainer}>
+    <div
+      className={style.footerContainer}
+      style={
+        isLight
+          ? { backgroundColor: "#fff", color: "#1a1a1b" }
+          : { backgroundColor: "#1a1a1b", color: "#c8cbcd" }
+      }
+    >
       <div className={style.footerFlex}>
         <div>
           <p>Help</p> <p>Reddit Coins</p> <p>Reddit Premium</p>{" "}

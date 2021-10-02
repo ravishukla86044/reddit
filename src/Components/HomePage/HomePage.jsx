@@ -36,7 +36,8 @@ function HomePage() {
           <Feed data={data} />
         </div>
         <div>
-          <div className="fake">
+          {/* <div className="fake"> */}
+          <div>
             <Sidebar />
           </div>
         </div>
