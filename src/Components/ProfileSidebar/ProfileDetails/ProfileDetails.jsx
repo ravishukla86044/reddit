@@ -17,25 +17,18 @@ export const ProfileDetails = () => {
           : { backgroundColor: "#1a1a1b", color: "#c8cbcd" }
       }
     >
-      <div className={style.blueBackGround}></div>
-      <div className={style.avtarContainer}>
-        <img
-          src="https://i.redd.it/snoovatar/avatars/966e7dba-ebec-42a5-93d2-cda2ab2b438d.png"
-          alt=""
-        />
-        <span className={style.profileName}>rumblingresonance</span>
-        <span className={style.profilelink}>u/rumblingresonance .7m</span>
+      <div className={style.blueBackGround}>
+        <div>
+          <img src="https://res.cloudinary.com/dwulcntnx/image/upload/v1633062061/a7dqizsyb37mpavxedai.jpg" alt="" />
+          <p>Username</p>
+        </div>
       </div>
-      <div className={style.avatarButtonContainer}>
+      <div className={style.createButtonContainer}>
         <button className={style.createAvatarButton}>
-          <span>Create Your Own Avatar </span>
-          <span>
-            <MdNavigateNext />
-          </span>
+          <span>Update profile picture</span>
         </button>
       </div>
       <div className={style.description}>
-        <span style={{ padding: "10px" }}>Well Hi There!</span>
         <div className={`${style.padding10} ${style.countDown}`}>
           <div>
             <span className={style.boldHeading}>Karma</span>
@@ -57,18 +50,9 @@ export const ProfileDetails = () => {
             </span>
           </div>
         </div>
-        <div className={style.award}>
-          <GiFlowerPot style={{ color: "gray" }} />
-          <button className={style.rating}>+29</button>
-          <span
-            className={`${style.subHeading} ${style.lineheight}`}
-            style={isLight ? { color: "#1a1a1b" } : { color: "#c8cbcd" }}
-          >
-            Received the Helpful Award and more in the past 30 days
-          </span>
-        </div>
+
         <div className={style.buttonContainer}>
-          <button className={style.primaryButton}>Follow</button>
+          <button className={style.primaryButton}>New Post</button>
         </div>
       </div>
       {showMoreOption ? (
