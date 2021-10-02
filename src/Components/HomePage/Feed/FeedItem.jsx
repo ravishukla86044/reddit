@@ -15,7 +15,7 @@ function FeedItem({ community, comments, type = 1, data }) {
   const { isLight } = useSelector((state) => state.color);
   const [comment, setComment] = useState(0);
   const history = useHistory();
-
+  //console.log(data);
   // extractin time past
   const currentDate = Date.now();
   const postDate = new Date(data?.createdAt || 0);
@@ -44,12 +44,12 @@ function FeedItem({ community, comments, type = 1, data }) {
 
   const handleRouteCommunity = (e) => {
     e.stopPropagation();
-    history.push("/r/xyz");
+    history.push(`/r/${data.communityId}`);
   };
 
   const handleRouteUser = (e) => {
     e.stopPropagation();
-    history.push("/user/xyz");
+    history.push(`/user/${data.userId._id}`);
   };
 
   const handleRouteComments = (id) => {
@@ -75,7 +75,7 @@ function FeedItem({ community, comments, type = 1, data }) {
                 handleRouteCommunity(e);
               }}
             >
-              {!community && `r/sdfsf`}
+              {!community && data.communityId && `r/sdfsf`}
             </span>
             <span
               onClick={(e) => {

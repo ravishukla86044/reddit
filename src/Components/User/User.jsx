@@ -2,21 +2,44 @@ import { Feed } from "../HomePage/Feed/Feed";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { UserHeader } from "./UserHeader";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ProfileSidebar } from "../ProfileSidebar/ProfileSidebar";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import Spinner from "react-spinkit";
 
 function User() {
   const { isLight } = useSelector((state) => state.color);
+  const { userId } = useParams();
+  const [isLoading, setLoading] = useState(true);
+  const [data, setData] = useState();
   const [value, setValue] = useState(1);
+
+  useEffect(() => {
+    getAllPost();
+  }, []);
+
+  // getting all post from backend
+  async function getAllPost() {
+    let postData = await axios.get(`https://reddit-new.herokuapp.com/posts/user/${userId}`);
+    setData(postData.data.post);
+    //console.log(postData, "thd");
+    setLoading(false);
+  }
+
   const handleValue = (n) => {
     setValue(n);
   };
-  return (
+  return isLoading ? (
+    <AppLoading>
+      <Spinner name="ball-spin-fade-loader" color="#0079D3" fadeIn="none" />
+    </AppLoading>
+  ) : (
     <>
       <UserHeader handleValue={handleValue} value={value} />
       <StyledDiv isLight={isLight}>
         <div className="feedDiv">
-          <Feed />
+          <Feed data={data} />
         </div>
         <div>
           <div className="fake">
@@ -27,6 +50,16 @@ function User() {
     </>
   );
 }
+
+const AppLoading = styled.div`
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 const StyledDiv = styled.div`
   width: 100%;
