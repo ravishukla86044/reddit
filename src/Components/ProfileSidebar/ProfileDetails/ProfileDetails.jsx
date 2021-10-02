@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux';
 import { updateProfile } from "../../../Redux/auth/actions";
 import styled from 'styled-components'
 import Spinner from "react-spinkit";
+import { Avatar } from "@material-ui/core";
 
 export const ProfileDetails = () => {
   const dispatch = useDispatch();
@@ -51,8 +52,11 @@ export const ProfileDetails = () => {
     >
       <div className={style.blueBackGround}>
         <div>
-          <img src={user.profile_url} alt="" />
-          <p>Username</p>
+          {user.profile_url ?
+            <img src={user.profile_url} alt="" />
+            : <Avatar style={{ width: "85px",fontSize:"50px", height: "85px" }}></Avatar>}
+          
+          <p>{`u/${user.name}`}</p>
         </div>
         {isLoading ? <AppLoading>
           <Spinner
