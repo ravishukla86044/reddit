@@ -1,14 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import { FiMail } from "react-icons/fi";
-import { VscDeviceCameraVideo } from "react-icons/vsc";
-import { ImCoinDollar } from "react-icons/im";
 import { CgArrowTopRightO } from "react-icons/cg";
 import { AiOutlineMessage } from "react-icons/ai";
 import { AiOutlinePlus } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { GiTwoCoins } from 'react-icons/gi';
+import { BiVideoRecording } from 'react-icons/bi';
+import { IoNotificationsOutline } from 'react-icons/io5';
 
 const Login = ({ setChat }) => {
   const isAuth = useSelector((state) => state.auth.isAuth);
@@ -18,9 +18,9 @@ const Login = ({ setChat }) => {
       {isAuth ? (
         <>
           <CgArrowTopRightO />
-          <VscDeviceCameraVideo />
+          <BiVideoRecording />
           <AiOutlineMessage onClick={() => setChat((pre) => !pre)} />
-          <FiMail />
+          <IoNotificationsOutline />
           <AiOutlinePlus />
           <span>
             <GiTwoCoins />
