@@ -12,6 +12,8 @@
   padding: 10px 20px;
   color: #fff;
   font-weight: 600;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 .buttonBox {
   padding: 10px;

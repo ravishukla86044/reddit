@@ -1,7 +1,7 @@
 .aboutCommunityContainer {
   width: 22vw;
   background-color: #fff;
-  /* margin: 20px auto; */
+  margin: 0 auto 20px;
   box-sizing: border-box;
   padding: 1px 1px 20px 1px;
   border-radius: 5px;
@@ -11,6 +11,8 @@
   padding: 10px 20px;
   color: #fff;
   font-weight: 600;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 .padding10 {
   padding: 10px;
