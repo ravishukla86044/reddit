@@ -2,9 +2,11 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import Avatar from "@material-ui/core/Avatar";
+import { useSelector } from "react-redux";
 
 function AllChatMember({ data, currentUser }) {
   const [user, setUser] = useState(null);
+  const { isLight } = useSelector((state) => state.color);
 
   useEffect(() => {
     const friendsId = data.members.find((a) => a !== currentUser._id);
@@ -17,7 +19,7 @@ function AllChatMember({ data, currentUser }) {
   }
 
   return (
-    <User>
+    <User isLight={isLight}>
       <div>
         {user?.profile_url ? (
           <img src={user?.profile_url} alt="" />
@@ -35,11 +37,15 @@ function AllChatMember({ data, currentUser }) {
 const User = styled.div`
   cursor: pointer;
   padding: 5px;
+  margin: 9px 0px;
   width: 100%;
   height: 30px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  &:hover {
+    background: ${(props) => (props.isLight ? "rgba(82 75 75 / 10%)" : "rgba(255 255 255 / 10%)")};
+  }
 
   & > div {
     margin: 5px;
