@@ -69,7 +69,7 @@ const UserOption = () => {
         ></path>
       </svg>
       {userClicked && (
-        <StyledModel color={isLight?"#FFF":"#1A1A1B"} textColor={isLight?"#1A1A1B":"#D7DADC"} onClick={bubbleHandler}>
+        <StyledModel color={isLight?"#FFF":"#1A1A1B"} textColor={isLight?"#757575":"#D7DADC"} onClick={bubbleHandler}>
           <p>VIEW OPTIONS</p>
           <li onClick={nightModeHandler}>
             <Moon /> Night Mode {nightMode ? <ToggleOffIcon /> : <ToggleOnIcon />}
