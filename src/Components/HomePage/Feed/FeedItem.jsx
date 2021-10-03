@@ -273,7 +273,7 @@ function FeedItem({ community = false, comments, type = 1, data }) {
                 handleRouteCommunity(e);
               }}
             >
-              {!community && `r/sdfsf`}
+              {!community && data.communityId && `r/${data.communityId.name}`}
             </span>
             <span
               onClick={(e) => {
@@ -370,7 +370,7 @@ function FeedItem({ community = false, comments, type = 1, data }) {
                 handleRouteCommunity(e);
               }}
             >
-              {!community && `r/sdfsf`}
+              {!community && data.communityId && `r/${data.communityId.name}`}
             </span>
             <span
               onClick={(e) => {
