@@ -8,6 +8,7 @@ import { AiOutlineMessage } from "react-icons/ai";
 import { AiOutlinePlus } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
+import { GiTwoCoins } from 'react-icons/gi';
 
 const Login = ({ setChat }) => {
   const isAuth = useSelector((state) => state.auth.isAuth);
@@ -22,7 +23,7 @@ const Login = ({ setChat }) => {
           <FiMail />
           <AiOutlinePlus />
           <span>
-            <ImCoinDollar />
+            <GiTwoCoins />
             Get Coins
           </span>
         </>

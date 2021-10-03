@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Moon from "@material-ui/icons/Brightness2Outlined";
-import InputIcon from "@material-ui/icons/Input";
 import ToggleOnIcon from "@material-ui/icons/ToggleOnOutlined";
 import ToggleOffIcon from "@material-ui/icons/ToggleOffOutlined";
 import HelpIcon from "@material-ui/icons/HelpOutlineRounded";
@@ -10,6 +8,14 @@ import { lightMode } from "../../../../Redux/color/action";
 import { useSelector } from "react-redux";
 import CommunityModal from "./CommunityModal";
 import { logOut } from "../../../../Redux/auth/actions";
+import { CgProfile } from 'react-icons/cg';
+import { GiTwoCoins } from 'react-icons/gi';
+import { HiViewGridAdd } from 'react-icons/hi';
+import { ImPower } from 'react-icons/im';
+import { GiTalk } from 'react-icons/gi';
+import { IoIosLogOut } from 'react-icons/io';
+import { IoMoonOutline } from 'react-icons/io5';
+
 
 const UserOption = () => {
   // States
@@ -40,6 +46,7 @@ const UserOption = () => {
 
   const handleLogOut = () => {
     dispatch(logOut())
+    setUserClicked(false);
   }
 
   return (
@@ -77,23 +84,23 @@ const UserOption = () => {
         <StyledModel color={isLight?"#FFF":"#1A1A1B"} textColor={isLight?"#757575":"#D7DADC"} onClick={bubbleHandler}>
           <p>VIEW OPTIONS</p>
           <li onClick={nightModeHandler}>
-            <Moon /> Night Mode {nightMode ? <ToggleOffIcon /> : <ToggleOnIcon />}
+            <IoMoonOutline /> Night Mode {nightMode ? <ToggleOffIcon /> : <ToggleOnIcon />}
           </li>
           <p>MORE STUFF</p>
           <li>
-            <HelpIcon /> Coin
+            <GiTwoCoins /> Coins
           </li>
           <li>
-            <HelpIcon /> Premium
+            <CgProfile /> Profile
           </li>
           <li onClick={handleOpen}>
-            <HelpIcon /> Create Community
+            <HiViewGridAdd /> Create Community
           </li>
           <li>
-            <HelpIcon /> Powerups
+            <ImPower /> Powerups
           </li>
           <li>
-            <HelpIcon /> Talks
+            <GiTalk /> Talks
           </li>
           <li>
             <HelpIcon />
@@ -101,7 +108,7 @@ const UserOption = () => {
           </li>
           <div className="line"></div>
           <li onClick={handleLogOut}>
-            <InputIcon /> Log Out
+            <IoIosLogOut /> Log Out
           </li>
         </StyledModel>
       )}
@@ -162,7 +169,7 @@ const StyledModel = styled.div`
       color: #1c1c1c;
       padding: 0.2rem;
       margin: auto 1%;
-      fill: ${props=>props.textColor};
+      color: ${props => props.textColor};
     }
     &:hover {
       background: #0079d3;
