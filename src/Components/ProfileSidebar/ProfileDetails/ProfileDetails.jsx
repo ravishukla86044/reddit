@@ -10,9 +10,11 @@ import { updateProfile } from "../../../Redux/auth/actions";
 import styled from 'styled-components'
 import Spinner from "react-spinkit";
 import { Avatar } from "@material-ui/core";
+import { useHistory } from "react-router";
 
 export const ProfileDetails = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [isLoading, setIsLoading] = useState(false);
   const { isLight } = useSelector((state) => state.color);
   const [showMoreOption, setShowMoreOption] = useState(true);
@@ -98,7 +100,7 @@ export const ProfileDetails = () => {
         </div>
 
         <div className={style.buttonContainer}>
-          <button className={style.primaryButton}>New Post</button>
+          <button onClick={()=>{history.push("/create-post")}} className={style.primaryButton}>New Post</button>
         </div>
       </div>
       {showMoreOption ? (
