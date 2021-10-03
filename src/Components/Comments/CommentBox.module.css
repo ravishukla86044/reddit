@@ -37,6 +37,7 @@ textarea{
     width: 100%;
 }
 .cmnt_tools{
+    padding: 5px;
     /* justify-content: space-between; */
     /* background-color: #272729; */
     flex-direction: row;
