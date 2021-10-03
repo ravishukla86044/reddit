@@ -9,7 +9,8 @@
 }
 .TopComunityHeading {
   width: 100%;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://styles.redditmedia.com/t5_3gcwj/styles/bannerBackgroundImage_xb79tkanji141.jpg?format=pjpg&s=f3b989950120f6aef4fd1a76cebadfdd526035fc");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("https://styles.redditmedia.com/t5_3gcwj/styles/bannerBackgroundImage_xb79tkanji141.jpg?format=pjpg&s=f3b989950120f6aef4fd1a76cebadfdd526035fc");
   background-position: 50%;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
@@ -25,7 +26,9 @@
 .community {
   border-bottom: 1px solid rgb(200, 203, 205, 0.5);
   padding: 10px 30px;
+  cursor: pointer;
 }
+
 .community a {
   text-decoration: none;
 }

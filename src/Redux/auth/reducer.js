@@ -1,4 +1,4 @@
-import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, REGISTER_REQUEST, REGISTER_SUCCESS, REGISTER_FAILURE, UPDATE_PROFILE } from "./actionTypes";
+import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, REGISTER_REQUEST, REGISTER_SUCCESS, REGISTER_FAILURE, UPDATE_PROFILE, LOGOUT } from "./actionTypes";
 import { loadData, saveData } from "../../utils/localStorage"
 
 const token = loadData("token");
@@ -79,6 +79,16 @@ export const authReducer = (state = initState, { type, payload }) => {
             return {
                 ...state,
                 user:payload
+            }
+        }
+        case LOGOUT: {
+            saveData("token", "");
+            saveData("user", "");
+            return {
+                ...state,
+                isAuth:false,
+                user: "",
+                token:""
             }
         }
         default:

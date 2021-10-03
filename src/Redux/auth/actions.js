@@ -1,4 +1,4 @@
-import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS,REGISTER_REQUEST,REGISTER_SUCCESS,REGISTER_FAILURE, UPDATE_PROFILE } from "./actionTypes"
+import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS,REGISTER_REQUEST,REGISTER_SUCCESS,REGISTER_FAILURE, UPDATE_PROFILE, LOGOUT } from "./actionTypes"
 import axios from "axios"
 
 const updateProfile = (payload) => {
@@ -24,6 +24,12 @@ const loginFailure =(payload)=>{
     return {
         type:LOGIN_FAILURE,
         payload
+    }
+}
+
+const logOut = () => {
+    return {
+        type: LOGOUT
     }
 }
 
@@ -78,4 +84,15 @@ const registerUser = (payload) => (dispatch) => {
         });
 }
 
-export {loginRequest,loginSuccess,loginFailure,loginUser,registerRequest,registerSuccess,registerFailure, registerUser,updateProfile}
+export {
+    loginRequest,
+    loginSuccess,
+    loginFailure,
+    loginUser,
+    registerRequest,
+    registerSuccess,
+    registerFailure,
+    registerUser,
+    updateProfile,
+    logOut
+}

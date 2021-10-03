@@ -510,6 +510,9 @@ const Compact = styled.div`
       border-radius: 50%;
       overflow: hidden;
       margin-right: 5px;
+      &>img{
+        object-fit: cover;
+      }
     }
     .text {
       align-items: center;
@@ -720,6 +723,9 @@ const Classic = styled.div`
       border-radius: 50%;
       overflow: hidden;
       margin-right: 5px;
+      &>img{
+        object-fit: cover;
+      }
     }
     .text {
       align-items: center;
@@ -910,6 +916,9 @@ const Box = styled.div`
     border-radius: 50%;
     overflow: hidden;
     margin-right: 5px;
+    &>img{
+        object-fit: cover;
+    }
   }
   .text {
     align-items: center;

@@ -24,7 +24,7 @@ function Feed({ community = false, data, userPage = false }) {
   //   console.log("hh");
   //   setOpen(false);
   // };
-
+  console.log("feed", data);
   return (
     <Con isLight={isLight}>
       <div className="menu">

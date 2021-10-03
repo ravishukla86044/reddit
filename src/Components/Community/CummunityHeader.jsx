@@ -1,20 +1,36 @@
 import styled from "styled-components";
 import { useSelector } from "react-redux";
-function CommunityHeader({ data }) {
+import { useState, useEffect } from "react";
+import axios from "axios";
+import Avatar from "@material-ui/core/Avatar";
+
+function CommunityHeader({ communityId }) {
   const { isLight } = useSelector((state) => state.color);
+  const [data, setData] = useState();
+
+  useEffect(() => {
+    getCommunity();
+  }, []);
+
+  async function getCommunity() {
+    let postData = await axios.get(`https://reddit-new.herokuapp.com/community/${communityId}`);
+    setData(postData.data.community);
+    //console.log(data, "thd");
+  }
 
   return (
     <Div data={data} isLight={isLight}>
       <div className="backgroundImg"></div>
       <div className="communityData">
         <div className="communityTitle">
-          <div>
-            <img src={data.communityProfile} alt="" />
+          <div className="avatar">
+            <Avatar alt="Remy Sharp" src="/broken-image.jpg">
+              {data?.name?.charAt(0)}
+            </Avatar>
           </div>
           <div className="titleDiv">
             <div className="upperText">
-              <div>{data.title}</div>
-              <div>r/{data.communityName}</div>
+              <div>r/{data?.name}</div>
             </div>
             <div className="join">Join</div>
           </div>
@@ -44,8 +60,7 @@ const Div = styled.div`
   .backgroundImg {
     width: 100%;
     height: 165px;
-    background: url(${(props) => props.data.communityBackground}) center top / cover no-repeat
-      rgb(55, 60, 63);
+    background: center top / cover no-repeat rgb(55, 60, 63);
   }
   .communityData {
     max-width: 984px;
@@ -144,6 +159,10 @@ const Div = styled.div`
     li:hover {
       color: rgb(100, 109, 115);
     }
+  }
+  .avatar .MuiAvatar-root {
+    width: 100%;
+    height: 100%;
   }
 `;
 export { CommunityHeader };
