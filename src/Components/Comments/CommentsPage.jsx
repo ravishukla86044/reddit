@@ -10,6 +10,7 @@ import axios from "axios";
 import Spinner from "react-spinkit";
 import { useState, useEffect } from "react";
 import CommentBox from "./CommentBox";
+import { CommunitySidebar } from "../CommunitySidebar/CommunitySidebar";
 
 function CommentsPage() {
   const { isLight } = useSelector((state) => state.color);
@@ -120,7 +121,7 @@ function CommentsPage() {
         <div>
           <div className="likeDiv">
             <Likes isLight={isLight} isVoted={isVoted}>
-              <ImArrowUp
+              {/* <ImArrowUp
                 onClick={() => {
                   if (!user._id) {
                     alert("Please login first");
@@ -138,7 +139,7 @@ function CommentsPage() {
                   }
                   voteDown(data._id, user?._id);
                 }}
-              />
+              /> */}
             </Likes>
             <div className="upperTitle">
               <RiFileListLine />
@@ -166,7 +167,9 @@ function CommentsPage() {
           ))}
         </div>
         <div className="sideDiv">
-          <div className="fake"></div>
+          <div className="fake">
+            <CommunitySidebar />
+          </div>
         </div>
       </div>
     </StyledDiv>
@@ -216,7 +219,7 @@ const StyledDiv = styled.div`
   .fake {
     width: 300px;
     height: 200px;
-    border: 1px solid black;
+    /* border: 1px solid black; */
   }
   .commentHeader {
     background: #030303;
