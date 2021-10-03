@@ -25,6 +25,7 @@ const UserOption = () => {
   const [modalDisplay, setModalDisplay] = useState(false);
   const [nightMode, setNightMode] = useState(false);
   const user = useSelector(state => state.auth.user);
+  const isAuth = useSelector(state => state.auth.isAuth);
   const history = useHistory();
 
   //theme
@@ -83,24 +84,27 @@ const UserOption = () => {
         ></path>
       </svg>
       {userClicked && (
-        <StyledModel color={isLight?"#FFF":"#1A1A1B"} textColor={isLight?"#757575":"#D7DADC"} onClick={bubbleHandler}>
+        <StyledModel color={isLight ? "#FFF" : "#1A1A1B"} textColor={isLight ? "#757575" : "#D7DADC"} onClick={bubbleHandler}>
           <p>VIEW OPTIONS</p>
           <li onClick={nightModeHandler}>
             <IoMoonOutline /> Night Mode {nightMode ? <ToggleOffIcon /> : <ToggleOnIcon />}
           </li>
           <p>MORE STUFF</p>
-          <li>
-            <GiTwoCoins /> Coins
-          </li>
-          <li onClick={() => { history.push(`/user/${user._id}`); setUserClicked(false);}} >
-            <CgProfile/> Profile
-          </li>
-          <li onClick={handleOpen}>
-            <HiViewGridAdd /> Create Community
-          </li>
-          <li>
-            <ImPower /> Powerups
-          </li>
+          {isAuth ? <>
+            <li>
+              <GiTwoCoins /> Coins
+            </li>
+            <li onClick={() => { history.push(`/user/${user._id}`); setUserClicked(false); }} >
+              <CgProfile /> Profile
+            </li>
+            <li onClick={handleOpen}>
+              <HiViewGridAdd /> Create Community
+            </li>
+            <li>
+              <ImPower /> Powerups
+            </li>
+          </>
+            : null}
           <li>
             <GiTalk /> Talks
           </li>
@@ -108,10 +112,13 @@ const UserOption = () => {
             <HelpIcon />
             Help Center
           </li>
-          <div className="line"></div>
-          <li onClick={handleLogOut}>
-            <IoIosLogOut /> Log Out
-          </li>
+          {isAuth ? <>
+            <div className="line"></div>
+            <li onClick={handleLogOut}>
+              <IoIosLogOut /> Log Out
+            </li>
+          </>
+            : null}
         </StyledModel>
       )}
       <CommunityModal modalDisplay={modalDisplay} setModalDisplay={setModalDisplay} />
@@ -149,12 +156,12 @@ const StyledModel = styled.div`
   z-index: 2;
   right: 0;
   top: 45px;
-  background: ${props=>props.color};
+  background: ${props => props.color};
   list-style: none;
   width: 180px;
   padding: 0.7rem;
   border-radius: 0 0 0 1rem;
-  color: ${props=>props.textColor};
+  color: ${props => props.textColor};
   p {
     font-size: 70%;
     color: #878a8c;

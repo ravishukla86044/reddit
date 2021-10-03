@@ -265,6 +265,12 @@ function Chat({ setChat }) {
                 label="Message"
                 variant="outlined"
                 value={newMessage}
+                onKeyUp={(e) => {
+                  if (e.keyCode === 13 && newMessage !== "") {
+                    handleSendMessage();
+                    console.log(e.keyCode);
+                  }
+                }}
                 onChange={(e) => {
                   setNewMessage(e.target.value);
                 }}
@@ -299,7 +305,7 @@ const ChatDiv = styled.div`
   overflow: hidden;
   background: none;
   z-index: 51;
-  border: 1px solid #edeff1;
+  border: 1px solid ${(props) => (props.isLight ? "#ccc" : "#343536")};
   border-bottom: none;
   .rootDiv {
     width: 530px;
@@ -317,22 +323,21 @@ const ChatDiv = styled.div`
     display: flex;
     flex-direction: column;
     transition: all 0.3s;
-    border-right: 1px solid #edeff1;
+    border-right: 1px solid ${(props) => (props.isLight ? "#ccc" : "#343536")};
     background-color: rgba(179, 179, 179, 0.1);
     box-sizing: border-box;
+    color: ${(props) => (props.isLight ? " #1c1c1c" : "#d7dadc")};
 
     .leftHeader {
       font-size: 16px;
       font-weight: 500;
       line-height: 20px;
-      padding: 0 0.3em 0 1em;
-      min-height: 3.07em;
+      padding: 0px 10px 0 15px;
+      min-height: 42px;
       display: flex;
       align-items: center;
       justify-content: left;
-      border-bottom: transparent;
-      background-color: #ffffff;
-      color: "#1c1c1c";
+      border-bottom: 1px solid ${(props) => (props.isLight ? " #edeff1" : "#5e6368")};
     }
     .leftHeader > div:nth-child(1) {
       font-size: 18px;
@@ -343,6 +348,11 @@ const ChatDiv = styled.div`
     .leftHeader input {
       outline: none;
       border: none;
+      color: ${(props) => (props.isLight ? " #1c1c1c" : "#d7dadc")};
+      background-color: ${(props) => (props.isLight ? "#FFFFFF" : "#29292A")};
+    }
+    .leftHeader input::placeholder {
+      color: ${(props) => (props.isLight ? " #1c1c1c" : "#d7dadc")};
     }
     .leftHeader > div:nth-child(2) {
       display: flex;
@@ -352,23 +362,30 @@ const ChatDiv = styled.div`
     .leftHeader .hidden {
       position: absolute;
       top: 26px;
-      border: 1px solid black;
+      border: 1px solid ${(props) => (props.isLight ? "#ccc" : "#343536")};
       border-radius: 4px;
       padding: 5px;
       font-size: 14px;
       font-weight: 400;
       z-index: 70;
-      background: #ffffff;
+      background-color: ${(props) => (props.isLight ? "#FFFFFF" : "#29292A")};
     }
     .hiddenUser {
-      border-bottom: 1px solid #e7dbdb;
+      border-bottom: 1px solid ${(props) => (props.isLight ? " #edeff1" : "#5e6368")};
       margin: 5px 0px;
       cursor: pointer;
     }
+    .hiddenUser:hover {
+      background: ${(props) =>
+        props.isLight ? "rgba(82 75 75 / 10%)" : "rgba(255 255 255 / 10%)"};
+    }
     .allChatrooms {
       box-sizing: border-box;
-      overflow: scroll;
+      overflow: auto;
       overflow-x: hidden;
+      ::-webkit-scrollbar {
+        width: 7px;
+      }
     }
     .join {
       display: flex;
@@ -408,7 +425,8 @@ const ChatDiv = styled.div`
       align-items: center;
       transition: all 0.3s;
       justify-content: space-between;
-      border-bottom: 1px solid #edeff1;
+      border-bottom: 1px solid ${(props) => (props.isLight ? " #edeff1" : "#5e6368")};
+      color: ${(props) => (props.isLight ? " rgb(26, 26, 27)" : "#d7dadc")};
     }
     .name {
       flex: 1 1 auto;
@@ -440,13 +458,17 @@ const ChatDiv = styled.div`
     .inputField {
       flex-grow: 1;
       margin-left: 15px;
-      margin-bottom: -10px;
+      margin-bottom: -16px;
+      padding: 5px 5px;
 
       .MuiOutlinedInput-root > input {
         padding: 5px 10px;
+        color: ${(props) => (props.isLight ? " #1c1c1c" : "#d7dadc")};
       }
+
       label {
         top: -9px;
+        color: ${(props) => (props.isLight ? " #1c1c1c" : "#d7dadc")};
       }
     }
     .input {
@@ -456,22 +478,27 @@ const ChatDiv = styled.div`
       display: flex;
       align-items: flex-end;
       margin-bottom: 12px;
-      padding: 0px 16px 10px 5px;
+      padding: 8px 16px 10px 5px;
+      border-top: 1px solid ${(props) => (props.isLight ? " #edeff1" : "#5e6368")};
     }
     .lastIcons svg {
       font-size: 25px !important;
     }
     .chatFeed {
-      margin-bottom: 20px;
+      padding: 20px 0px;
       flex-grow: 1;
       display: flex;
       flex-direction: column;
       box-sizing: border-box;
-      overflow: scroll;
+      overflow: auto;
       overflow-x: hidden;
+      ::-webkit-scrollbar {
+        width: 7px;
+      }
     }
     .nochat {
       text-align: center;
+      color: ${(props) => (props.isLight ? " #1c1c1c" : "#d7dadc")};
       align-self: center;
       margin-top: 40%;
       opacity: 0.4;
