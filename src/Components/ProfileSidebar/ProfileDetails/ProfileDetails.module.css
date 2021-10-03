@@ -1,7 +1,7 @@
 .ProfileDetailsContainer {
   background-color: #fff;
   width: 22vw;
-  margin: 20px auto;
+  margin: 0 auto 20px;
   box-sizing: border-box;
   border-radius: 5px;
 }
