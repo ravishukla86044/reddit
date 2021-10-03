@@ -7,9 +7,10 @@ import ToggleOffIcon from "@material-ui/icons/ToggleOffOutlined";
 import HelpIcon from "@material-ui/icons/HelpOutlineRounded";
 import { useDispatch } from "react-redux";
 import { lightMode } from "../../../../Redux/color/action";
-import { Avatar } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import CommunityModal from "./CommunityModal";
+import { logOut } from "../../../../Redux/auth/actions";
+
 const UserOption = () => {
   // States
   const { isLight } = useSelector((state) => state.color);
@@ -36,6 +37,10 @@ const UserOption = () => {
   const bubbleHandler = (e) => {
     e.stopPropagation();
   };
+
+  const handleLogOut = () => {
+    dispatch(logOut())
+  }
 
   return (
     <StyledUser onClick={userClickHandler}>
@@ -95,8 +100,8 @@ const UserOption = () => {
             Help Center
           </li>
           <div className="line"></div>
-          <li>
-            <InputIcon /> Log In/ Sign Up
+          <li onClick={handleLogOut}>
+            <InputIcon /> Log Out
           </li>
         </StyledModel>
       )}
