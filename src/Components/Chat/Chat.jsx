@@ -68,7 +68,7 @@ function Chat({ setChat }) {
   async function getConversation() {
     let res = await axios.get(`https://reddit-new.herokuapp.com/chatroom/${user._id}`);
     setChatroom(res.data.chatroom);
-    //console.log(res.data.chatroom, "chatroom");
+    console.log(res.data.chatroom, "chatroom");
   }
   async function getMsg() {
     try {
