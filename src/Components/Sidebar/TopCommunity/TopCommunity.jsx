@@ -1,30 +1,24 @@
 import { IoIosArrowUp } from "react-icons/io";
 import style from "./TopCommunity.module.css";
 import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import Avatar  from "@material-ui/core/Avatar";
+
+
 export const TopCommunity = () => {
   const { isLight } = useSelector((state) => state.color);
-  const community = [
-    {
-      img: "https://styles.redditmedia.com/t5_2qixk/styles/communityIcon_7un6h01l6j871.png",
-      name: "abc",
-    },
-    {
-      img: "https://styles.redditmedia.com/t5_2qxh7/styles/communityIcon_nbzgv367wcn31.PNG",
-      name: "cde",
-    },
-    {
-      img: "https://styles.redditmedia.com/t5_3h47q/styles/communityIcon_tjhylhfxrhp01.jpg?format=pjpg&s=f5eca7dc43ddb9c5dd2c0ec5ce43e5cba6ad9f48",
-      name: "ghi",
-    },
-    {
-      img: "https://styles.redditmedia.com/t5_2sqho/styles/communityIcon_5yv6wpzxt5w31.png",
-      name: "jkl",
-    },
-    {
-      img: "https://b.thumbs.redditmedia.com/Q9R2vbB9_oXgNWoE3GgdDutm-rgdpDh0Ny1KEJYJMto.png",
-      name: "mno",
-    },
-  ];
+  const [communities, setCommunities] = useState([]);
+
+  useEffect((el) => {
+    axios.get("https://reddit-new.herokuapp.com/community")
+      .then((res) => {
+        setCommunities(res.data.communities.slice(0,5));
+      }).catch((err) => {
+        console.log(err);
+      });
+  })
+
   return (
     <div
       className={style.backgroundWhite}
@@ -35,8 +29,8 @@ export const TopCommunity = () => {
       <div className={style.TopComunityHeading}>
         <h4>Top Aww Communities</h4>
       </div>
-      {community.map((ele, index) => (
-        <div key={index} className={style.community}>
+      {communities.map((el,index) => (
+        <div key={el._id} className={style.community}>
           <span>
             <div
               className={style.communityDetails}
@@ -45,10 +39,10 @@ export const TopCommunity = () => {
               <span className={style.indexing}>{index + 1}</span>
               <IoIosArrowUp style={{ color: "#46D160" }} />
               <div>
-                <img src={ele.img} alt="" />
+                <Avatar style={{background:`${color[index]}`,margin:"0 8px"}}>{ el.name.charAt(0) }</Avatar>
               </div>
 
-              <span>r/{ele.name}</span>
+              <span>r/{el.name}</span>
             </div>
           </span>
         </div>
@@ -74,3 +68,5 @@ export const TopCommunity = () => {
     </div>
   );
 };
+
+const color = ["#0079D3", "#FF5C58", "#6FCB64", "#916CBF", "#FFD461",];

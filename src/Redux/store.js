@@ -11,10 +11,14 @@ const customMiddleware = (store) => (next) => (action) => {
   return typeof action === "function" ? action(store.dispatch) : next(action);
 };
 
-export const store = createStore(
-  rootreducer,
-  compose(
-    applyMiddleware(customMiddleware),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-  )
-);
+const store = createStore(rootreducer,applyMiddleware(customMiddleware))
+
+// const store = createStore(
+//   rootreducer,
+//   compose(
+//     applyMiddleware(customMiddleware),
+//     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+//   )
+// );
+
+export default store;

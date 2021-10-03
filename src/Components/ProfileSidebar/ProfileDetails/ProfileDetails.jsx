@@ -1,13 +1,46 @@
 import { IoFlowerSharp } from "react-icons/io5";
 import style from "./ProfileDetails.module.css";
 import { BsCardText } from "react-icons/bs";
-import { GiFlowerPot } from "react-icons/gi";
-import { MdNavigateNext } from "react-icons/md";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { loadData } from "../../../utils/localStorage";
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { updateProfile } from "../../../Redux/auth/actions";
+import styled from 'styled-components'
+import Spinner from "react-spinkit";
+import { Avatar } from "@material-ui/core";
+
 export const ProfileDetails = () => {
+  const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false);
   const { isLight } = useSelector((state) => state.color);
   const [showMoreOption, setShowMoreOption] = useState(true);
+  const user = useSelector(state => state.auth.user);
+
+
+  const handleFileUplod = (e) => {
+    setIsLoading(true);
+    const { _id } = loadData("user");
+    const token = loadData("token");
+    const formData = new FormData();
+    formData.append('profile_url', e.target.files[0]);
+
+    axios.patch(`https://reddit-new.herokuapp.com/users/${_id}`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        "Authorization": "Bearer " + token
+      }
+    }).then((res) => {
+      const successAction = updateProfile(res.data.user);
+      dispatch(successAction);
+      setIsLoading(false);
+    }).catch((err) => {
+      setIsLoading(false);
+      console.log("err.response", err.response);
+    })
+  }
+
   return (
     <div
       className={style.ProfileDetailsContainer}
@@ -17,25 +50,31 @@ export const ProfileDetails = () => {
           : { backgroundColor: "#1a1a1b", color: "#c8cbcd" }
       }
     >
-      <div className={style.blueBackGround}></div>
-      <div className={style.avtarContainer}>
-        <img
-          src="https://i.redd.it/snoovatar/avatars/966e7dba-ebec-42a5-93d2-cda2ab2b438d.png"
-          alt=""
-        />
-        <span className={style.profileName}>rumblingresonance</span>
-        <span className={style.profilelink}>u/rumblingresonance .7m</span>
+      <div className={style.blueBackGround}>
+        <div>
+          {user.profile_url ?
+            <img src={user.profile_url} alt="" />
+            : <Avatar style={{ width: "85px",fontSize:"50px", height: "85px" }}></Avatar>}
+          
+          <p>{`u/${user.name}`}</p>
+        </div>
+        {isLoading ? <AppLoading>
+          <Spinner
+            name="line-spin-fade-loader"
+            color="#F22C20"
+            fadeIn="none"
+          />
+        </AppLoading> :
+          null
+        }
       </div>
-      <div className={style.avatarButtonContainer}>
-        <button className={style.createAvatarButton}>
-          <span>Create Your Own Avatar </span>
-          <span>
-            <MdNavigateNext />
-          </span>
-        </button>
+      <div className={style.createButtonContainer}>
+        <div className={style.createAvatarButton}>
+          <span>Update profile picture</span>
+          <input onChange={handleFileUplod} type="file" name="myfile" />
+        </div>
       </div>
       <div className={style.description}>
-        <span style={{ padding: "10px" }}>Well Hi There!</span>
         <div className={`${style.padding10} ${style.countDown}`}>
           <div>
             <span className={style.boldHeading}>Karma</span>
@@ -57,18 +96,9 @@ export const ProfileDetails = () => {
             </span>
           </div>
         </div>
-        <div className={style.award}>
-          <GiFlowerPot style={{ color: "gray" }} />
-          <button className={style.rating}>+29</button>
-          <span
-            className={`${style.subHeading} ${style.lineheight}`}
-            style={isLight ? { color: "#1a1a1b" } : { color: "#c8cbcd" }}
-          >
-            Received the Helpful Award and more in the past 30 days
-          </span>
-        </div>
+
         <div className={style.buttonContainer}>
-          <button className={style.primaryButton}>Follow</button>
+          <button className={style.primaryButton}>New Post</button>
         </div>
       </div>
       {showMoreOption ? (
@@ -91,3 +121,10 @@ export const ProfileDetails = () => {
     </div>
   );
 };
+
+const AppLoading = styled.div`
+width: 100%;
+height: 100%;
+margin-top: 40px;
+margin-left: 40px;
+`;

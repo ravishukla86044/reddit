@@ -46,7 +46,7 @@ function Chat({ setChat }) {
     });
 
     socket.current.on("getUsers", (users) => {
-      console.log(users);
+      //console.log(users);
     });
   }, [user]);
 
@@ -54,16 +54,18 @@ function Chat({ setChat }) {
     arrivedM &&
       currentChat?.members.includes(arrivedM.senderId) &&
       setMessages((pre) => [...pre, arrivedM]);
+    console.log(currentChat, "currChat");
   }, [arrivedM]);
 
   useEffect(() => {
     getConversation();
+    getAllUser();
   }, []);
 
   async function getConversation() {
     let res = await axios.get(`http://localhost:3001/chatroom/${user._id}`);
     setChatroom(res.data.chatroom);
-    console.log(res, "chatroom");
+    //console.log(res.data.chatroom, "chatroom");
   }
   async function getMsg() {
     try {
@@ -95,6 +97,7 @@ function Chat({ setChat }) {
       senderId: user._id,
       receiverId,
       text: newMessage,
+      currentChatroomId: currentChat._id,
     });
 
     try {
@@ -117,14 +120,80 @@ function Chat({ setChat }) {
     const res = await axios.get(`http://localhost:3001/users/${friendsId}`);
     setFriend(res.data.user);
   }
+
+  async function getAllUser() {
+    let data = await axios.get("https://reddit-new.herokuapp.com/users");
+    setAllUser(data.data.users);
+  }
+
+  const [allUser, setAllUser] = useState();
+  const [userSearch, setUserSearch] = useState("");
+  const [selectedUser, setSelectedUser] = useState([]);
+  const friendIdRef = useRef();
+
+  const handleSearchUser = (e) => {
+    setUserSearch(e.target.value);
+    let newallUser = allUser.filter((a) => a.name.includes(userSearch));
+    setSelectedUser(newallUser);
+  };
+
+  const handelAddchatroom = async () => {
+    console.log(chatroom);
+    for (var i = 0; i < chatroom.length; i++) {
+      let mem = chatroom[i].members;
+      if (mem.includes(user._id) && mem.includes(friendIdRef.current)) {
+        alert("Friend alreday in the list");
+        return;
+      }
+    }
+    if (!friendIdRef.current) {
+      alert("Please add a friend");
+      return;
+    }
+    let body = {
+      members: [user._id, friendIdRef.current],
+    };
+    try {
+      let data = await axios.post("https://reddit-new.herokuapp.com/chatroom", body);
+      console.log(data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
     <ChatDiv isLight={isLight}>
       <div className="rootDiv">
         <div className="leftPart">
           <div className="leftHeader">
-            <div>Chat</div>
             <div>
-              <div className="join">
+              <input
+                type="text"
+                placeholder="Search users"
+                value={userSearch}
+                onChange={handleSearchUser}
+              />
+              {selectedUser.length > 0 && userSearch !== "" && (
+                <div className="hidden">
+                  {selectedUser.map((a) => {
+                    return (
+                      <div
+                        onClick={() => {
+                          setUserSearch(a.name);
+                          setSelectedUser([]);
+                          friendIdRef.current = a._id;
+                        }}
+                        className="hiddenUser"
+                      >
+                        {a.name}
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+            <div>
+              <div onClick={handelAddchatroom} className="join">
                 <HiOutlinePlus />
               </div>
             </div>
@@ -224,6 +293,7 @@ const ChatDiv = styled.div`
     height: 420px;
     background-color: ${(props) => (props.isLight ? "#FFFFFF" : "#1A1A1B")};
     display: flex;
+    box-sizing: border-box;
   }
 
   .leftPart {
@@ -255,13 +325,33 @@ const ChatDiv = styled.div`
       font-size: 18px;
       font-weight: 500;
       line-height: 22px;
+      position: relative;
+    }
+    .leftHeader input {
+      outline: none;
+      border: none;
     }
     .leftHeader > div:nth-child(2) {
       display: flex;
       flex: 1;
       justify-content: flex-end;
     }
-
+    .leftHeader .hidden {
+      position: absolute;
+      top: 26px;
+      border: 1px solid black;
+      border-radius: 4px;
+      padding: 5px;
+      font-size: 14px;
+      font-weight: 400;
+      z-index: 70;
+      background: #ffffff;
+    }
+    .hiddenUser {
+      border-bottom: 1px solid #e7dbdb;
+      margin: 5px 0px;
+      cursor: pointer;
+    }
     .join {
       display: flex;
       align-items: center;
@@ -290,6 +380,7 @@ const ChatDiv = styled.div`
     position: relative;
     display: flex;
     flex-direction: column;
+    box-sizing: border-box;
 
     .rightHeader {
       padding: 0 1em;
@@ -357,6 +448,8 @@ const ChatDiv = styled.div`
       flex-grow: 1;
       display: flex;
       flex-direction: column;
+      box-sizing: border-box;
+      overflow: scroll;
     }
   }
 `;

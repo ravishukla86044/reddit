@@ -13,7 +13,7 @@ function CreatePost() {
   const user = useSelector(state => state.auth.user);
   return (
     <Con isLight={isLight}>
-      <Avatar src={user.profile_url }/>
+      <Avatar onClick={()=>{history.push(`/user/${user._id}`)}} src={user.profile_url }/>
       <input onClick={()=>{history.push("/create-post")}} type="text" placeholder="Create Post" />
       <GoFileMedia onClick={() => { history.push("/create-post") }} />
       <HiLink onClick={() => { history.push("/create-post") }}/>
@@ -81,5 +81,11 @@ const Con = styled.div`
     font-weight: 400;
     line-height: 21px;
     font-family: inherit;
+  }
+  &>div:first-child{
+    cursor: pointer;
+    &:hover{
+      opacity: 0.8;
+    }
   }
 `;

@@ -1,66 +1,79 @@
 .ProfileDetailsContainer {
   background-color: #fff;
+<<<<<<< HEAD
   width: 22vw;
   margin: 0 auto 20px;
+=======
+  width: 300px;
+>>>>>>> d8c851fe2cc97bb5aa97b3e123d8f39fd90feadc
   box-sizing: border-box;
   border-radius: 5px;
+  margin-bottom: 20px;
+  padding-bottom: 8px;
 }
-.profileName {
-  font-size: 20px;
-  font-weight: 600;
-  text-align: center;
-}
-.avatarButtonContainer {
-  width: 90%;
-  margin: auto;
+.blueBackGround {
   position: relative;
-  top: -65px;
+  height: 100px;
+  border-radius: 5px 5px 0 0;
+  background-color: #33A8FF;
+  margin-bottom: 50px;
+}
+.blueBackGround>div{
+  position: absolute;
+  top: 30px;
+  left: 10px;
+  height: 100px;
+}
+.blueBackGround>div>img{
+  width: 90px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: solid 4px white;
+}
+.blueBackGround>div>p{
+font-size: 12px;
+font-weight: 600;
+text-align: center;
+}
+.createButtonContainer{
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  width: 100%;
+  padding: 0 20px;
+  text-align: center;
+  overflow: hidden;
 }
 .createAvatarButton {
-  background: linear-gradient(90deg, #ec0623, #ff8717);
   color: #fff;
+  position: relative;
   padding: 10px;
   width: 100%;
   border-radius: 20px;
-  border: none;
-  margin-bottom: 10px;
-  font-weight: 800;
-  display: flex;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-}
-.profilelink {
-  font-size: 13px;
-  color: gray;
-  text-align: center;
-}
-.blueBackGround {
-  height: 100px;
-  background-color: #0079d3;
-}
-.avtarContainer {
-  width: 100%;
+  overflow: hidden;
   margin: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  top: -80px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  background: linear-gradient(90deg, #ec0623, #ff8717);
 }
-.avtarContainer > img {
-  width: 120px;
+.createAvatarButton input[type=file] {
+  font-size: 30px;
+  position: absolute;
+  left: -60px;
+  top: 0;
+  cursor: pointer;
+  transform: rotate(180deg);
+  opacity: 0;
 }
+
 .buttonContainer {
   width: 100%;
   padding: 0 20px;
   text-align: center;
 }
-.description {
-  position: relative;
-  top: -50px;
-}
+
 .rating {
   border: none;
   color: gray;
@@ -73,22 +86,17 @@
   color: #fff;
   padding: 10px;
   width: 100%;
-  border-radius: 20px;
+  border-radius: 200px;
   border: none;
   margin-bottom: 10px;
   font-weight: 800;
 }
 .moreOptionContainer {
-  width: 95%;
-  position: relative;
-  top: -40px;
-  padding: 10px;
+  padding: 0 20px;
   text-align: right;
 }
 .moreOptionBox {
   padding: 10px;
-  position: relative;
-  top: -30px;
 }
 .moreOption {
   border: none;
@@ -114,14 +122,6 @@
   width: 80%;
   align-items: center;
   justify-content: space-between;
-}
-.award {
-  display: grid;
-  padding: 0 10px;
-  grid-template-columns: auto auto auto;
-  align-items: center;
-  grid-gap: 5px;
-  margin-bottom: 15px;
 }
 .lineheight {
   line-height: 13px;
