@@ -13,8 +13,8 @@ const customMiddleware = (store) => (next) => (action) => {
 
 export const store = createStore(
   rootreducer,
-  compose(
-    applyMiddleware(customMiddleware),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-  )
+
+  applyMiddleware(customMiddleware)
 );
+
+//  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
