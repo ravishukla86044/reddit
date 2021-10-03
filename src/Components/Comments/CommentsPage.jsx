@@ -163,7 +163,7 @@ function CommentsPage() {
           <CommentBox />
           {comment.map((a) => (
             <CommentsItem data={a} key={a._id} />
-          )).reverse()}
+          ))}
         </div>
         <div className="sideDiv">
           <div className="fake"></div>
