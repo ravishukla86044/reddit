@@ -19,7 +19,7 @@ function FeedItem({ community = false, comments, type = 1, data }) {
   const [isVoted, setIsVoted] = useState(0);
   const history = useHistory();
 
-  //console.log(data);
+  // console.log("data community", data);
   // extractin time past
   const currentDate = Date.now();
   const postDate = new Date(data?.createdAt || 0);
@@ -273,7 +273,7 @@ function FeedItem({ community = false, comments, type = 1, data }) {
                 handleRouteCommunity(e);
               }}
             >
-              {!community && `r/sdfsf`}
+              {!community && data.communityId && `r/${data.communityId.name}`}
             </span>
             <span
               onClick={(e) => {
@@ -370,7 +370,7 @@ function FeedItem({ community = false, comments, type = 1, data }) {
                 handleRouteCommunity(e);
               }}
             >
-              {!community && `r/sdfsf`}
+              {!community && data.communityId && `r/${data.communityId.name}`}
             </span>
             <span
               onClick={(e) => {

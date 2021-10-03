@@ -16,7 +16,7 @@ function HomePage() {
     getAllPost();
   }, []);
 
-  console.log(data);
+  //console.log(data);
   // getting all post from backend
   async function getAllPost() {
     let postData = await axios.get("https://reddit-new.herokuapp.com/posts");
@@ -69,13 +69,13 @@ const StyledDiv = styled.div`
     margin-top: 30px;
   }
   & > div:nth-child(2) {
-    margin-top: 59px;
+    margin-top: 30px;
     margin-left: 30px;
   }
   .fake {
     width: 300px;
     height: 200px;
-    border: 1px solid black;
+
     box-sizing: border-box;
   }
 `;
