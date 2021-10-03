@@ -23,7 +23,7 @@ function AllChatMember({ data, currentUser }) {
           <img src={user?.profile_url} alt="" />
         ) : (
           <Avatar alt="Remy Sharp" src="/broken-image.jpg">
-            {user?.name[0]}
+            {user?.name?.charAt(0)}
           </Avatar>
         )}
       </div>

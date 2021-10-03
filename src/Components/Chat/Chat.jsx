@@ -222,7 +222,7 @@ function Chat({ setChat }) {
                 <img src={currentFriend.profile_url} alt="" />
               ) : (
                 <Avatar alt="Remy Sharp" src="/broken-image.jpg">
-                  B
+                  {currentFriend?.name?.charAt(0)}
                 </Avatar>
               )}
             </span>
@@ -469,6 +469,14 @@ const ChatDiv = styled.div`
       box-sizing: border-box;
       overflow: scroll;
       overflow-x: hidden;
+    }
+    .nochat {
+      text-align: center;
+      align-self: center;
+      margin-top: 40%;
+      opacity: 0.4;
+      font-size: 20px;
+      font-weight: 500;
     }
   }
   .currentuserImage {
