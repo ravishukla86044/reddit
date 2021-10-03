@@ -156,7 +156,7 @@ function CommentsPage() {
           </div>
         </div>
       </div>
-     
+
       <div>
         <div className="feedDiv">
           <FeedItem comments={true} data={data} />
@@ -169,7 +169,6 @@ function CommentsPage() {
           <div className="fake"></div>
         </div>
       </div>
-      
     </StyledDiv>
   );
 }

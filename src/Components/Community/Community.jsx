@@ -38,7 +38,6 @@ function Community() {
       <CommunityHeader data={data} />
       <StyledDiv isLight={isLight}>
         <div className="feedDiv">
-          <CreatePost />
           <Feed community={true} data={data} />
         </div>
         <div>
@@ -79,7 +78,6 @@ const StyledDiv = styled.div`
   .fake {
     width: 300px;
     height: 200px;
-    border: 1px solid black;
   }
 `;
 export { Community };

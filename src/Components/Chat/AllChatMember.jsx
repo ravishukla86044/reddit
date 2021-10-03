@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
+import Avatar from "@material-ui/core/Avatar";
 
 function AllChatMember({ data, currentUser }) {
   const [user, setUser] = useState(null);
@@ -11,14 +12,20 @@ function AllChatMember({ data, currentUser }) {
   }, []);
 
   async function getUser(friendsId) {
-    const res = await axios.get(`http://localhost:3001/users/${friendsId}`);
+    const res = await axios.get(`https://reddit-new.herokuapp.com/users/${friendsId}`);
     setUser(res.data.user);
   }
 
   return (
     <User>
       <div>
-        <img src={user?.profile_url} alt="" />
+        {user?.profile_url ? (
+          <img src={user?.profile_url} alt="" />
+        ) : (
+          <Avatar alt="Remy Sharp" src="/broken-image.jpg">
+            {user?.name?.charAt(0)}
+          </Avatar>
+        )}
       </div>
       <div>{user?.name}</div>
     </User>
@@ -47,6 +54,11 @@ const User = styled.div`
     img {
       width: 100%;
       height: 100%;
+    }
+    .MuiAvatar-root {
+      width: 23px;
+      height: 22px;
+      font-size: 15px;
     }
   }
 `;
