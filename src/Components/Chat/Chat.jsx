@@ -12,6 +12,7 @@ import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { AllChatMember } from "./AllChatMember";
 import { Messages } from "./Messages";
+import Avatar from "@material-ui/core/Avatar";
 
 import TextField from "@mui/material/TextField";
 
@@ -216,6 +217,15 @@ function Chat({ setChat }) {
         </div>
         <div className="rightPart">
           <div className="rightHeader">
+            <span className="currentuserImage">
+              {currentFriend.profile_url ? (
+                <img src={currentFriend.profile_url} alt="" />
+              ) : (
+                <Avatar alt="Remy Sharp" src="/broken-image.jpg">
+                  {currentFriend?.name?.charAt(0)}
+                </Avatar>
+              )}
+            </span>
             <div className="name">{currentFriend?.name || "Name"}</div>
             <div className="optionIcons">
               <div>
@@ -358,6 +368,7 @@ const ChatDiv = styled.div`
     .allChatrooms {
       box-sizing: border-box;
       overflow: scroll;
+      overflow-x: hidden;
     }
     .join {
       display: flex;
@@ -457,6 +468,32 @@ const ChatDiv = styled.div`
       flex-direction: column;
       box-sizing: border-box;
       overflow: scroll;
+      overflow-x: hidden;
+    }
+    .nochat {
+      text-align: center;
+      align-self: center;
+      margin-top: 40%;
+      opacity: 0.4;
+      font-size: 20px;
+      font-weight: 500;
+    }
+  }
+  .currentuserImage {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 5px;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+    .MuiAvatar-root {
+      width: 23px;
+      height: 22px;
+      font-size: 15px;
     }
   }
 `;
