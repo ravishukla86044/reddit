@@ -69,7 +69,7 @@ const StyledDiv = styled.div`
     margin-top: 30px;
   }
   & > div:nth-child(2) {
-    margin-top: 59px;
+    margin-top: 30px;
     margin-left: 30px;
   }
   .fake {

@@ -8,7 +8,7 @@ import { BsThreeDots, BsLayoutThreeColumns } from "react-icons/bs";
 import { RiArrowDownSLine, RiLayoutRowLine } from "react-icons/ri";
 import { useState } from "react";
 import { CreatePost } from "./CreatePost";
-function Feed({ community = false, data }) {
+function Feed({ community = false, data, userPage = false }) {
   const { isLight } = useSelector((state) => state.color);
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(1);
@@ -23,12 +23,11 @@ function Feed({ community = false, data }) {
   //   console.log("hh");
   //   setOpen(false);
   // };
-  
 
   return (
     <Con isLight={isLight}>
       <div className="menu">
-        <CreatePost />
+        {!userPage && <CreatePost />}
         <div>Popular Post</div>
         <div className="menuItem">
           <div className="icon firstIcon">
@@ -54,7 +53,7 @@ function Feed({ community = false, data }) {
               <BsThreeDots />
             </div>
           </div>
-          <div className="last" >
+          <div className="last">
             <div className="icon" onClick={handleClick}>
               <div>
                 {value === 1 ? (

@@ -39,7 +39,7 @@ function User() {
       <UserHeader handleValue={handleValue} value={value} />
       <StyledDiv isLight={isLight}>
         <div className="feedDiv">
-          <Feed data={data} />
+          <Feed data={data} userPage={true} />
         </div>
         <div>
           <div className="fake">
@@ -73,7 +73,7 @@ const StyledDiv = styled.div`
     margin-top: 30px;
   }
   & > div:nth-child(2) {
-    margin-top: 59px;
+    margin-top: 30px;
     margin-left: 30px;
   }
   .fake {

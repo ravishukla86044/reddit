@@ -38,7 +38,6 @@ function Community() {
       <CommunityHeader data={data} />
       <StyledDiv isLight={isLight}>
         <div className="feedDiv">
-          <CreatePost />
           <Feed community={true} data={data} />
         </div>
         <div>
