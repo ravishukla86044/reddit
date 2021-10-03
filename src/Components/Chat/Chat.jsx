@@ -157,7 +157,8 @@ function Chat({ setChat }) {
     };
     try {
       let data = await axios.post("https://reddit-new.herokuapp.com/chatroom", body);
-      console.log(data);
+      getConversation();
+      //console.log(data);
     } catch (e) {
       console.log(e);
     }
@@ -200,7 +201,7 @@ function Chat({ setChat }) {
               </div>
             </div>
           </div>
-          <div>
+          <div className="allChatrooms">
             {chatroom.map((a) => (
               <div
                 onClick={() => {
@@ -353,6 +354,10 @@ const ChatDiv = styled.div`
       border-bottom: 1px solid #e7dbdb;
       margin: 5px 0px;
       cursor: pointer;
+    }
+    .allChatrooms {
+      box-sizing: border-box;
+      overflow: scroll;
     }
     .join {
       display: flex;

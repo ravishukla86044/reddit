@@ -123,7 +123,7 @@ function FeedItem({ community = false, comments, type = 1, data }) {
     e.stopPropagation();
     history.push(`/r/${data.communityId._id}`);
   };
-  console.log("data", data);
+  //console.log("data", data);
   const handleRouteUser = (e) => {
     e.stopPropagation();
     history.push(`/user/${data.userId._id}`);
