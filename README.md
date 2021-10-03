@@ -29,10 +29,10 @@ After Login user direcly redirect to home page.
 
 Below image shows the steps to post something.
 
-  <img src="./src/PreviewImageGallery/post.png"  width="400"/> 
+  <img src="./src/PreviewImageGallery/post.png"  width="500"/> 
   <br/>
   Below image shows steps to comment something.
-  <img src="./src/PreviewImageGallery/comments.png" width="400">
+  <img src="./src/PreviewImageGallery/comments.png" width="500">
 
 There are some Key Features which are added in website clone such as:
 
@@ -44,10 +44,10 @@ There are some Key Features which are added in website clone such as:
 - _Easy navigation by links_
 
 <p>
-<img src="./src/PreviewImageGallery/chat.png" width="400"/>
-<img src="./src/PreviewImageGallery/darkHomepage.png" width="400"/>
-<img src="./src/PreviewImageGallery/community.png" width="400">
-<img src="./src/PreviewImageGallery/user.png" width="400"/>
+<img src="./src/PreviewImageGallery/chat.png" height="400" />
+<img src="./src/PreviewImageGallery/darkHomepage.png" height="400"/>
+<img src="./src/PreviewImageGallery/community.png" height="400">
+<img src="./src/PreviewImageGallery/user.png" height="400"/>
 </p>
 
 ## NPM Packages used
