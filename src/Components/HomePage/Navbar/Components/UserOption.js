@@ -1,15 +1,23 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Moon from "@material-ui/icons/Brightness2Outlined";
-import InputIcon from "@material-ui/icons/Input";
 import ToggleOnIcon from "@material-ui/icons/ToggleOnOutlined";
 import ToggleOffIcon from "@material-ui/icons/ToggleOffOutlined";
 import HelpIcon from "@material-ui/icons/HelpOutlineRounded";
 import { useDispatch } from "react-redux";
 import { lightMode } from "../../../../Redux/color/action";
-import { Avatar } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import CommunityModal from "./CommunityModal";
+import { logOut } from "../../../../Redux/auth/actions";
+import { CgProfile } from 'react-icons/cg';
+import { GiTwoCoins } from 'react-icons/gi';
+import { HiViewGridAdd } from 'react-icons/hi';
+import { ImPower } from 'react-icons/im';
+import { GiTalk } from 'react-icons/gi';
+import { IoIosLogOut } from 'react-icons/io';
+import { IoMoonOutline } from 'react-icons/io5';
+import { useHistory } from "react-router";
+
+
 const UserOption = () => {
   // States
   const { isLight } = useSelector((state) => state.color);
@@ -17,6 +25,7 @@ const UserOption = () => {
   const [modalDisplay, setModalDisplay] = useState(false);
   const [nightMode, setNightMode] = useState(false);
   const user = useSelector(state => state.auth.user);
+  const history = useHistory();
 
   //theme
   const dispatch = useDispatch();
@@ -36,6 +45,11 @@ const UserOption = () => {
   const bubbleHandler = (e) => {
     e.stopPropagation();
   };
+
+  const handleLogOut = () => {
+    dispatch(logOut())
+    setUserClicked(false);
+  }
 
   return (
     <StyledUser onClick={userClickHandler}>
@@ -72,31 +86,31 @@ const UserOption = () => {
         <StyledModel color={isLight?"#FFF":"#1A1A1B"} textColor={isLight?"#757575":"#D7DADC"} onClick={bubbleHandler}>
           <p>VIEW OPTIONS</p>
           <li onClick={nightModeHandler}>
-            <Moon /> Night Mode {nightMode ? <ToggleOffIcon /> : <ToggleOnIcon />}
+            <IoMoonOutline /> Night Mode {nightMode ? <ToggleOffIcon /> : <ToggleOnIcon />}
           </li>
           <p>MORE STUFF</p>
           <li>
-            <HelpIcon /> Coin
+            <GiTwoCoins /> Coins
           </li>
-          <li>
-            <HelpIcon /> Premium
+          <li onClick={() => { history.push(`/user/${user._id}`); setUserClicked(false);}} >
+            <CgProfile/> Profile
           </li>
           <li onClick={handleOpen}>
-            <HelpIcon /> Create Community
+            <HiViewGridAdd /> Create Community
           </li>
           <li>
-            <HelpIcon /> Powerups
+            <ImPower /> Powerups
           </li>
           <li>
-            <HelpIcon /> Talks
+            <GiTalk /> Talks
           </li>
           <li>
             <HelpIcon />
             Help Center
           </li>
           <div className="line"></div>
-          <li>
-            <InputIcon /> Log In/ Sign Up
+          <li onClick={handleLogOut}>
+            <IoIosLogOut /> Log Out
           </li>
         </StyledModel>
       )}
@@ -157,7 +171,7 @@ const StyledModel = styled.div`
       color: #1c1c1c;
       padding: 0.2rem;
       margin: auto 1%;
-      fill: ${props=>props.textColor};
+      color: ${props => props.textColor};
     }
     &:hover {
       background: #0079d3;
