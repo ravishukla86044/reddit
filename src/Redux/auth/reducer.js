@@ -9,7 +9,8 @@ const initState = {
     user: user || "",
     token: token || "",
     isLoading: false,
-    isError: false
+    isError: false,
+    errMsg:""
 }
 export const authReducer = (state = initState, { type, payload }) => {
     switch (type) {
@@ -29,7 +30,8 @@ export const authReducer = (state = initState, { type, payload }) => {
                 user: payload.user,
                 token: payload.token,
                 isLoading: false,
-                isError: false
+                isError: false,
+                errMsg:""
             }
         }
         case LOGIN_FAILURE: {
@@ -38,7 +40,8 @@ export const authReducer = (state = initState, { type, payload }) => {
                 isAuth: false,
                 token: "",
                 isLoading: false,
-                isError: true
+                isError: true,
+                errMsg:payload.message
             }
         }
         case REGISTER_REQUEST: {
@@ -57,7 +60,8 @@ export const authReducer = (state = initState, { type, payload }) => {
                 user: payload.user,
                 token: payload.token,
                 isLoading: false,
-                isError: false
+                isError: false,
+                errMsg:""
             }
         }
         case REGISTER_FAILURE: {
@@ -66,7 +70,8 @@ export const authReducer = (state = initState, { type, payload }) => {
                 isAuth: false,
                 token: "",
                 isLoading: false,
-                isError: true
+                isError: true,
+                errMsg:payload.message
             }
         }
         case UPDATE_PROFILE: {

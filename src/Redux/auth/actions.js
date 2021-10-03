@@ -38,7 +38,7 @@ const loginUser=(payload)=>(dispatch)=>{
         })
         .catch((err) => {
             console.log('err:', err.response.data)
-            const failureAction = loginFailure(err);
+            const failureAction = loginFailure(err.response.data);
             dispatch(failureAction);
         });
 }
@@ -72,7 +72,8 @@ const registerUser = (payload) => (dispatch) => {
             dispatch(successAction);
         })
         .catch((err) => {
-            const failureAction = registerFailure(err);
+            console.log(err.response.data)
+            const failureAction = registerFailure(err.response.data);
             dispatch(failureAction);
         });
 }
