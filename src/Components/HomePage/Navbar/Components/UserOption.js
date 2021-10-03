@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 import CommunityModal from "./CommunityModal";
 const UserOption = () => {
   // States
+  const { isLight } = useSelector((state) => state.color);
   const [userClicked, setUserClicked] = useState(false);
   const [modalDisplay, setModalDisplay] = useState(false);
   const [nightMode, setNightMode] = useState(false);
@@ -68,7 +69,7 @@ const UserOption = () => {
         ></path>
       </svg>
       {userClicked && (
-        <StyledModel onClick={bubbleHandler}>
+        <StyledModel color={isLight?"#FFF":"#1A1A1B"} textColor={isLight?"#1A1A1B":"#D7DADC"} onClick={bubbleHandler}>
           <p>VIEW OPTIONS</p>
           <li onClick={nightModeHandler}>
             <Moon /> Night Mode {nightMode ? <ToggleOffIcon /> : <ToggleOnIcon />}
@@ -134,11 +135,12 @@ const StyledModel = styled.div`
   z-index: 2;
   right: 0;
   top: 45px;
-  background: #fff;
+  background: ${props=>props.color};
   list-style: none;
   width: 180px;
   padding: 0.7rem;
   border-radius: 0 0 0 1rem;
+  color: ${props=>props.textColor};
   p {
     font-size: 70%;
     color: #878a8c;
@@ -155,6 +157,7 @@ const StyledModel = styled.div`
       color: #1c1c1c;
       padding: 0.2rem;
       margin: auto 1%;
+      fill: ${props=>props.textColor};
     }
     &:hover {
       background: #0079d3;
