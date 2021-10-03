@@ -9,6 +9,7 @@ import { useHistory, useParams } from "react-router-dom";
 import axios from "axios";
 import Spinner from "react-spinkit";
 import { useState, useEffect } from "react";
+import CommentBox from "./CommentBox";
 
 function CommentsPage() {
   const { isLight } = useSelector((state) => state.color);
@@ -23,7 +24,7 @@ function CommentsPage() {
 
   useEffect(() => {
     getPost();
-  }, []);
+  }, [comment]);
 
   console.log(data);
 
@@ -155,9 +156,11 @@ function CommentsPage() {
           </div>
         </div>
       </div>
+     
       <div>
         <div className="feedDiv">
           <FeedItem comments={true} data={data} />
+          <CommentBox />
           {comment.map((a) => (
             <CommentsItem data={a} key={a._id} />
           ))}
@@ -166,6 +169,7 @@ function CommentsPage() {
           <div className="fake"></div>
         </div>
       </div>
+      
     </StyledDiv>
   );
 }
