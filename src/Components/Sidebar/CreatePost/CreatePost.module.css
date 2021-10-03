@@ -1,19 +1,19 @@
 .createpostContainer {
   background-color: "#fff";
   width: 22vw;
-  /* padding: 10px; */
   margin: 20px auto;
-
-  box-sizing: border-box;
   border-radius: 5px;
+  box-sizing: border-box;
 }
 .imageContainer {
   background-image: url("https://www.redditstatic.com/desktop2x/img/id-cards/home-banner@2x.png");
   padding-top: 40px;
+  border-radius: 5px;
   width: 100%;
 }
 .CreatePostPara {
   padding: 0 20px;
+  border-radius: 5px;
 }
 .CreatePostPara p {
   margin-bottom: 10px;
@@ -39,7 +39,7 @@
   font-weight: 800;
 }
 .buttonContainer {
-  width: 90%;
+  width: 100%;
   padding: 0 20px;
   text-align: center;
 }
@@ -50,6 +50,7 @@
 }
 .createPostBgWhite {
   background-color: #fff;
+  border-radius: 0 0 5px  5px;
 }
 .createPostImageLeftAlign {
   padding: 0 10px;
