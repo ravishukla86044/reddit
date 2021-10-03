@@ -12,7 +12,7 @@ function AllChatMember({ data, currentUser }) {
   }, []);
 
   async function getUser(friendsId) {
-    const res = await axios.get(`http://localhost:3001/users/${friendsId}`);
+    const res = await axios.get(`https://reddit-new.herokuapp.com/users/${friendsId}`);
     setUser(res.data.user);
   }
 
