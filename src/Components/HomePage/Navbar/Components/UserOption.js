@@ -15,6 +15,7 @@ import { ImPower } from 'react-icons/im';
 import { GiTalk } from 'react-icons/gi';
 import { IoIosLogOut } from 'react-icons/io';
 import { IoMoonOutline } from 'react-icons/io5';
+import { useHistory } from "react-router";
 
 
 const UserOption = () => {
@@ -24,6 +25,7 @@ const UserOption = () => {
   const [modalDisplay, setModalDisplay] = useState(false);
   const [nightMode, setNightMode] = useState(false);
   const user = useSelector(state => state.auth.user);
+  const history = useHistory();
 
   //theme
   const dispatch = useDispatch();
@@ -90,8 +92,8 @@ const UserOption = () => {
           <li>
             <GiTwoCoins /> Coins
           </li>
-          <li>
-            <CgProfile /> Profile
+          <li onClick={() => { history.push(`/user/${user._id}`); setUserClicked(false);}} >
+            <CgProfile/> Profile
           </li>
           <li onClick={handleOpen}>
             <HiViewGridAdd /> Create Community
