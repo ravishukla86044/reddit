@@ -72,7 +72,7 @@ const StyleLogin = styled.div`
   }
   & > svg {
     font-size: 140%;
-    color: #1a1a1b;
+    color: #757575;
     cursor: pointer;
   }
   & > span {
@@ -82,9 +82,11 @@ const StyleLogin = styled.div`
     border: solid 1px #ddbd37;
     border-radius: 20px;
     padding: 4px;
+    color:#757575;
     & > svg {
       margin-right: 4px;
       font-size: 20px;
+      color:#757575
     }
   }
 `;
