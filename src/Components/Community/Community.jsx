@@ -35,7 +35,7 @@ function Community() {
     </AppLoading>
   ) : (
     <>
-      <CommunityHeader data={data} />
+      <CommunityHeader communityId={communityId} />
       <StyledDiv isLight={isLight}>
         <div className="feedDiv">
           <Feed community={true} data={data} />
