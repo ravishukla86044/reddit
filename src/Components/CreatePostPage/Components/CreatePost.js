@@ -225,19 +225,26 @@ const StyledCreatePost = styled.div`
       position: absolute;
       top: 40px;
       left: 0;
-      background: #edf7ff;
+      background: #fff;
       width: 100%;
-      height: 120px;
+      height: 160px;
       overflow-y: scroll;
+      z-index: 50;
+      border-radius:8px;
       padding: 1rem;
       & > p {
         color: #ccc;
       }
       & > div {
-        padding: 0.4rem 0;
+        padding: 0.4rem;
         display: flex;
+        border-radius: 3px;
         align-items: center;
         color: #333;
+        &:hover{
+          background-color: #0079D3;
+          color: white;
+        }
         & > svg {
           margin-right: 0.4rem;
           color: #cccc;
