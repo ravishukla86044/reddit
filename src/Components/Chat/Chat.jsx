@@ -265,6 +265,12 @@ function Chat({ setChat }) {
                 label="Message"
                 variant="outlined"
                 value={newMessage}
+                onKeyUp={(e) => {
+                  if (e.keyCode === 13 && newMessage !== "") {
+                    handleSendMessage();
+                    console.log(e.keyCode);
+                  }
+                }}
                 onChange={(e) => {
                   setNewMessage(e.target.value);
                 }}
@@ -356,23 +362,30 @@ const ChatDiv = styled.div`
     .leftHeader .hidden {
       position: absolute;
       top: 26px;
-      border: 1px solid black;
+      border: 1px solid ${(props) => (props.isLight ? "#ccc" : "#343536")};
       border-radius: 4px;
       padding: 5px;
       font-size: 14px;
       font-weight: 400;
       z-index: 70;
-      background: #ffffff;
+      background-color: ${(props) => (props.isLight ? "#FFFFFF" : "#29292A")};
     }
     .hiddenUser {
-      border-bottom: 1px solid #e7dbdb;
+      border-bottom: 1px solid ${(props) => (props.isLight ? " #edeff1" : "#5e6368")};
       margin: 5px 0px;
       cursor: pointer;
+    }
+    .hiddenUser:hover {
+      background: ${(props) =>
+        props.isLight ? "rgba(82 75 75 / 10%)" : "rgba(255 255 255 / 10%)"};
     }
     .allChatrooms {
       box-sizing: border-box;
       overflow: auto;
       overflow-x: hidden;
+      ::-webkit-scrollbar {
+        width: 7px;
+      }
     }
     .join {
       display: flex;
@@ -479,9 +492,13 @@ const ChatDiv = styled.div`
       box-sizing: border-box;
       overflow: auto;
       overflow-x: hidden;
+      ::-webkit-scrollbar {
+        width: 7px;
+      }
     }
     .nochat {
       text-align: center;
+      color: ${(props) => (props.isLight ? " #1c1c1c" : "#d7dadc")};
       align-self: center;
       margin-top: 40%;
       opacity: 0.4;
