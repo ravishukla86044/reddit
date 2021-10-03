@@ -72,6 +72,7 @@ const registerUser = (payload) => (dispatch) => {
             dispatch(successAction);
         })
         .catch((err) => {
+            // console.log("tyyyyyy", err.response.data.message)
             const failureAction = registerFailure(err);
             dispatch(failureAction);
         });

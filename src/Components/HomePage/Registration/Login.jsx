@@ -41,7 +41,7 @@ const Login = () => {
         <div>
           <TextField
             id="filled-search"
-            label="USERNAME"
+            label="EMAIL"
             type="search"
             variant="filled"
             name="username"
