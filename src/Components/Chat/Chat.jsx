@@ -33,9 +33,9 @@ function Chat({ setChat }) {
   const [userSocketId, setUsersocketId] = useState();
 
   useEffect(() => {
-    socket.current = io("http://localhost:3001");
+    socket.current = io("https://reddit-new.herokuapp.com");
     socket.current.on("welcome", (data) => {
-      console.log(data);
+      //console.log(data);
     });
     socket.current.emit("addedUser", user._id);
 
@@ -48,7 +48,7 @@ function Chat({ setChat }) {
     });
 
     socket.current.on("getUsers", (users) => {
-      console.log("users", users);
+      //console.log("users", users);
       setUsersocketId(users);
     });
   }, [user]);
@@ -57,7 +57,7 @@ function Chat({ setChat }) {
     arrivedM &&
       currentChat?.members.includes(arrivedM.senderId) &&
       setMessages((pre) => [...pre, arrivedM]);
-    console.log(currentChat, "currChat");
+    //console.log(currentChat, "currChat");
   }, [arrivedM]);
 
   useEffect(() => {
@@ -66,14 +66,14 @@ function Chat({ setChat }) {
   }, []);
 
   async function getConversation() {
-    let res = await axios.get(`http://localhost:3001/chatroom/${user._id}`);
+    let res = await axios.get(`https://reddit-new.herokuapp.com/chatroom/${user._id}`);
     setChatroom(res.data.chatroom);
     //console.log(res.data.chatroom, "chatroom");
   }
   async function getMsg() {
     try {
-      const res = await axios.get(`http://localhost:3001/msg/${currentChat._id}`);
-      console.log(res, "msg");
+      const res = await axios.get(`https://reddit-new.herokuapp.com/msg/${currentChat._id}`);
+      //console.log(res, "msg");
       setMessages(res.data.allMsg);
     } catch (e) {
       console.log(e);
@@ -95,7 +95,7 @@ function Chat({ setChat }) {
     };
 
     const receiverId = currentChat.members.find((mem) => mem._id !== user._id);
-    console.log("receiverId", receiverId);
+    //console.log("receiverId", receiverId);
     socket.current.emit("sendMessage", {
       senderId: user._id,
       receiverId,
@@ -104,8 +104,8 @@ function Chat({ setChat }) {
     });
 
     try {
-      const res = await axios.post(`http://localhost:3001/msg`, payload);
-      console.log(res.data.msg);
+      const res = await axios.post(`https://reddit-new.herokuapp.com/msg`, payload);
+      //console.log(res.data.msg);
       setMessages([...messages, res.data.msg]);
 
       setNewMessage("");
@@ -120,7 +120,7 @@ function Chat({ setChat }) {
 
   async function getUser(data) {
     const friendsId = data.members.find((a) => a !== user._id);
-    const res = await axios.get(`http://localhost:3001/users/${friendsId}`);
+    const res = await axios.get(`https://reddit-new.herokuapp.com/users/${friendsId}`);
     setFriend(res.data.user);
   }
 
@@ -141,7 +141,7 @@ function Chat({ setChat }) {
   };
 
   const handelAddchatroom = async () => {
-    console.log(chatroom);
+    //console.log(chatroom);
     for (var i = 0; i < chatroom.length; i++) {
       let mem = chatroom[i].members;
       if (mem.includes(user._id) && mem.includes(friendIdRef.current)) {
