@@ -30,13 +30,11 @@
 /* background: url(./trndgImg/trndgImg1.jpg) center center / cover no-repeat rgb(26, 26, 27); */
 }
 .card:nth-child(1){
-    background: linear-gradient( rgba(26,26,27,0.2), rgba(26,26,27,0.3), rgba(26,26,27,0.4), rgba(26,26,27,0.6), rgba(26,26,27,0.8), #1A1A1B );
     background: url(./trndgImg/trndgImg1.jpg) center center / cover no-repeat rgb(26, 26, 27);
 }
 .card:nth-child(2){
-    background: linear-gradient( rgba(255,255,255,0.2), rgba(255,255,255,0.3), rgba(255,255,255,0.4), rgba(255,255,255,0.6), rgba(255,255,255,0.8), #FFFFFF );
-    background: url(./trndgImg/trndgImg2.jpg) center center / cover no-repeat rgb(255, 255, 255);
     
+    background: url(./trndgImg/trndgImg2.jpg) center center / cover no-repeat rgb(255, 255, 255);
 }
 .card:nth-child(3){
     background: url(./trndgImg/trndgImg3.jpg) center center / cover no-repeat rgb(26, 26, 27);
@@ -80,6 +78,7 @@
     flex: 1;
     color: white;
     box-sizing: content-box;
+    background: linear-gradient( rgb(21 18 18 / 76%), rgb(66 58 58 / 63%), rgb(80 66 66 / 42%), rgb(67 54 54 / 61%), rgb(22 20 20 / 71%), #060404 );
 }
 .card_body > h2{
     font-size: 18px;

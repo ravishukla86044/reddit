@@ -59,10 +59,14 @@ const CommentBox = () => {
           `https://reddit-new.herokuapp.com/comments/${postId}`
         );
         console.log(comm.data.comment);
+        setCmntBody("")
       })
       .catch((err) => {
         console.log(err.response);
+        setCmntBody("")
       });
+
+     
   }
 
   return (
