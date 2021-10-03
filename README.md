@@ -1,70 +1,114 @@
-# Getting Started with Create React App
+# Reddit - Website Clone - Project Work
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+reddit.com : Reddit is a social media platform. It is the home to thousands of communities, endless conversation, and authentic human connection.
 
-## Available Scripts
+<img src="./src/PreviewImageGallery/reddit-title.jpg" width="400"/>
 
-In the project directory, you can run:
+**Our team was given a task to clone the reddit.com Website.**
 
-### `npm start`
+### Landing Page :
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The landing page of reddit website displays various breaking news, sports, TV fan theories, or a never-ending stream of the internet's cutest animals, there's a community on Reddit for you.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+In top section there is a Navbar which displays varius sections of website e.g. chat application , switching dark-light theme etc.
+posts and comments related to post are included in the page.
+At right side section there is a sidebar, both Header & Footer are same across all the pages.
+<br/>
+<img src="./src/PreviewImageGallery/homepage.png" width="500"/>
+<br/>
 
-### `npm test`
+### Login Page:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Existing user can Login and new user's can SignUp themselves on page.
+From NavigationBar of Landing Page.
+<img src="./src/PreviewImageGallery/login.png" width="500"/>
 
-### `npm run build`
+After Login user direcly redirect to home page.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Posts and Comments page :
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Below image shows the steps to post something.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+  <img src="./src/PreviewImageGallery/post.png"  width="400"/> 
+  <br/>
+  Below image shows steps to comment something.
+  <img src="./src/PreviewImageGallery/comments.png" width="400">
 
-### `npm run eject`
+There are some Key Features which are added in website clone such as:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Special features:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- _Chat Application_
+- _Dark & Light Theme_
+- _Communities and Users_
+- _Easy navigation by links_
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+<p>
+<img src="./src/PreviewImageGallery/chat.png" width="400"/>
+<img src="./src/PreviewImageGallery/darkHomepage.png" width="400"/>
+<img src="./src/PreviewImageGallery/community.png" width="400">
+<img src="./src/PreviewImageGallery/user.png" width="400"/>
+</p>
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## NPM Packages used
 
-## Learn More
+- ### react [![react](https://camo.githubusercontent.com/475b49b04214dfa67c1ec8a2837888ae63003feb7b71fd45be30ff360148ad87/68747470733a2f2f696d672e736869656c64732e696f2f6e706d2f762f72656163742e7376673f7374796c653d666c6174)](https://github.com/facebook/react)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- ### react-router-dom [![react-router-dom](https://camo.githubusercontent.com/475b49b04214dfa67c1ec8a2837888ae63003feb7b71fd45be30ff360148ad87/68747470733a2f2f696d672e736869656c64732e696f2f6e706d2f762f72656163742e7376673f7374796c653d666c6174)](https://github.com/ReactTraining/react-router/tree/master/packages/react-router-dom)
+- ### axios [![axios](https://camo.githubusercontent.com/1f22b6c297d1cb0e3aa68b2e6fed42da8b002bbefca8d63e99e0b790da8cce9b/68747470733a2f2f696d672e736869656c64732e696f2f6e706d2f762f6178696f732e7376673f7374796c653d666c61742d737175617265)](https://github.com/axios/axios)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- ### create-react-app [![create-react-app](https://camo.githubusercontent.com/475b49b04214dfa67c1ec8a2837888ae63003feb7b71fd45be30ff360148ad87/68747470733a2f2f696d672e736869656c64732e696f2f6e706d2f762f72656163742e7376673f7374796c653d666c6174)](https://github.com/facebook/create-react-app)
+- ### styled-components [![styled-components](https://camo.githubusercontent.com/5ba6643341d94abdad0bc89edf930b9223664ffd462c61e4f32ec06cdbf50eb9/68747470733a2f2f636f6465636f762e696f2f67682f7374796c65642d636f6d706f6e656e74732f7374796c65642d636f6d706f6e656e74732f636f7665726167652e7376673f6272616e63683d6d61696e)](https://github.com/styled-components/styled-components)
+- ### Redux [![Redux](https://camo.githubusercontent.com/2022a06df85880c1a2921a5828dd512e60926cffaad30a193ff6e9a44496a685/68747470733a2f2f696d672e736869656c64732e696f2f6e706d2f762f72656475782e7376673f7374796c653d666c61742d737175617265)](https://www.npmjs.com/package/redux)
 
-### Code Splitting
+- ### react-icons [![react-icons](https://camo.githubusercontent.com/ad17280cf203ea59c61a273f2e45cc8ac30c65c379163cb26c2ff5a26410e63a/68747470733a2f2f696d672e736869656c64732e696f2f6e706d2f762f72656163742d69636f6e732e7376673f7374796c653d666c61742d737175617265)](https://www.npmjs.com/package/react-icons)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- ### socket.io-client [![socket.io-client](https://camo.githubusercontent.com/539b21bfeb9db41b2c0c38f6c3abe43b9fc8cf549961e11c996df7b13a92f7cd/68747470733a2f2f62616467652e667572792e696f2f6a732f736f636b65742e696f2d636c69656e742e737667)](https://www.npmjs.com/package/socket.io-client)
 
-### Analyzing the Bundle Size
+- ### cors [![cors](https://img.shields.io/npm/v/cors.svg)](https://www.npmjs.com/package/cors)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- ### MongoDB [![MongoDB]](https://github.com/mongodb/mongo)
+- ### Node.js [![Node.js]](https://github.com/nodejs/node)
 
-### Making a Progressive Web App
+## Technologies Used
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+<p float="left">
+  <img src="./src/PreviewImageGallery/html.png" height="150"/>
+  <img src="./src/PreviewImageGallery/css.png"  height="150"/> 
+  <img src="./src/PreviewImageGallery/JavaScript.png"  height="150"/>
+  <img src="./src/PreviewImageGallery/React.png" height="150"/>
+  <img src="./src/PreviewImageGallery/Redux.png" height="150"/>
+  <img src="./src/PreviewImageGallery/mongodb.png" height="150"/>
+  <img src="./src/PreviewImageGallery/nodejs.png" height="150"/>
+</p>
 
-### Advanced Configuration
+## Installing and Running
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Executing the commands mentioned below one by one in your command line will help in making this React app .
+**Cloning**
 
-### Deployment
+```
+git clone https://github.com/ravishukla86044/reddit
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+```
 
-### `npm run build` fails to minify
+**To run the react app execute below command**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
+cd ./reddit
+npm install
+npm run start
+
+```
+
+## Features
+
+- Fullscreen mode
+- Partially responsive
+
+## Team Members and Contributors
+
+- [@Ravi Shukla](https://github.com/ravishukla86044/)
+- [@Shubham](https://github.com/vshubhams)
+- [@Gaurav Parmar](https://github.com/Gaurav6291)
+- [@Sudhir Kumar Samantaray](https://github.com/devSudhir)
