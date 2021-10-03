@@ -75,7 +75,7 @@ const StyledDiv = styled.div`
   .fake {
     width: 300px;
     height: 200px;
-    border: 1px solid black;
+
     box-sizing: border-box;
   }
 `;

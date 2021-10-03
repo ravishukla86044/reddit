@@ -8,6 +8,7 @@ import { BsThreeDots, BsLayoutThreeColumns } from "react-icons/bs";
 import { RiArrowDownSLine, RiLayoutRowLine } from "react-icons/ri";
 import { useState } from "react";
 import { CreatePost } from "./CreatePost";
+
 function Feed({ community = false, data, userPage = false }) {
   const { isLight } = useSelector((state) => state.color);
   const [open, setOpen] = useState(false);
