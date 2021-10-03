@@ -24,7 +24,7 @@ function CommentsPage() {
 
   useEffect(() => {
     getPost();
-  }, []);
+  }, [comment]);
 
   console.log(data);
 
@@ -156,18 +156,20 @@ function CommentsPage() {
           </div>
         </div>
       </div>
+     
       <div>
         <div className="feedDiv">
           <FeedItem comments={true} data={data} />
+          <CommentBox />
           {comment.map((a) => (
             <CommentsItem data={a} key={a._id} />
-          ))}
+          )).reverse()}
         </div>
         <div className="sideDiv">
           <div className="fake"></div>
         </div>
       </div>
-      {/* <CommentBox /> */}
+      
     </StyledDiv>
   );
 }
