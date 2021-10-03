@@ -12,7 +12,8 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
-  const errMsg = useSelector((state) => state.auth);
+  const errMsg = useSelector((state) => state.auth.errMsg);
+  
   console.log(errMsg);
   const handleEmail = (e) => {
     setEmail(e.target.value);
@@ -39,6 +40,7 @@ const SignUp = () => {
 
   return (
     <>
+     {errMsg!=="" ? <p style={{ color: "red", fontSize: "small", marginTop: "-10px" }}>{errMsg}</p> : <></>}
       <Box
         component="form"
         sx={{
@@ -71,7 +73,7 @@ const SignUp = () => {
           <TextField
             id="filled-search"
             label="PASSWORD"
-            type="search"
+            type="password"
             variant="filled"
             onChange={(e)=>{setPassword(e.target.value)}}
           />
