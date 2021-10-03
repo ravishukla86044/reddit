@@ -29,6 +29,7 @@ function Chat({ setChat }) {
   const [currentFriend, setFriend] = useState("");
   const [arrivedM, setArrivedM] = useState();
   const socket = useRef();
+  const [userSocketId, setUsersocketId] = useState();
 
   useEffect(() => {
     socket.current = io("http://localhost:3001");
@@ -46,7 +47,8 @@ function Chat({ setChat }) {
     });
 
     socket.current.on("getUsers", (users) => {
-      //console.log(users);
+      console.log("users", users);
+      setUsersocketId(users);
     });
   }, [user]);
 
