@@ -20,11 +20,11 @@ import { useSelector } from "react-redux";
 const StyledDiv = styled.div`
   background: ${(props) => (props.isLight ? "#dae0e6" : "rgb(3,3,3)")};
   color: ${(props) => (props.isLight ? " #1a1a1b;" : "#d7dadc")};
-  .btn {
-    background: ${(props) =>
-      props.isLight ? "rgb(132,132,132)" : "rgb(225,225,225)"};
+  textarea {
+    background-color: ${(props) =>
+      props.isLight ? "rgb(255,255,255)" : "rgb(26,26,27)"};
     color: ${(props) =>
-      props.isLight ? " rgb(183,183,183)" : "rgb(125,125,125)"};
+      props.isLight ? " rgb(26,26,27)" : "rgb(255,255,255)"};
       
   }
 `;

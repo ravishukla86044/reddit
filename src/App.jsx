@@ -21,6 +21,7 @@ function App() {
         <Route exact path="/">
         {/* <CommentBox /> */}
           <HomePage />
+          {/* <RegistrationModal /> */}
         </Route>
         <Route exact path="/r/:communityId">
           <Community />

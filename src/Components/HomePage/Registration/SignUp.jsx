@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import styles from './RegistrationModal.module.css';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { registerUser } from "../../../Redux/auth/actions";
+
 
 const SignUp = () => {
   const dispatch = useDispatch();
@@ -11,7 +12,9 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
-
+  const errMsg = useSelector((state) => state.auth.errMsg);
+  
+  console.log(errMsg);
   const handleEmail = (e) => {
     setEmail(e.target.value);
     if (email.length > 1) {
@@ -37,6 +40,7 @@ const SignUp = () => {
 
   return (
     <>
+     {errMsg!=="" ? <p style={{ color: "red", fontSize: "small", marginTop: "-10px" }}>{errMsg}</p> : <></>}
       <Box
         component="form"
         sx={{
@@ -69,7 +73,7 @@ const SignUp = () => {
           <TextField
             id="filled-search"
             label="PASSWORD"
-            type="search"
+            type="password"
             variant="filled"
             onChange={(e)=>{setPassword(e.target.value)}}
           />
