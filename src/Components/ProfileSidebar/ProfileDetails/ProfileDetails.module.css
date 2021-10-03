@@ -1,11 +1,6 @@
 .ProfileDetailsContainer {
   background-color: #fff;
-<<<<<<< HEAD
-  width: 22vw;
-  margin: 0 auto 20px;
-=======
   width: 300px;
->>>>>>> d8c851fe2cc97bb5aa97b3e123d8f39fd90feadc
   box-sizing: border-box;
   border-radius: 5px;
   margin-bottom: 20px;
@@ -15,28 +10,28 @@
   position: relative;
   height: 100px;
   border-radius: 5px 5px 0 0;
-  background-color: #33A8FF;
+  background-color: #33a8ff;
   margin-bottom: 50px;
 }
-.blueBackGround>div{
+.blueBackGround > div {
   position: absolute;
   top: 30px;
   left: 10px;
   height: 100px;
 }
-.blueBackGround>div>img{
+.blueBackGround > div > img {
   width: 90px;
   height: 100px;
   object-fit: cover;
   border-radius: 8px;
   border: solid 4px white;
 }
-.blueBackGround>div>p{
-font-size: 12px;
-font-weight: 600;
-text-align: center;
+.blueBackGround > div > p {
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
 }
-.createButtonContainer{
+.createButtonContainer {
   position: relative;
   overflow: hidden;
   display: inline-block;
@@ -58,7 +53,7 @@ text-align: center;
   cursor: pointer;
   background: linear-gradient(90deg, #ec0623, #ff8717);
 }
-.createAvatarButton input[type=file] {
+.createAvatarButton input[type="file"] {
   font-size: 30px;
   position: absolute;
   left: -60px;
