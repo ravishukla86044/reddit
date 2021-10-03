@@ -41,7 +41,7 @@ const Login = () => {
         <div>
           <TextField
             id="filled-search"
-            label="USERNAME"
+            label="EMAIL"
             type="search"
             variant="filled"
             name="username"
@@ -53,7 +53,7 @@ const Login = () => {
           <TextField
             id="filled-search"
             label="PASSWORD"
-            type="search"
+            type="password"
             variant="filled"
             onChange={(e) => setPassword(e.target.value)}
             onClick={handleLoginText}
