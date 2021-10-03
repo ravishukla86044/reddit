@@ -73,13 +73,13 @@ There are some Key Features which are added in website clone such as:
 ## Technologies Used
 
 <p float="left">
-  <img src="./src/PreviewImageGallery/html.png" height="150"/>
-  <img src="./src/PreviewImageGallery/css.png"  height="150"/> 
-  <img src="./src/PreviewImageGallery/JavaScript.png"  height="150"/>
-  <img src="./src/PreviewImageGallery/React.png" height="150"/>
-  <img src="./src/PreviewImageGallery/Redux.png" height="150"/>
-  <img src="./src/PreviewImageGallery/mongodb.png" height="150"/>
-  <img src="./src/PreviewImageGallery/nodejs.png" height="150"/>
+  <img src="./src/PreviewImageGallery/html.png" height="100"/>
+  <img src="./src/PreviewImageGallery/css.png"  height="100"/> 
+  <img src="./src/PreviewImageGallery/JavaScript.png"  height="100"/>
+  <img src="./src/PreviewImageGallery/React.png" height="100"/>
+  <img src="./src/PreviewImageGallery/Redux.png" height="100"/>
+  <img src="./src/PreviewImageGallery/mongodb.png" height="100"/>
+  <img src="./src/PreviewImageGallery/nodejs.png" height="100"/>
 </p>
 
 ## Installing and Running
