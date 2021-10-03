@@ -81,10 +81,12 @@
   color: #fff;
   padding: 10px;
   width: 100%;
+  cursor: pointer;
+  font-size: 14px;
   border-radius: 200px;
   border: none;
   margin-bottom: 10px;
-  font-weight: 800;
+  font-weight: 700;
 }
 .moreOptionContainer {
   padding: 0 20px;
