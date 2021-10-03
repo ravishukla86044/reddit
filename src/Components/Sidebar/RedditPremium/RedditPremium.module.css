@@ -5,6 +5,7 @@
   background-color: white;
   box-sizing: border-box;
   border-radius: 5px;
+  border: 1px solid rgb(204, 204, 204);
 }
 .flexPremium {
   width: 90%;
