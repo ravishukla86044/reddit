@@ -16,27 +16,27 @@ const TrendingData = [
 
     },
     {
-        title: 'The Book of Boba Fett1',
-        subtitle: 'First poster for Star Wars: The Book of Boba Fett',
+        title: "Women's March",
+        subtitle: 'Sign from the Women’s March in Texas',
         bgImg: img2,
         logo: logo2,
-        footerLine: 'r/StarWars and more'
+        footerLine: 'r/pics and more'
 
     },
     {
-        title: 'The Book of Boba Fett2',
-        subtitle: 'First poster for Star Wars: The Book of Boba Fett',
+        title: 'Climate ',
+        subtitle: 'Joe Manchin, who is holding up crucial climate change initiatives in Bidens bill',
         bgImg: img3,
         logo: logo4,
-        footerLine: 'r/StarWars and more'
+        footerLine: 'r/politics and more'
 
     },
     {
-        title: 'The Book of Boba Fett3',
-        subtitle: 'First poster for Star Wars: The Book of Boba Fett',
+        title: 'NBA',
+        subtitle: '[NBADraft] Projected 1st overall pick for 2022 draft is Gonzaga freshman 7-footer forward Chet Holmgren.',
         bgImg: img4,
         logo: logo4,
-        footerLine: 'r/StarWars and more'
+        footerLine: 'r/nba and more'
 
     },
 ]
