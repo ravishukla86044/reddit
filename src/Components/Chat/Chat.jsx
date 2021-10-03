@@ -29,6 +29,7 @@ function Chat({ setChat }) {
   const [currentFriend, setFriend] = useState("");
   const [arrivedM, setArrivedM] = useState();
   const socket = useRef();
+  const [userSocketId, setUsersocketId] = useState();
 
   useEffect(() => {
     socket.current = io("http://localhost:3001");
@@ -46,7 +47,8 @@ function Chat({ setChat }) {
     });
 
     socket.current.on("getUsers", (users) => {
-      //console.log(users);
+      console.log("users", users);
+      setUsersocketId(users);
     });
   }, [user]);
 
@@ -155,7 +157,8 @@ function Chat({ setChat }) {
     };
     try {
       let data = await axios.post("https://reddit-new.herokuapp.com/chatroom", body);
-      console.log(data);
+      getConversation();
+      //console.log(data);
     } catch (e) {
       console.log(e);
     }
@@ -198,7 +201,7 @@ function Chat({ setChat }) {
               </div>
             </div>
           </div>
-          <div>
+          <div className="allChatrooms">
             {chatroom.map((a) => (
               <div
                 onClick={() => {
@@ -351,6 +354,10 @@ const ChatDiv = styled.div`
       border-bottom: 1px solid #e7dbdb;
       margin: 5px 0px;
       cursor: pointer;
+    }
+    .allChatrooms {
+      box-sizing: border-box;
+      overflow: scroll;
     }
     .join {
       display: flex;

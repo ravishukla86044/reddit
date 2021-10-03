@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 
 const StyledDiv = styled.div`
  background: ${(props) => (props.isLight ? "#dae0e6" : "rgb(3,3,3)")};
+ color: ${(props) => (props.isLight ? " #1a1a1b;" : "#d7dadc")};
  `
 
 const TrendingCards = () => {
