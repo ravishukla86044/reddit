@@ -97,7 +97,7 @@ const UserOption = () => {
             <li onClick={() => { history.push(`/user/${user._id}`); setUserClicked(false); }} >
               <CgProfile /> Profile
             </li>
-            <li onClick={handleOpen}>
+            <li onClick={() => { handleOpen(); setUserClicked(false);}}>
               <HiViewGridAdd /> Create Community
             </li>
             <li>
