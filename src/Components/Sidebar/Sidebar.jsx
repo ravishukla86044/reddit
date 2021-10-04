@@ -11,7 +11,7 @@ export const Sidebar = () => {
       <TopCommunity />
       <RedditPremium />
       <CreatePost />
-      <RecentPost />
+      {/* <RecentPost /> */}
       {/* <Categories /> */}
       <Footer />
     </>
