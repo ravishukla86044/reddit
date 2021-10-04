@@ -18,6 +18,7 @@ const CommunityModal = ({ setModalDisplay, modalDisplay }) => {
 
   // handler
   const modalDisableHandler = (e) => {
+    e.stopPropagation();
     if (e.target.id === 'communityModal') {
       setModalDisplay(false)
 
@@ -47,10 +48,12 @@ const CommunityModal = ({ setModalDisplay, modalDisplay }) => {
       .then((res) => {
         console.log(res.data);
         setIsLoading(false);
+        setModalDisplay(false);
         history.push(`r/${res.data.community._id}`);
       })
       .catch((err) => {
         console.log(err.response);
+        setIsLoading(false);
       })
     console.log(nameInput, user._id)
   }
