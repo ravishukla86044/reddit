@@ -44,6 +44,9 @@ export const TopCommunity = () => {
           }}
           key={el._id}
           className={style.community}
+          style={{
+            borderBottom: `thin solid ${isLight ? "rgba(200, 203, 205, 0.3)" : "#343536"}`,
+          }}
         >
           <span>
             <div
