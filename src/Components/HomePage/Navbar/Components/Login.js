@@ -21,7 +21,7 @@ const Login = ({ setChat }) => {
           <BiVideoRecording />
           <AiOutlineMessage onClick={() => setChat((pre) => !pre)} />
           <IoNotificationsOutline />
-          <AiOutlinePlus />
+          <AiOutlinePlus onClick={()=>{history.push("/create-post")}} />
           <span>
             <GiTwoCoins />
             Get Coins
