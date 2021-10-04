@@ -10,7 +10,7 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-
+import CommunityModal from "./CommunityModal"
 function FeedItem({ community = false, comments, type = 1, data }) {
   const { isLight } = useSelector((state) => state.color);
   const { user } = useSelector((state) => state.auth);
@@ -18,6 +18,8 @@ function FeedItem({ community = false, comments, type = 1, data }) {
   const [vote, setVote] = useState(0);
   const [isVoted, setIsVoted] = useState(0);
   const history = useHistory();
+  const [modalDisplay, setModalDisplay] = useState(false);
+  console.log('modalDisplay:', modalDisplay)
 
   // console.log("data community", data);
   // extractin time past
@@ -120,12 +122,12 @@ function FeedItem({ community = false, comments, type = 1, data }) {
   }
 
   const handleRouteCommunity = (e) => {
-    e.stopPropagation();
+    // e.stopPropagation();
     history.push(`/r/${data.communityId._id}`);
   };
   //console.log("data", data);
   const handleRouteUser = (e) => {
-    e.stopPropagation();
+    // e.stopPropagation();
     history.push(`/user/${data.userId._id}`);
   };
 
@@ -134,10 +136,11 @@ function FeedItem({ community = false, comments, type = 1, data }) {
   };
 
   return type === 1 ? (
-    <Con isLight={isLight}>
+    <Con onClick={() => { setModalDisplay(true);console.log("hellow")}} isLight={isLight}>
       <Likes isLight={isLight} isVoted={isVoted}>
         <ImArrowUp
-          onClick={() => {
+          onClick={(e) => {
+            e.stopPropagation();
             if (!user._id) {
               alert("Please login first");
               return;
@@ -145,9 +148,10 @@ function FeedItem({ community = false, comments, type = 1, data }) {
             voteUp(data._id, user?._id);
           }}
         />
-        <div>{vote || 0}</div>
+        <div >{vote || 0}</div>
         <ImArrowDown
-          onClick={() => {
+          onClick={(e) => {
+            e.stopPropagation();
             if (!user._id) {
               alert("Please login first");
               return;
@@ -155,6 +159,9 @@ function FeedItem({ community = false, comments, type = 1, data }) {
             voteDown(data._id, user?._id);
           }}
         />
+          {/* <ImArrowDown
+            onClick={() => {setModalDisplay(true)}}
+          /> */}
       </Likes>
       <Box isLight={isLight}>
         <div className="upper">
@@ -233,6 +240,7 @@ function FeedItem({ community = false, comments, type = 1, data }) {
           </div>
         </div>
       </Box>
+      <CommunityModal data={data} modalDisplay={modalDisplay} setModalDisplay={setModalDisplay} />
     </Con>
   ) : type === 2 ? (
     <Classic isLight={isLight} isVoted={isVoted}>
