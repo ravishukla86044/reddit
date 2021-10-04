@@ -24,7 +24,7 @@
   color: #fff;
 }
 .community {
-  border-bottom: 1px solid rgb(200, 203, 205, 0.5);
+  border-bottom: 1px solid rgb(200, 203, 205, 0.3);
   padding: 10px 30px;
   cursor: pointer;
 }
@@ -55,21 +55,25 @@
   width: 32px;
 }
 .primaryButtonContainer {
-  width: 80%;
+  width: 92%;
   margin: auto;
 }
 .primaryButton {
   background-color: #0079d3;
   color: #fff;
-  padding: 10px;
+  padding: 8px 10px;
   width: 100%;
   border-radius: 20px;
   border: none;
   margin: 20px 0;
-  font-weight: 800;
+
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: unset;
+  line-height: 17px;
 }
 .tags {
-  width: 80%;
+  width: 88%;
   margin: auto;
   display: flex;
   justify-content: space-around;
@@ -85,5 +89,11 @@
 }
 .backgroundWhite {
   background-color: #fff;
-  border: 1px solid rgb(204, 204, 204);
+}
+
+.avatar {
+  width: 33px !important;
+  height: 33px !important;
+  margin: 0px 8px !important;
+  font-size: 18px !important;
 }

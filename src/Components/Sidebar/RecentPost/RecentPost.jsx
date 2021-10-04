@@ -7,21 +7,18 @@ export const RecentPost = () => {
   const handleClearContainer = () => {
     setDisplayRecentPostContainer(false);
   };
-  const [displayRecentPostContainer, setDisplayRecentPostContainer] =
-    useState(true);
+  const [displayRecentPostContainer, setDisplayRecentPostContainer] = useState(true);
   return displayRecentPostContainer ? (
     <div
       className={style.RecentPostContainer}
-      style={
-        isLight
-          ? { backgroundColor: "#fff", color: "#1a1a1b" }
-          : { backgroundColor: "#1a1a1b", color: "#c8cbcd" }
-      }
+      style={{
+        backgroundColor: isLight ? "#fff" : "#1a1a1b",
+        border: `1px solid ${isLight ? "#ccc" : "#343536"}`,
+        color: isLight ? "#1c1c1c" : "#d7dadc",
+      }}
     >
       <div>
-        <p className={`${style.textAlignLeft} ${style.recentpostHeading}`}>
-          RECENT POSTS
-        </p>
+        <p className={`${style.textAlignLeft} ${style.recentpostHeading}`}>RECENT POSTS</p>
       </div>
       <div className={style.displayFlexRecentPostContent}>
         <div className={style.imageContainer}>
@@ -33,8 +30,7 @@ export const RecentPost = () => {
         </div>
         <div>
           <p className={style.recentPostTitle}>
-            I've made the Reddit navbar in REACT. Are you interested to see a
-            tutorial on that?
+            I've made the Reddit navbar in REACT. Are you interested to see a tutorial on that?
           </p>
           <div className={style.recentSubTitle}>
             <span>•96 points</span>
@@ -44,10 +40,7 @@ export const RecentPost = () => {
         </div>
       </div>
       <div className={style.rightButtonBox}>
-        <button
-          className={style.buttonAlignRight}
-          onClick={handleClearContainer}
-        >
+        <button className={style.buttonAlignRight} onClick={handleClearContainer}>
           clear
         </button>
       </div>

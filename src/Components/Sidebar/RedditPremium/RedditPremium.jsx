@@ -6,11 +6,11 @@ export const RedditPremium = () => {
   return (
     <div
       className={style.premiumBox}
-      style={
-        isLight
-          ? { backgroundColor: "#fff", color: "#1a1a1b" }
-          : { backgroundColor: "#1a1a1b", color: "#c8cbcd" }
-      }
+      style={{
+        backgroundColor: isLight ? "#fff" : "#1a1a1b",
+        border: `1px solid ${isLight ? "#ccc" : "#343536"}`,
+        color: isLight ? "#1c1c1c" : "#d7dadc",
+      }}
     >
       <div className={style.flexPremium}>
         <div>

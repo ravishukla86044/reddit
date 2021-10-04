@@ -29,7 +29,10 @@ export const TopCommunity = () => {
   return (
     <div
       className={style.backgroundWhite}
-      style={isLight ? { backgroundColor: "#fff" } : { backgroundColor: "#1a1a1b" }}
+      style={{
+        backgroundColor: isLight ? "#fff" : "#1a1a1b",
+        border: `1px solid ${isLight ? "#ccc" : "#343536"}`,
+      }}
     >
       <div className={style.TopComunityHeading}>
         <h4>Top Aww Communities</h4>
@@ -50,7 +53,10 @@ export const TopCommunity = () => {
               <span className={style.indexing}>{index + 1}</span>
               <IoIosArrowUp style={{ color: "#46D160" }} />
               <div>
-                <Avatar style={{ background: `${color[index]}`, margin: "0 8px" }}>
+                <Avatar
+                  className={style.avatar}
+                  style={{ background: `${color[index]}`, margin: "0 8px" }}
+                >
                   {el.name.charAt(0)}
                 </Avatar>
               </div>

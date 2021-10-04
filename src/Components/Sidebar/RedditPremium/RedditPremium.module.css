@@ -22,24 +22,38 @@
 .premiumParaBox {
   margin-left: 10px;
 }
-.premiumParaBox p {
+
+.premiumParaBox p:nth-child(1) {
   font-size: 12px;
   font-weight: 500;
-  line-height: 16px;
+
   line-height: 12px;
   margin-top: 2px;
   margin-bottom: 4px;
 }
+.premiumParaBox p:nth-child(2) {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+
+  margin-top: 2px;
+  margin-bottom: 4px;
+}
 .primaryOrangeButtonContainer {
-  width: 85%;
-  margin: 7px auto;
+  width: 99%;
+  margin: auto;
+  margin-top: 7px;
 }
 .primaryOrangeButton {
   background-color: #ff5414;
   color: #fff;
-  padding: 10px;
+  padding: 7px 10px;
   width: 100%;
   border-radius: 20px;
   border: none;
   font-weight: 800;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: unset;
+  line-height: 17px;
 }
