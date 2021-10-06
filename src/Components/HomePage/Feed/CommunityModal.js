@@ -66,7 +66,6 @@ const StyledModal = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  min-height: 100vh;
   background: rgba(0, 0, 0, 0.3);
   padding: 3rem;
   display: flex;
@@ -78,7 +77,7 @@ const StyledModal = styled.div`
 const StyledModalContent = styled.div`
   position: relative;
   width: 360px;
-  height: 535px;
+  min-height: 300px;
   background: #fff;
   /* padding:1rem; */
   overflow: hidden;
