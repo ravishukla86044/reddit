@@ -1,6 +1,6 @@
 # Reddit - Website Clone - Project Work
 
-reddit.com : Reddit is a social media platform. It is the home to thousands of communities, endless conversation, and authentic human connection.
+reddit.com : Reddit is an American social media platform. It is the home to thousands of communities, endless conversation, and authentic human connection.
 
 <img src="./src/PreviewImageGallery/reddit-title.jpg" width="400"/>
 
@@ -25,15 +25,6 @@ From NavigationBar of Landing Page.
 
 After Login user direcly redirect to home page.
 
-### Posts and Comments page :
-
-Below image shows the steps to post something.
-
-  <img src="./src/PreviewImageGallery/post.png"  width="500"/> 
-  <br/>
-  Below image shows steps to comment something.
-  <img src="./src/PreviewImageGallery/comments.png" width="500">
-
 There are some Key Features which are added in website clone such as:
 
 ### Special features:
@@ -50,10 +41,14 @@ There are some Key Features which are added in website clone such as:
 <img src="./src/PreviewImageGallery/user.png" height="400"/>
 </p>
 
+## Team Members and Contributors
+
+- [@Ravi Shukla](https://github.com/ravishukla86044/)
+- [@Shubham](https://github.com/vshubhams)
+- [@Gaurav Parmar](https://github.com/Gaurav6291)
+- [@Sudhir Kumar Samantaray](https://github.com/devSudhir)
+
 ## NPM Packages used
-
-- ### react [![react](https://camo.githubusercontent.com/475b49b04214dfa67c1ec8a2837888ae63003feb7b71fd45be30ff360148ad87/68747470733a2f2f696d672e736869656c64732e696f2f6e706d2f762f72656163742e7376673f7374796c653d666c6174)](https://github.com/facebook/react)
-
 - ### react-router-dom [![react-router-dom](https://camo.githubusercontent.com/475b49b04214dfa67c1ec8a2837888ae63003feb7b71fd45be30ff360148ad87/68747470733a2f2f696d672e736869656c64732e696f2f6e706d2f762f72656163742e7376673f7374796c653d666c6174)](https://github.com/ReactTraining/react-router/tree/master/packages/react-router-dom)
 - ### axios [![axios](https://camo.githubusercontent.com/1f22b6c297d1cb0e3aa68b2e6fed42da8b002bbefca8d63e99e0b790da8cce9b/68747470733a2f2f696d672e736869656c64732e696f2f6e706d2f762f6178696f732e7376673f7374796c653d666c61742d737175617265)](https://github.com/axios/axios)
 
@@ -64,8 +59,6 @@ There are some Key Features which are added in website clone such as:
 - ### react-icons [![react-icons](https://camo.githubusercontent.com/ad17280cf203ea59c61a273f2e45cc8ac30c65c379163cb26c2ff5a26410e63a/68747470733a2f2f696d672e736869656c64732e696f2f6e706d2f762f72656163742d69636f6e732e7376673f7374796c653d666c61742d737175617265)](https://www.npmjs.com/package/react-icons)
 
 - ### socket.io-client [![socket.io-client](https://camo.githubusercontent.com/539b21bfeb9db41b2c0c38f6c3abe43b9fc8cf549961e11c996df7b13a92f7cd/68747470733a2f2f62616467652e667572792e696f2f6a732f736f636b65742e696f2d636c69656e742e737667)](https://www.npmjs.com/package/socket.io-client)
-
-- ### cors [![cors](https://img.shields.io/npm/v/cors.svg)](https://www.npmjs.com/package/cors)
 
 - ### MongoDB [![MongoDB]](https://github.com/mongodb/mongo)
 - ### Node.js [![Node.js]](https://github.com/nodejs/node)
@@ -100,15 +93,3 @@ npm install
 npm run start
 
 ```
-
-## Features
-
-- Fullscreen mode
-- Partially responsive
-
-## Team Members and Contributors
-
-- [@Ravi Shukla](https://github.com/ravishukla86044/)
-- [@Shubham](https://github.com/vshubhams)
-- [@Gaurav Parmar](https://github.com/Gaurav6291)
-- [@Sudhir Kumar Samantaray](https://github.com/devSudhir)
