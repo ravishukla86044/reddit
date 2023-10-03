@@ -40,7 +40,7 @@ const CommunityModal = ({ setModalDisplay, modalDisplay }) => {
       name: nameInput,
       userId: user._id
     }
-    axios.post("https://reddit-new.herokuapp.com/community", payload, {
+    axios.post(`${process.env.REACT_APP_API_URL}/community`, payload, {
       headers: {
         "Authorization": "Bearer " + token
       }

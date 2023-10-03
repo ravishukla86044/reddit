@@ -36,7 +36,7 @@ const logOut = () => {
 const loginUser=(payload)=>(dispatch)=>{
     const requestAction = loginRequest();
     dispatch(requestAction);
-    axios.post("https://reddit-new.herokuapp.com/login", payload)
+    axios.post(`${process.env.REACT_APP_API_URL}/login`, payload)
         .then((res) => {
             console.log('res:', res)
             const successAction = loginSuccess(res.data);
@@ -72,7 +72,7 @@ const registerFailure =(payload)=>{
 const registerUser = (payload) => (dispatch) => {
     const requestAction = registerRequest();
     dispatch(requestAction);
-    axios.post("https://reddit-new.herokuapp.com/register", payload)
+    axios.post(`${process.env.REACT_APP_API_URL}/register`, payload)
         .then((res) => {
             const successAction = registerSuccess(res.data);
             dispatch(successAction);

@@ -48,7 +48,7 @@ const CommentBox = () => {
       userId: user._id,
     };
     axios
-      .post(`https://reddit-new.herokuapp.com/comments`, body, {
+      .post(`${process.env.REACT_APP_API_URL}/comments`, body, {
         headers: {
           Authorization: "Bearer " + token,
         },
@@ -56,7 +56,7 @@ const CommentBox = () => {
       .then(async (res) => {
         console.log(res.data.comment.text);
         let comm = await axios.get(
-          `https://reddit-new.herokuapp.com/comments/${postId}`
+          `${process.env.REACT_APP_API_URL}/comments/${postId}`
         );
         console.log(comm.data.comment);
         setCmntBody("")

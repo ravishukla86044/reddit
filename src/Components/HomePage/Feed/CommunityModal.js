@@ -19,7 +19,7 @@ const CommunityModal = ({ setModalDisplay, modalDisplay,data }) => {
   }
 
   useEffect(() => {
-    axios.get(`https://reddit-new.herokuapp.com/votes/post/${data._id}`)
+    axios.get(`${process.env.REACT_APP_API_URL}/votes/post/${data._id}`)
       .then((res) => {
         setVotes(res.data.vote)
       console.log(res.data.vote)

@@ -28,7 +28,7 @@ export const ProfileDetails = () => {
     const formData = new FormData();
     formData.append('profile_url', e.target.files[0]);
 
-    axios.patch(`https://reddit-new.herokuapp.com/users/${_id}`, formData, {
+    axios.patch(`${process.env.REACT_APP_API_URL}/users/${_id}`, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
         "Authorization": "Bearer " + token

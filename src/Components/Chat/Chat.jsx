@@ -33,7 +33,7 @@ function Chat({ setChat }) {
   const [userSocketId, setUsersocketId] = useState();
 
   useEffect(() => {
-    socket.current = io("https://reddit-new.herokuapp.com");
+    socket.current = io(`${process.env.REACT_APP_API_URL}`);
     socket.current.on("welcome", (data) => {
       //console.log(data);
     });
@@ -66,13 +66,13 @@ function Chat({ setChat }) {
   }, []);
 
   async function getConversation() {
-    let res = await axios.get(`https://reddit-new.herokuapp.com/chatroom/${user._id}`);
+    let res = await axios.get(`${process.env.REACT_APP_API_URL}/chatroom/${user._id}`);
     setChatroom(res.data.chatroom);
     console.log(res.data.chatroom, "chatroom");
   }
   async function getMsg() {
     try {
-      const res = await axios.get(`https://reddit-new.herokuapp.com/msg/${currentChat._id}`);
+      const res = await axios.get(`${process.env.REACT_APP_API_URL}/msg/${currentChat._id}`);
       //console.log(res, "msg");
       setMessages(res.data.allMsg);
     } catch (e) {
@@ -104,7 +104,7 @@ function Chat({ setChat }) {
     });
 
     try {
-      const res = await axios.post(`https://reddit-new.herokuapp.com/msg`, payload);
+      const res = await axios.post(`${process.env.REACT_APP_API_URL}/msg`, payload);
       //console.log(res.data.msg);
       setMessages([...messages, res.data.msg]);
 
@@ -120,12 +120,12 @@ function Chat({ setChat }) {
 
   async function getUser(data) {
     const friendsId = data.members.find((a) => a !== user._id);
-    const res = await axios.get(`https://reddit-new.herokuapp.com/users/${friendsId}`);
+    const res = await axios.get(`${process.env.REACT_APP_API_URL}/users/${friendsId}`);
     setFriend(res.data.user);
   }
 
   async function getAllUser() {
-    let data = await axios.get("https://reddit-new.herokuapp.com/users");
+    let data = await axios.get(`${process.env.REACT_APP_API_URL}/users`);
     setAllUser(data.data.users);
   }
 
@@ -157,7 +157,7 @@ function Chat({ setChat }) {
       members: [user._id, friendIdRef.current],
     };
     try {
-      let data = await axios.post("https://reddit-new.herokuapp.com/chatroom", body);
+      let data = await axios.post(`${process.env.REACT_APP_API_URL}/chatroom`, body);
       getConversation();
       //console.log(data);
     } catch (e) {

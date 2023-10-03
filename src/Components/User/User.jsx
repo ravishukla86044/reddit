@@ -21,7 +21,7 @@ function User() {
 
   // getting all post from backend
   async function getAllPost() {
-    let postData = await axios.get(`https://reddit-new.herokuapp.com/posts/user/${userId}`);
+    let postData = await axios.get(`${process.env.REACT_APP_API_URL}/posts/user/${userId}`);
     setData(postData.data.post);
     //console.log(postData, "thd");
     setLoading(false);
