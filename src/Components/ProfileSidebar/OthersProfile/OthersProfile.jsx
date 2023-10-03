@@ -16,7 +16,7 @@ export const OthersProfile = () => {
     const { userId } = useParams();
 
     useEffect(() => {
-        axios.get(`https://reddit-new.herokuapp.com/users/${userId}`)
+        axios.get(`${process.env.REACT_APP_API_URL}/users/${userId}`)
             .then((res) => {
                 setUser(res.data.user);
             })

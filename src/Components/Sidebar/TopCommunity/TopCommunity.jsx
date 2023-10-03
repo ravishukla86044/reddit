@@ -13,7 +13,7 @@ export const TopCommunity = () => {
 
   useEffect((el) => {
     axios
-      .get("https://reddit-new.herokuapp.com/community")
+      .get(`${process.env.REACT_APP_API_URL}/community`)
       .then((res) => {
         setCommunities(res.data.communities.slice(0, 5));
       })

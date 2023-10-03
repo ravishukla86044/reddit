@@ -38,14 +38,14 @@ function CommentsPage() {
 
   //  gettiing vote count
   async function voteCount(postId) {
-    let count = await axios.get(`https://reddit-new.herokuapp.com/votes/count/${postId}`);
+    let count = await axios.get(`${process.env.REACT_APP_API_URL}/votes/count/${postId}`);
     setVote(count.data.count);
     //console.log("count.data", count.data.count);
   }
 
   // getting vote status
   async function voteStatus(postId, userId) {
-    let count = await axios.get(`https://reddit-new.herokuapp.com/votes/check/${postId}/${userId}`);
+    let count = await axios.get(`${process.env.REACT_APP_API_URL}/votes/check/${postId}/${userId}`);
     setIsVoted(count.data.vote[0]?.value);
   }
 
@@ -60,7 +60,7 @@ function CommentsPage() {
         userId: userId,
         parentId: postId,
       };
-      let up = await axios.post(`https://reddit-new.herokuapp.com/votes/up`, body);
+      let up = await axios.post(`${process.env.REACT_APP_API_URL}/votes/up`, body);
       updateVote();
       setIsVoted(1);
     } catch (e) {
@@ -78,7 +78,7 @@ function CommentsPage() {
         userId: userId,
         parentId: postId,
       };
-      let down = await axios.post(`https://reddit-new.herokuapp.com/votes/down`, body);
+      let down = await axios.post(`${process.env.REACT_APP_API_URL}/votes/down`, body);
       updateVote();
       setIsVoted(down);
       console.log("down", down.data);
@@ -93,7 +93,7 @@ function CommentsPage() {
         userId: userId,
         parentId: postId,
       };
-      let remove = await axios.post(`https://reddit-new.herokuapp.com/votes/remove`, body);
+      let remove = await axios.post(`${process.env.REACT_APP_API_URL}/votes/remove`, body);
       updateVote();
       setIsVoted(0);
       console.log("remove", remove.data);
@@ -104,8 +104,8 @@ function CommentsPage() {
 
   // getting  post and comments from backend
   async function getPost() {
-    let postData = await axios.get(`https://reddit-new.herokuapp.com/posts/${postId}`);
-    let comm = await axios.get(`https://reddit-new.herokuapp.com/comments/${postId}`);
+    let postData = await axios.get(`${process.env.REACT_APP_API_URL}/posts/${postId}`);
+    let comm = await axios.get(`${process.env.REACT_APP_API_URL}/comments/${postId}`);
     setData(postData.data.post);
     setComment(comm.data.comment);
     setLoading(false);

@@ -59,7 +59,7 @@ const CreatePost = () => {
     formData.append('userId', _id);
     formData.append("communityId", communityId)
 
-    axios.post("https://reddit-new.herokuapp.com/posts", formData, {
+    axios.post(`${process.env.REACT_APP_API_URL}/posts`, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
         "Authorization": "Bearer " + token
@@ -76,7 +76,7 @@ const CreatePost = () => {
   }
 
   useEffect(() => {
-    axios.get("https://reddit-new.herokuapp.com/community")
+    axios.get(`${process.env.REACT_APP_API_URL}/community`)
       .then((res) => {
         setCommunities(res.data.communities);
       })

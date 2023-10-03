@@ -22,7 +22,7 @@ function Community() {
   // getting all post from backend
   async function getAllPost() {
     let postData = await axios.get(
-      `https://reddit-new.herokuapp.com/posts/community/${communityId}`
+      `${process.env.REACT_APP_API_URL}/posts/community/${communityId}`
     );
     setData(postData.data.post);
     //console.log(postData.data.post, "thd");

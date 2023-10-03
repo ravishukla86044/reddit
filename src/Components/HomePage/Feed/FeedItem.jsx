@@ -51,20 +51,20 @@ function FeedItem({ community = false, comments, type = 1, data }) {
 
   ////////getting comments count
   async function getComments(postId) {
-    let commentsCount = await axios.get(`https://reddit-new.herokuapp.com/comments/${postId}`);
+    let commentsCount = await axios.get(`${process.env.REACT_APP_API_URL}/comments/${postId}`);
     setComment(commentsCount.data);
   }
 
   //  gettiing vote count
   async function voteCount(postId) {
-    let count = await axios.get(`https://reddit-new.herokuapp.com/votes/count/${postId}`);
+    let count = await axios.get(`${process.env.REACT_APP_API_URL}/votes/count/${postId}`);
     setVote(count.data.count);
     //console.log("count.data", count.data.count);
   }
 
   // getting vote status
   async function voteStatus(postId, userId) {
-    let count = await axios.get(`https://reddit-new.herokuapp.com/votes/check/${postId}/${userId}`);
+    let count = await axios.get(`${process.env.REACT_APP_API_URL}/votes/check/${postId}/${userId}`);
     setIsVoted(count.data.vote[0]?.value);
   }
 
@@ -79,7 +79,7 @@ function FeedItem({ community = false, comments, type = 1, data }) {
         userId: userId,
         parentId: postId,
       };
-      let up = await axios.post(`https://reddit-new.herokuapp.com/votes/up`, body);
+      let up = await axios.post(`${process.env.REACT_APP_API_URL}/votes/up`, body);
       updateVote();
       setIsVoted(1);
     } catch (e) {
@@ -97,7 +97,7 @@ function FeedItem({ community = false, comments, type = 1, data }) {
         userId: userId,
         parentId: postId,
       };
-      let down = await axios.post(`https://reddit-new.herokuapp.com/votes/down`, body);
+      let down = await axios.post(`${process.env.REACT_APP_API_URL}/votes/down`, body);
       updateVote();
       setIsVoted(down);
       console.log("down", down.data);
@@ -112,7 +112,7 @@ function FeedItem({ community = false, comments, type = 1, data }) {
         userId: userId,
         parentId: postId,
       };
-      let remove = await axios.post(`https://reddit-new.herokuapp.com/votes/remove`, body);
+      let remove = await axios.post(`${process.env.REACT_APP_API_URL}/votes/remove`, body);
       updateVote();
       setIsVoted(0);
       console.log("remove", remove.data);

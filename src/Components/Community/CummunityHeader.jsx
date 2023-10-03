@@ -13,7 +13,7 @@ function CommunityHeader({ communityId }) {
   }, []);
 
   async function getCommunity() {
-    let postData = await axios.get(`https://reddit-new.herokuapp.com/community/${communityId}`);
+    let postData = await axios.get(`${process.env.REACT_APP_API_URL}/community/${communityId}`);
     setData(postData.data.community);
     //console.log(data, "thd");
   }

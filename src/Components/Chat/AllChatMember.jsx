@@ -14,7 +14,7 @@ function AllChatMember({ data, currentUser }) {
   }, []);
 
   async function getUser(friendsId) {
-    const res = await axios.get(`https://reddit-new.herokuapp.com/users/${friendsId}`);
+    const res = await axios.get(`${process.env.REACT_APP_API_URL}/users/${friendsId}`);
     setUser(res.data.user);
   }
 
